@@ -12,12 +12,12 @@ export type AvailabilityEntry = {
 const LOCAL_DIR = path.join(process.cwd(), "data", "availability");
 const BLOB_PREFIX = "availability/";
 
-function useBlobStorage() {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
-}
-
 function isVercelRuntime() {
   return Boolean(process.env.VERCEL);
+}
+
+function shouldUseBlob() {
+  return isVercelRuntime() || Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 }
 
 async function ensureLocalDir() {
@@ -56,21 +56,25 @@ async function saveLocalSubmission(entry: AvailabilityEntry) {
 }
 
 async function getBlobSubmissions(): Promise<AvailabilityEntry[]> {
-  const { blobs } = await list({ prefix: BLOB_PREFIX });
+  try {
+    const { blobs } = await list({ prefix: BLOB_PREFIX });
 
-  const entries = await Promise.all(
-    blobs.map(async (blob) => {
-      const response = await fetch(blob.url);
+    const entries = await Promise.all(
+      blobs.map(async (blob) => {
+        const response = await fetch(blob.url);
 
-      if (!response.ok) {
-        return null;
-      }
+        if (!response.ok) {
+          return null;
+        }
 
-      return (await response.json()) as AvailabilityEntry;
-    }),
-  );
+        return (await response.json()) as AvailabilityEntry;
+      }),
+    );
 
-  return entries.filter((entry): entry is AvailabilityEntry => entry !== null);
+    return entries.filter((entry): entry is AvailabilityEntry => entry !== null);
+  } catch {
+    return [];
+  }
 }
 
 async function saveBlobSubmission(entry: AvailabilityEntry) {
@@ -84,10 +88,8 @@ async function saveBlobSubmission(entry: AvailabilityEntry) {
 export async function getSubmissions(): Promise<AvailabilityEntry[]> {
   let entries: AvailabilityEntry[];
 
-  if (useBlobStorage()) {
+  if (shouldUseBlob()) {
     entries = await getBlobSubmissions();
-  } else if (isVercelRuntime()) {
-    entries = [];
   } else {
     entries = await getLocalSubmissions();
   }
@@ -107,10 +109,6 @@ export async function saveSubmission(
   name: string,
   date: string,
 ): Promise<AvailabilityEntry> {
-  if (isVercelRuntime() && !useBlobStorage()) {
-    throw new Error("Blob storage is not configured for production.");
-  }
-
   const entry: AvailabilityEntry = {
     id: crypto.randomUUID(),
     name: name.trim(),
@@ -118,7 +116,7 @@ export async function saveSubmission(
     submittedAt: new Date().toISOString(),
   };
 
-  if (useBlobStorage()) {
+  if (shouldUseBlob()) {
     await saveBlobSubmission(entry);
   } else {
     await saveLocalSubmission(entry);
