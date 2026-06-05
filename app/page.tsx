@@ -2,6 +2,11 @@ import Link from "next/link";
 
 const sections = [
   {
+    title: "When Are You Free?",
+    href: "/when-are-you-free",
+    description: "Share your name and the date you are available.",
+  },
+  {
     title: "Secret Hitler",
     href: "/secret-hitler",
     description: "Open the Secret Hitler area.",
