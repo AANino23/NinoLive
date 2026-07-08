@@ -2,21 +2,39 @@ import Link from "next/link";
 
 const sections = [
   {
+    title: "Steve",
+    href: "/steve",
+    description:
+      "Study Steve Fox in Tekken 8 with dojo drills, game-plan notes, and embedded move clips.",
+  },
+  {
+    title: "FootballManager",
+    href: "/football-manager",
+    description:
+      "Set up clubs, managers, tactics, fixtures, and the foundation for a daily football league.",
+    hidden: true,
+  },
+  {
     title: "When Are You Free?",
     href: "/when-are-you-free",
     description: "Share your name and the date you are available.",
+    hidden: true,
   },
   {
     title: "Secret Hitler",
     href: "/secret-hitler",
     description: "Open the Secret Hitler area.",
+    hidden: true,
   },
   {
     title: "Halo",
     href: "/halo",
     description: "Open the Halo area.",
+    hidden: true,
   },
 ];
+
+const visibleSections = sections.filter((section) => !section.hidden);
 
 export default function Home() {
   return (
@@ -34,7 +52,7 @@ export default function Home() {
           </p>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {sections.map((section) => (
+            {visibleSections.map((section) => (
               <Link
                 key={section.href}
                 href={section.href}
