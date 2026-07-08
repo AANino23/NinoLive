@@ -1,6 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import {
+  getMatchupExtras,
+  getOpponentClipUrl,
+  getOpponentOkizemeUrl,
+} from "./matchup-extras";
 
 type Clip = {
   label: string;
@@ -1505,8 +1510,20 @@ function getOkizemeUrl(search: string) {
   return `https://okizeme.gg/database/steve?search=${encodeURIComponent(search)}`;
 }
 
-function getClipUrl(search: string) {
-  return `https://okizeme.b-cdn.net/steve/${encodeURIComponent(search)}.mp4`;
+function getClipUrl(search: string, characterSlug = "steve") {
+  if (characterSlug === "steve") {
+    return `https://okizeme.b-cdn.net/steve/${encodeURIComponent(search)}.mp4`;
+  }
+
+  return getOpponentClipUrl(characterSlug, search);
+}
+
+function getClipDatabaseUrl(search: string, characterSlug = "steve") {
+  if (characterSlug === "steve") {
+    return getOkizemeUrl(search);
+  }
+
+  return getOpponentOkizemeUrl(characterSlug, search);
 }
 
 function getClipTitle(label: string) {
@@ -1544,7 +1561,11 @@ function ClipButton({
 function ClipPlayer({
   activeClip,
 }: {
-  activeClip: { clipKey: string; clip: Clip } | null;
+  activeClip: {
+    clipKey: string;
+    clip: Clip;
+    characterSlug?: string;
+  } | null;
 }) {
   if (!activeClip) {
     return (
@@ -1560,6 +1581,7 @@ function ClipPlayer({
   }
 
   const title = getClipTitle(activeClip.clip.label);
+  const characterSlug = activeClip.characterSlug ?? "steve";
 
   return (
     <aside className="overflow-hidden rounded-3xl border border-sky-400/25 bg-slate-950/80 shadow-2xl shadow-slate-950/40 xl:sticky xl:top-6">
@@ -1571,7 +1593,7 @@ function ClipPlayer({
           <h3 className="mt-1 text-base font-semibold text-white">{title}</h3>
         </div>
         <a
-          href={getOkizemeUrl(activeClip.clip.search)}
+          href={getClipDatabaseUrl(activeClip.clip.search, characterSlug)}
           target="_blank"
           rel="noreferrer"
           className="rounded-full border border-white/10 px-3 py-2 text-xs text-slate-300 transition hover:border-sky-400/60 hover:text-white"
@@ -1588,7 +1610,7 @@ function ClipPlayer({
         muted
         playsInline
         preload="metadata"
-        src={getClipUrl(activeClip.clip.search)}
+        src={getClipUrl(activeClip.clip.search, characterSlug)}
       >
         Your browser does not support embedded video playback.
       </video>
@@ -1625,6 +1647,7 @@ export function SteveGuide() {
   const [activeClip, setActiveClip] = useState<{
     clipKey: string;
     clip: Clip;
+    characterSlug?: string;
   } | null>(null);
   const activeClipKey = activeClip?.clipKey ?? null;
   const [activeMatchupName, setActiveMatchupName] = useState<string | null>(
@@ -1635,10 +1658,20 @@ export function SteveGuide() {
     () => matchups.find((matchup) => matchup.name === activeMatchupName) ?? null,
     [activeMatchupName],
   );
+  const activeMatchupExtras = useMemo(
+    () => (activeMatchup ? getMatchupExtras(activeMatchup.name) : null),
+    [activeMatchup],
+  );
 
-  function playClip(clipKey: string, clip: Clip) {
+  function playClip(
+    clipKey: string,
+    clip: Clip,
+    characterSlug = "steve",
+  ) {
     setActiveClip((currentClip) =>
-      currentClip?.clipKey === clipKey ? null : { clipKey, clip },
+      currentClip?.clipKey === clipKey
+        ? null
+        : { clipKey, clip, characterSlug },
     );
   }
 
@@ -1655,7 +1688,7 @@ export function SteveGuide() {
       case "secrets":
         return "The layer above the guide: hidden inputs, buried move properties, and the flowcharts high-level Steves actually run. Built for players who already know the character.";
       case "matchups":
-        return "Pick your opponent and get a loading-screen briefing: what to do, what to dodge, what to lean on, and what will get you killed.";
+        return "Pick your opponent for a loading-screen briefing: opponent threat clips to study, quick action lists, and deep-dive notes on throw breaks, key reads, and round-winning habits.";
       default:
         return "";
     }
@@ -2086,7 +2119,7 @@ export function SteveGuide() {
           <SectionHeading
             eyebrow="Matchups"
             title="Loading-screen briefings"
-            copy="Tap the character you're about to fight. Each briefing is written to be scanned in under a minute: the plan, the dodges, the tools to lean on, and the mistakes that lose the match."
+            copy="Tap the character you're about to fight. Watch their main threats in video, scan the action list, then read the deep-dive notes on throw breaks, key reads, and the habits that win rounds."
           />
 
           <div className="flex flex-wrap gap-2">
@@ -2097,9 +2130,10 @@ export function SteveGuide() {
                 <button
                   key={matchup.name}
                   type="button"
-                  onClick={() =>
-                    setActiveMatchupName(isSelected ? null : matchup.name)
-                  }
+                  onClick={() => {
+                    setActiveMatchupName(isSelected ? null : matchup.name);
+                    setActiveClip(null);
+                  }}
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                     isSelected
                       ? "border-rose-300 bg-rose-300 text-slate-950"
@@ -2113,91 +2147,177 @@ export function SteveGuide() {
           </div>
 
           {activeMatchup ? (
-            <article className="rounded-3xl border border-rose-300/20 bg-slate-950/70 p-6 sm:p-8">
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
-                    {activeMatchup.archetype}
-                  </p>
-                  <h3 className="mt-3 text-2xl font-semibold text-white sm:text-3xl">
-                    Steve vs {activeMatchup.name}
-                  </h3>
-                </div>
-                <div className="rounded-2xl border border-rose-300/25 bg-rose-300/10 px-4 py-3 text-sm text-rose-100 lg:max-w-xs">
-                  {activeMatchup.verdict}
-                </div>
-              </div>
-
-              <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
-                {activeMatchup.overview}
-              </p>
-
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
-                <div className="rounded-2xl border border-emerald-300/20 bg-emerald-300/5 p-5">
-                  <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
-                    Do this
-                  </h4>
-                  <ul className="mt-3 space-y-2">
-                    {activeMatchup.doThis.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+              <article className="rounded-3xl border border-rose-300/20 bg-slate-950/70 p-6 sm:p-8">
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
+                      {activeMatchup.archetype}
+                    </p>
+                    <h3 className="mt-3 text-2xl font-semibold text-white sm:text-3xl">
+                      Steve vs {activeMatchup.name}
+                    </h3>
+                  </div>
+                  <div className="rounded-2xl border border-rose-300/25 bg-rose-300/10 px-4 py-3 text-sm text-rose-100 lg:max-w-xs">
+                    {activeMatchup.verdict}
+                  </div>
                 </div>
 
-                <div className="rounded-2xl border border-sky-300/20 bg-sky-300/5 p-5">
-                  <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
-                    How to dodge
-                  </h4>
-                  <ul className="mt-3 space-y-2">
-                    {activeMatchup.dodge.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
+                  {activeMatchup.overview}
+                </p>
+
+                {activeMatchupExtras ? (
+                  <div className="mt-8 rounded-2xl border border-violet-300/20 bg-violet-300/5 p-5">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-violet-300">
+                      Opponent threats to watch
+                    </h4>
+                    <p className="mt-2 text-sm leading-6 text-slate-400">
+                      Tap a move to watch it loop in the player. These are the
+                      patterns that actually cost Steve players rounds.
+                    </p>
+                    <div className="mt-4 space-y-3">
+                      {activeMatchupExtras.threats.map((threat) => {
+                        const clipKey = `matchup-${activeMatchup.name}-${threat.search}`;
+                        const isActive = activeClipKey === clipKey;
+
+                        return (
+                          <div
+                            key={threat.search}
+                            className={`rounded-xl border px-4 py-3 transition ${
+                              isActive
+                                ? "border-violet-300/50 bg-violet-300/10"
+                                : "border-white/10 bg-slate-950/60"
+                            }`}
+                          >
+                            <button
+                              type="button"
+                              onClick={() =>
+                                playClip(
+                                  clipKey,
+                                  {
+                                    label: `Watch ${threat.label}`,
+                                    search: threat.search,
+                                  },
+                                  activeMatchupExtras.slug,
+                                )
+                              }
+                              className={`text-left text-sm font-semibold transition ${
+                                isActive
+                                  ? "text-violet-200"
+                                  : "text-white hover:text-violet-200"
+                              }`}
+                            >
+                              {threat.label}
+                            </button>
+                            <p className="mt-2 text-sm leading-6 text-slate-300">
+                              {threat.note}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : null}
+
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  <div className="rounded-2xl border border-emerald-300/20 bg-emerald-300/5 p-5">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
+                      Do this
+                    </h4>
+                    <ul className="mt-3 space-y-2">
+                      {activeMatchup.doThis.map((item) => (
+                        <li
+                          key={item}
+                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="rounded-2xl border border-sky-300/20 bg-sky-300/5 p-5">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
+                      How to dodge
+                    </h4>
+                    <ul className="mt-3 space-y-2">
+                      {activeMatchup.dodge.map((item) => (
+                        <li
+                          key={item}
+                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="rounded-2xl border border-amber-300/20 bg-amber-300/5 p-5">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300">
+                      Utilise
+                    </h4>
+                    <ul className="mt-3 space-y-2">
+                      {activeMatchup.utilise.map((item) => (
+                        <li
+                          key={item}
+                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="rounded-2xl border border-rose-300/20 bg-rose-300/5 p-5">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
+                      Don't do
+                    </h4>
+                    <ul className="mt-3 space-y-2">
+                      {activeMatchup.avoid.map((item) => (
+                        <li
+                          key={item}
+                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
 
-                <div className="rounded-2xl border border-amber-300/20 bg-amber-300/5 p-5">
-                  <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300">
-                    Utilise
-                  </h4>
-                  <ul className="mt-3 space-y-2">
-                    {activeMatchup.utilise.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {activeMatchupExtras?.deepDive.length ? (
+                  <div className="mt-8 space-y-4">
+                    <div>
+                      <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
+                        Deep dive
+                      </h4>
+                      <p className="mt-2 text-sm leading-6 text-slate-400">
+                        The layer below the bullet points — throw breaks, key
+                        reads, and the habits that actually swing rounds.
+                      </p>
+                    </div>
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      {activeMatchupExtras.deepDive.map((section) => (
+                        <div
+                          key={section.title}
+                          className="rounded-2xl border border-white/10 bg-slate-950/60 p-5"
+                        >
+                          <h5 className="text-base font-semibold text-white">
+                            {section.title}
+                          </h5>
+                          <p className="mt-3 text-sm leading-7 text-slate-300">
+                            {section.body}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </article>
 
-                <div className="rounded-2xl border border-rose-300/20 bg-rose-300/5 p-5">
-                  <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
-                    Don't do
-                  </h4>
-                  <ul className="mt-3 space-y-2">
-                    {activeMatchup.avoid.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </article>
+              <ClipPlayer activeClip={activeClip} />
+            </div>
           ) : (
             <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-6 text-sm leading-7 text-slate-400">
               No character selected yet. Pick who you're fighting and the
