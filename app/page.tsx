@@ -8,6 +8,12 @@ const sections = [
       "Study Steve Fox in Tekken 8 with dojo drills, game-plan notes, and embedded move clips.",
   },
   {
+    title: "Fahkumram",
+    href: "/fahkumram",
+    description:
+      "Learn Fahkumram in Tekken 8 with Garuda Force drills, Rama mixups, matchup reminders, and embedded move clips.",
+  },
+  {
     title: "FootballManager",
     href: "/football-manager",
     description:
