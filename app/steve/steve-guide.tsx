@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 import {
+  ClipButtonLabel,
+  ClipPlayerEmpty,
+  ClipPlayerFrame,
+  GuideTabGlyph,
+  MoveNotation,
+  SectionHeading,
+  StepBadge,
+} from "../tekken/guide-ui";
+import {
   getMatchupExtras,
   getOpponentClipUrl,
   getOpponentOkizemeUrl,
@@ -1526,10 +1535,6 @@ function getClipDatabaseUrl(search: string, characterSlug = "steve") {
   return getOpponentOkizemeUrl(characterSlug, search);
 }
 
-function getClipTitle(label: string) {
-  return label.replace(/^Watch\s+/u, "").replace(/^Play\s+/u, "");
-}
-
 function ClipButton({
   clip,
   clipKey,
@@ -1547,13 +1552,13 @@ function ClipButton({
     <button
       type="button"
       onClick={() => onPlay(clipKey, clip)}
-      className={`rounded-full border px-3 py-2 text-sm transition ${
+      className={`rounded-2xl border px-3 py-2 text-sm transition ${
         isActive
-          ? "border-sky-300 bg-sky-300 text-slate-950"
-          : "border-sky-400/35 text-sky-200 hover:border-sky-300 hover:text-white"
+          ? "border-sky-300 bg-sky-300 text-slate-950 shadow-lg shadow-sky-950/20"
+          : "border-sky-400/35 bg-sky-400/5 text-sky-100 hover:border-sky-300 hover:bg-sky-400/10 hover:text-white"
       }`}
     >
-      {clip.label}
+      <ClipButtonLabel label={clip.label} accent="sky" active={isActive} />
     </button>
   );
 }
@@ -1569,38 +1574,22 @@ function ClipPlayer({
 }) {
   if (!activeClip) {
     return (
-      <aside className="rounded-3xl border border-dashed border-white/10 bg-slate-950/50 p-6 text-sm leading-7 text-slate-400 xl:sticky xl:top-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
-          Video player
-        </p>
-        <p className="mt-3">
-          Pick any clip button and the video will open here in a larger player.
-        </p>
-      </aside>
+      <ClipPlayerEmpty
+        accent="sky"
+        title="Video player"
+        description="Pick any clip tile and the loop opens here with a larger move card."
+      />
     );
   }
 
-  const title = getClipTitle(activeClip.clip.label);
   const characterSlug = activeClip.characterSlug ?? "steve";
 
   return (
-    <aside className="overflow-hidden rounded-3xl border border-sky-400/25 bg-slate-950/80 shadow-2xl shadow-slate-950/40 xl:sticky xl:top-6">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-slate-950 px-4 py-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
-            Now watching
-          </p>
-          <h3 className="mt-1 text-base font-semibold text-white">{title}</h3>
-        </div>
-        <a
-          href={getClipDatabaseUrl(activeClip.clip.search, characterSlug)}
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-full border border-white/10 px-3 py-2 text-xs text-slate-300 transition hover:border-sky-400/60 hover:text-white"
-        >
-          Full move card
-        </a>
-      </div>
+    <ClipPlayerFrame
+      accent="sky"
+      label={activeClip.clip.label}
+      href={getClipDatabaseUrl(activeClip.clip.search, characterSlug)}
+    >
       <video
         key={activeClip.clipKey}
         className="aspect-video w-full bg-black"
@@ -1614,31 +1603,7 @@ function ClipPlayer({
       >
         Your browser does not support embedded video playback.
       </video>
-    </aside>
-  );
-}
-
-function SectionHeading({
-  eyebrow,
-  title,
-  copy,
-}: {
-  eyebrow: string;
-  title: string;
-  copy: string;
-}) {
-  return (
-    <div className="max-w-3xl">
-      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
-        {eyebrow}
-      </p>
-      <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">
-        {title}
-      </h2>
-      <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
-        {copy}
-      </p>
-    </div>
+    </ClipPlayerFrame>
   );
 }
 
@@ -1678,17 +1643,17 @@ export function SteveGuide() {
   const activeCopy = useMemo(() => {
     switch (activeTab) {
       case "dojo":
-        return "A Steve-focused training tab built like a practical study board: drills, cues, and embedded clips beside each drill button.";
+        return "Pick one layer, run the reps, and let the clip panel do the explaining.";
       case "gameplan":
-        return "The round flow behind the drills: how Steve gets control, when he cashes out, and what he should stop pretending to be.";
+        return "A short round map for how Steve steals momentum without playing like a generic launcher.";
       case "toolkit":
-        return "The buttons that hold the character together, with quick notes on when to use them and what they are really for.";
+        return "The moves worth seeing at a glance: what they do, when to swing, and what can go wrong.";
       case "clips":
-        return "Play Steve move clips inside each pack, then jump to okizeme.gg only if you want the full move card and frame breakdown.";
+        return "Quick visual packs for counter hits, stance pressure, wall pressure, and round-closing tools.";
       case "secrets":
-        return "The layer above the guide: hidden inputs, buried move properties, and the flowcharts high-level Steves actually run. Built for players who already know the character.";
+        return "Hidden inputs and real flowcharts, presented like study cards instead of buried notes.";
       case "matchups":
-        return "Pick your opponent for a loading-screen briefing: opponent threat clips to study, quick action lists, and deep-dive notes on throw breaks, key reads, and round-winning habits.";
+        return "Loading-screen notes: watch the threat, scan the action cards, then read the matchup swing points.";
       default:
         return "";
     }
@@ -1706,11 +1671,9 @@ export function SteveGuide() {
               Steve Fox Study Hall
             </h2>
             <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
-              Steve is at his best when he turns every small hesitation into
-              awkward, layered pressure. This guide pulls together Steve
-              priorities from tournament-level guide material, community advice,
-              and filtered Steve move pages on okizeme.gg so you can study the
-              character like a training plan instead of a random note dump.
+              Steve works best when every tiny hesitation becomes pressure. This
+              version of the guide leans on visual move chips, short drill
+              cards, and live clips so you can scan it like a study board.
             </p>
           </div>
           <div className="rounded-2xl border border-sky-400/25 bg-sky-400/10 px-4 py-3 text-sm text-sky-100">
@@ -1721,8 +1684,6 @@ export function SteveGuide() {
         <div className="mt-8 grid gap-3 rounded-3xl border border-white/10 bg-slate-950/80 p-2 shadow-inner shadow-black/30 sm:grid-cols-2 lg:grid-cols-3">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
-            const hasIcon = "icon" in tab;
-
             return (
               <button
                 key={tab.id}
@@ -1745,27 +1706,7 @@ export function SteveGuide() {
                   }`}
                 />
                 <span className="flex items-center gap-3">
-                  {hasIcon ? (
-                    <span
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border text-[0.7rem] font-black tracking-[0.16em] ${
-                        isActive
-                          ? "border-slate-950/20 bg-slate-950/10 text-slate-950"
-                          : tab.tone === "rose"
-                            ? "border-rose-300/25 bg-rose-300/10 text-rose-200"
-                            : tab.tone === "amber"
-                            ? "border-amber-300/25 bg-amber-300/10 text-amber-200"
-                            : tab.tone === "emerald"
-                              ? "border-emerald-300/25 bg-emerald-300/10 text-emerald-200"
-                              : tab.tone === "violet"
-                                ? "border-violet-300/25 bg-violet-300/10 text-violet-200"
-                                : tab.tone === "cyan"
-                                  ? "border-cyan-300/25 bg-cyan-300/10 text-cyan-200"
-                                  : "border-sky-300/25 bg-sky-300/10 text-sky-200"
-                      }`}
-                    >
-                      {tab.icon}
-                    </span>
-                  ) : null}
+                  <GuideTabGlyph tabId={tab.id} accent={tab.tone} active={isActive} />
                   <span>
                     <span className="block text-sm font-semibold">
                       {tab.label}
@@ -1795,7 +1736,8 @@ export function SteveGuide() {
           <SectionHeading
             eyebrow="Dojo"
             title="Daily Steve drills"
-            copy="Run one or two of these per session instead of trying to learn every stance at once. Steve improves fastest when you isolate one layer, repeat it until it feels natural, then stack the next layer on top."
+            copy="Run one or two per session. Each card isolates one layer so you can drill the idea, watch the move, then move on."
+            accent="sky"
           />
 
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
@@ -1805,26 +1747,39 @@ export function SteveGuide() {
                   key={drill.title}
                   className="rounded-3xl border border-white/10 bg-white/5 p-6"
                 >
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
+                    Drill board
+                  </p>
                   <h3 className="text-xl font-semibold text-white">
                     {drill.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-200">
                     {drill.summary}
                   </p>
-                  <p className="mt-4 text-sm leading-7 text-slate-400">
-                    <span className="font-medium text-slate-200">Why:</span>{" "}
-                    {drill.why}
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-slate-400">
-                    <span className="font-medium text-slate-200">Drill:</span>{" "}
-                    {drill.drill}
-                  </p>
+                  <div className="mt-5 grid gap-4 lg:grid-cols-2">
+                    <div className="rounded-2xl border border-sky-300/15 bg-sky-300/5 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">
+                        Why it matters
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                        {drill.why}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">
+                        Run this
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                        {drill.drill}
+                      </p>
+                    </div>
+                  </div>
 
-                  <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-300">
+                  <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-300">
                     {drill.cues.map((cue) => (
                       <li
                         key={cue}
-                        className="rounded-2xl bg-slate-950/60 px-3 py-2"
+                        className="rounded-2xl border border-white/8 bg-slate-950/60 px-3 py-3"
                       >
                         {cue}
                       </li>
@@ -1855,22 +1810,21 @@ export function SteveGuide() {
           <SectionHeading
             eyebrow="Gameplan"
             title="How Steve should feel"
-            copy="Think of Steve as a pressure sculptor, not a basic launcher character. The round should feel increasingly uncomfortable for the opponent until they gamble into the counter hit or freeze long enough for you to take the wall."
+            copy="Think of Steve as a pressure sculptor. Build hesitation first, then spend it when the opponent finally presses or freezes."
+            accent="sky"
           />
 
-          <div className="grid gap-4">
+          <div className="grid gap-4 lg:grid-cols-2">
             {gameplan.map((step, index) => (
               <article
                 key={step.title}
                 className="rounded-3xl border border-white/10 bg-white/5 p-6"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
-                  Step {index + 1}
-                </p>
-                <h3 className="mt-3 text-xl font-semibold text-white">
+                <StepBadge step={index + 1} accent="sky" />
+                <h3 className="mt-4 text-xl font-semibold text-white">
                   {step.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-slate-300">
+                <p className="mt-3 text-sm leading-6 text-slate-300">
                   {step.copy}
                 </p>
               </article>
@@ -1884,7 +1838,8 @@ export function SteveGuide() {
           <SectionHeading
             eyebrow="Toolkit"
             title="The buttons doing the real work"
-            copy="These are the tools most worth revisiting when your Steve feels flat. If one of these is missing from your rounds, the character usually starts to feel fake or overcomplicated."
+            copy="These are the buttons worth seeing fast. Learn the picture, remember the role, then use the clip if you need a refresh."
+            accent="sky"
           />
 
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
@@ -1899,9 +1854,9 @@ export function SteveGuide() {
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
                         {tool.role}
                       </p>
-                      <h3 className="mt-3 text-2xl font-semibold text-white">
-                        {tool.move}
-                      </h3>
+                      <div className="mt-3">
+                        <MoveNotation notation={tool.move} accent="sky" size="lg" />
+                      </div>
                     </div>
                     <ClipButton
                       clip={tool.clip}
@@ -1911,14 +1866,24 @@ export function SteveGuide() {
                     />
                   </div>
 
-                  <p className="mt-4 text-sm leading-7 text-slate-300">
-                    <span className="font-medium text-slate-200">When:</span>{" "}
-                    {tool.when}
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-slate-400">
-                    <span className="font-medium text-slate-200">Risk:</span>{" "}
-                    {tool.risk}
-                  </p>
+                  <div className="mt-5 grid gap-3 lg:grid-cols-2">
+                    <div className="rounded-2xl border border-sky-300/15 bg-sky-300/5 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">
+                        When to use it
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-200">
+                        {tool.when}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-rose-300/15 bg-rose-300/5 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-300">
+                        What loses
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                        {tool.risk}
+                      </p>
+                    </div>
+                  </div>
                 </article>
               ))}
             </div>
@@ -1932,7 +1897,8 @@ export function SteveGuide() {
           <SectionHeading
             eyebrow="Clips"
             title="Embedded Steve clip packs"
-            copy="Each button opens its own embedded clip in place. Use these as quick presets when you want to study Steve by theme instead of hunting for each move one by one."
+            copy="Use these as visual presets when you want to study Steve by theme instead of hunting move names one by one."
+            accent="sky"
           />
 
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
@@ -1981,7 +1947,8 @@ export function SteveGuide() {
           <SectionHeading
             eyebrow="Secrets"
             title="The tech nobody puts on the front page"
-            copy="Everything here assumes you already play Steve. These are the hidden inputs, buried move properties, and battle-tested flowcharts that separate a solid Steve from one that feels genuinely unfair to fight."
+            copy="Everything here assumes you already play Steve. The goal is to surface the hidden inputs and real pressure routes without burying them in prose."
+            accent="amber"
           />
 
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
@@ -2002,21 +1969,27 @@ export function SteveGuide() {
                       <h4 className="mt-3 text-xl font-semibold text-white">
                         {tech.title}
                       </h4>
-                      <p className="mt-4 text-sm leading-7 text-slate-300">
+                      <p className="mt-4 text-sm leading-6 text-slate-300">
                         {tech.secret}
                       </p>
-                      <p className="mt-4 text-sm leading-7 text-slate-400">
-                        <span className="font-medium text-slate-200">
-                          How to do it:
-                        </span>{" "}
-                        {tech.execution}
-                      </p>
-                      <p className="mt-3 text-sm leading-7 text-slate-400">
-                        <span className="font-medium text-slate-200">
-                          Why it wins:
-                        </span>{" "}
-                        {tech.payoff}
-                      </p>
+                      <div className="mt-4 grid gap-3 lg:grid-cols-2">
+                        <div className="rounded-2xl border border-amber-300/15 bg-amber-300/5 p-4">
+                          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">
+                            How to do it
+                          </p>
+                          <p className="mt-3 text-sm leading-6 text-slate-200">
+                            {tech.execution}
+                          </p>
+                        </div>
+                        <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+                          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">
+                            Why it wins
+                          </p>
+                          <p className="mt-3 text-sm leading-6 text-slate-300">
+                            {tech.payoff}
+                          </p>
+                        </div>
+                      </div>
 
                       <div className="mt-5 flex flex-wrap gap-3">
                         {tech.clips.map((clip) => (
@@ -2047,7 +2020,7 @@ export function SteveGuide() {
                       <h4 className="text-xl font-semibold text-white">
                         {flow.title}
                       </h4>
-                      <p className="mt-3 text-sm leading-7 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
                         {flow.hook}
                       </p>
 
@@ -2055,22 +2028,22 @@ export function SteveGuide() {
                         {flow.steps.map((step, index) => (
                           <li
                             key={step}
-                            className="flex gap-3 rounded-2xl bg-slate-950/60 px-4 py-3 text-sm leading-6 text-slate-300"
+                            className="flex gap-3 rounded-2xl border border-white/8 bg-slate-950/60 px-4 py-3 text-sm leading-6 text-slate-300"
                           >
-                            <span className="font-semibold text-amber-300">
-                              {index + 1}
-                            </span>
+                            <StepBadge step={index + 1} accent="amber" />
                             <span>{step}</span>
                           </li>
                         ))}
                       </ol>
 
-                      <p className="mt-4 text-sm leading-7 text-slate-400">
-                        <span className="font-medium text-slate-200">
-                          If they adapt:
-                        </span>{" "}
-                        {flow.escapeHatch}
-                      </p>
+                      <div className="mt-4 rounded-2xl border border-amber-300/15 bg-amber-300/5 p-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">
+                          If they adapt
+                        </p>
+                        <p className="mt-3 text-sm leading-6 text-slate-300">
+                          {flow.escapeHatch}
+                        </p>
+                      </div>
 
                       <div className="mt-5 flex flex-wrap gap-3">
                         {flow.clips.map((clip) => (
@@ -2119,7 +2092,8 @@ export function SteveGuide() {
           <SectionHeading
             eyebrow="Matchups"
             title="Loading-screen briefings"
-            copy="Tap the character you're about to fight. Watch their main threats in video, scan the action list, then read the deep-dive notes on throw breaks, key reads, and the habits that win rounds."
+            copy="Watch the threat, scan the action cards, then read the swing points that actually decide the round."
+            accent="rose"
           />
 
           <div className="flex flex-wrap gap-2">
@@ -2163,9 +2137,14 @@ export function SteveGuide() {
                   </div>
                 </div>
 
-                <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
-                  {activeMatchup.overview}
-                </p>
+                <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-300">
+                    Quick read
+                  </p>
+                  <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300 sm:text-base">
+                    {activeMatchup.overview}
+                  </p>
+                </div>
 
                 {activeMatchupExtras ? (
                   <div className="mt-8 rounded-2xl border border-violet-300/20 bg-violet-300/5 p-5">
@@ -2174,7 +2153,7 @@ export function SteveGuide() {
                     </h4>
                     <p className="mt-2 text-sm leading-6 text-slate-400">
                       Tap a move to watch it loop in the player. These are the
-                      patterns that actually cost Steve players rounds.
+                      patterns that cost Steve rounds most often.
                     </p>
                     <div className="mt-4 space-y-3">
                       {activeMatchupExtras.threats.map((threat) => {
@@ -2210,7 +2189,7 @@ export function SteveGuide() {
                             >
                               {threat.label}
                             </button>
-                            <p className="mt-2 text-sm leading-6 text-slate-300">
+                            <p className="mt-2 text-sm leading-5 text-slate-300">
                               {threat.note}
                             </p>
                           </div>
@@ -2271,7 +2250,7 @@ export function SteveGuide() {
 
                   <div className="rounded-2xl border border-rose-300/20 bg-rose-300/5 p-5">
                     <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
-                      Don't do
+                      Don&rsquo;t do
                     </h4>
                     <ul className="mt-3 space-y-2">
                       {activeMatchup.avoid.map((item) => (
@@ -2293,8 +2272,8 @@ export function SteveGuide() {
                         Deep dive
                       </h4>
                       <p className="mt-2 text-sm leading-6 text-slate-400">
-                        The layer below the bullet points — throw breaks, key
-                        reads, and the habits that actually swing rounds.
+                        The matchup swing points: throw breaks, hard reads, and
+                        the habits that steal the round.
                       </p>
                     </div>
                     <div className="grid gap-4 lg:grid-cols-2">
@@ -2306,7 +2285,7 @@ export function SteveGuide() {
                           <h5 className="text-base font-semibold text-white">
                             {section.title}
                           </h5>
-                          <p className="mt-3 text-sm leading-7 text-slate-300">
+                          <p className="mt-3 text-sm leading-6 text-slate-300">
                             {section.body}
                           </p>
                         </div>
@@ -2320,7 +2299,7 @@ export function SteveGuide() {
             </div>
           ) : (
             <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-6 text-sm leading-7 text-slate-400">
-              No character selected yet. Pick who you're fighting and the
+              No character selected yet. Pick who you&rsquo;re fighting and the
               briefing appears here, laid out for a quick scan while the
               loading screen counts down.
             </div>

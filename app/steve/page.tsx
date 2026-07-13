@@ -12,9 +12,9 @@ export default function StevePage() {
           Steve
         </h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg">
-          A Tekken 8 Steve Fox guide built in the spirit of a dojo page: key
-          training drills, practical matchup ideas, and embedded okizeme.gg
-          move clips for live study.
+          A Tekken 8 Steve Fox study board with visual move notation, shorter
+          drill cards, practical matchup notes, and embedded okizeme.gg clips
+          for fast review.
         </p>
 
         <SteveGuide />

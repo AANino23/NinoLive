@@ -12,9 +12,9 @@ export default function FahkumramPage() {
           Fahkumram
         </h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg">
-          A Tekken 8 Fahkumram guide built for fast study: long-range Muay Thai
-          control, Garuda Force routing, Rama stance mixups, matchup reminders,
-          and embedded okizeme.gg move clips.
+          A Tekken 8 Fahkumram study board with visual move notation, shorter
+          drill cards, matchup reminders, and embedded okizeme.gg clips for
+          quick review.
         </p>
 
         <FahkumramGuide />

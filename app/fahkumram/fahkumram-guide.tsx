@@ -1,6 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import {
+  ClipButtonLabel,
+  ClipPlayerEmpty,
+  ClipPlayerFrame,
+  GuideTabGlyph,
+  MoveNotation,
+  SectionHeading,
+  StepBadge,
+} from "../tekken/guide-ui";
 
 type Clip = {
   label: string;
@@ -666,10 +675,6 @@ function getClipUrl(search: string) {
   return `https://okizeme.b-cdn.net/fahkumram/${encodeURIComponent(search)}.mp4`;
 }
 
-function getClipTitle(label: string) {
-  return label.replace(/^Watch\s+/u, "").replace(/^Play\s+/u, "");
-}
-
 function ClipButton({
   clip,
   clipKey,
@@ -687,13 +692,13 @@ function ClipButton({
     <button
       type="button"
       onClick={() => onPlay(clipKey, clip)}
-      className={`rounded-full border px-3 py-2 text-sm transition ${
+      className={`rounded-2xl border px-3 py-2 text-sm transition ${
         isActive
-          ? "border-orange-300 bg-orange-300 text-slate-950"
-          : "border-orange-400/35 text-orange-200 hover:border-orange-300 hover:text-white"
+          ? "border-orange-300 bg-orange-300 text-slate-950 shadow-lg shadow-orange-950/20"
+          : "border-orange-400/35 bg-orange-400/5 text-orange-100 hover:border-orange-300 hover:bg-orange-400/10 hover:text-white"
       }`}
     >
-      {clip.label}
+      <ClipButtonLabel label={clip.label} accent="orange" active={isActive} />
     </button>
   );
 }
@@ -705,37 +710,20 @@ function ClipPlayer({
 }) {
   if (!activeClip) {
     return (
-      <aside className="sticky top-6 rounded-3xl border border-white/10 bg-slate-950/70 p-5 text-sm leading-7 text-slate-400">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
-          Video player
-        </p>
-        <p className="mt-3">
-          Pick any clip button and the okizeme.gg video will open here.
-        </p>
-      </aside>
+      <ClipPlayerEmpty
+        accent="orange"
+        title="Video player"
+        description="Pick any clip tile and the loop opens here with a larger move card."
+      />
     );
   }
 
   return (
-    <aside className="sticky top-6 overflow-hidden rounded-3xl border border-orange-300/25 bg-black">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-slate-950/90 px-4 py-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
-            Clip
-          </p>
-          <h3 className="mt-1 text-sm font-semibold text-white">
-            {getClipTitle(activeClip.clip.label)}
-          </h3>
-        </div>
-        <a
-          href={getOkizemeUrl(activeClip.clip.search)}
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-full border border-white/10 px-3 py-2 text-xs text-slate-300 transition hover:border-orange-400/60 hover:text-white"
-        >
-          Full move card
-        </a>
-      </div>
+    <ClipPlayerFrame
+      accent="orange"
+      label={activeClip.clip.label}
+      href={getOkizemeUrl(activeClip.clip.search)}
+    >
       <video
         key={activeClip.clipKey}
         className="aspect-video w-full"
@@ -749,31 +737,7 @@ function ClipPlayer({
       >
         Your browser does not support embedded video playback.
       </video>
-    </aside>
-  );
-}
-
-function SectionHeading({
-  eyebrow,
-  title,
-  copy,
-}: {
-  eyebrow: string;
-  title: string;
-  copy: string;
-}) {
-  return (
-    <div className="max-w-3xl">
-      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
-        {eyebrow}
-      </p>
-      <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">
-        {title}
-      </h2>
-      <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
-        {copy}
-      </p>
-    </div>
+    </ClipPlayerFrame>
   );
 }
 
@@ -802,17 +766,17 @@ export function FahkumramGuide() {
   const activeCopy = useMemo(() => {
     switch (activeTab) {
       case "dojo":
-        return "Daily drills for turning Fahkumram's range, Garuda install, and Rama stance into muscle memory.";
+        return "Daily reps for range control, Garuda installs, and Rama stance pressure.";
       case "gameplan":
-        return "How the round should flow: claim space, gain Garuda, then force a real Rama decision near the wall.";
+        return "A short round map: claim space, install Garuda, then force the real guess.";
       case "toolkit":
-        return "The moves that make Fahkumram function, with what they are for and how they get you punished.";
+        return "The moves worth recognising fast, with a clean reminder of value and risk.";
       case "clips":
-        return "Embedded okizeme.gg clips for Fahkumram's key pokes, install routes, and Rama stance threats.";
+        return "Visual packs for pokes, install routes, pressure starters, and Rama threats.";
       case "secrets":
-        return "The high-value habits: using 3 as your real df+1, spending Garuda correctly, and not donating rounds with lows.";
+        return "The habits that make Fahkumram unfair, presented as short study cards.";
       case "matchups":
-        return "Pick a character for a quick Fahkumram loading-screen briefing.";
+        return "Pick a character for a quick loading-screen plan and fast action cards.";
       default:
         return "";
     }
@@ -830,10 +794,9 @@ export function FahkumramGuide() {
               Fahkumram Muay Thai Lab
             </h2>
             <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
-              Fahkumram is a range bully with explosive install pressure. This
-              guide focuses on the parts that actually win games: long-leg
-              neutral, Garuda Force discipline, Rama stance routing, and knowing
-              when not to gamble.
+              Fahkumram wins when his range and install pressure feel obvious at
+              a glance. This guide leans on visual move chips, shorter drill
+              cards, and live clips instead of long notes.
             </p>
           </div>
           <div className="rounded-2xl border border-orange-400/25 bg-orange-400/10 px-4 py-3 text-sm text-orange-100">
@@ -860,15 +823,7 @@ export function FahkumramGuide() {
                 }`}
               >
                 <span className="flex items-center gap-3">
-                  <span
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border text-[0.7rem] font-black tracking-[0.16em] ${
-                      isActive
-                        ? "border-slate-950/20 bg-slate-950/10 text-slate-950"
-                        : "border-orange-300/25 bg-orange-300/10 text-orange-200"
-                    }`}
-                  >
-                    {tab.icon}
-                  </span>
+                  <GuideTabGlyph tabId={tab.id} accent="orange" active={isActive} />
                   <span>
                     <span className="block text-sm font-semibold">
                       {tab.label}
@@ -897,7 +852,8 @@ export function FahkumramGuide() {
           <SectionHeading
             eyebrow="Dojo"
             title="Daily Fahkumram drills"
-            copy="Run these as isolated reps. Fahkumram gets much stronger when you stop treating him like a generic big-body brawler and start controlling the exact ranges his limbs own."
+            copy="Run these as isolated reps. Each card focuses on one spacing or install idea so the clips can do the teaching."
+            accent="orange"
           />
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
             <div className="grid gap-5">
@@ -906,25 +862,38 @@ export function FahkumramGuide() {
                   key={drill.title}
                   className="rounded-3xl border border-white/10 bg-white/5 p-6"
                 >
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
+                    Drill board
+                  </p>
                   <h3 className="text-xl font-semibold text-white">
                     {drill.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                  <p className="mt-3 text-sm leading-7 text-slate-200">
                     {drill.summary}
                   </p>
-                  <p className="mt-4 text-sm leading-7 text-slate-400">
-                    <span className="font-medium text-slate-200">Why:</span>{" "}
-                    {drill.why}
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-slate-400">
-                    <span className="font-medium text-slate-200">Drill:</span>{" "}
-                    {drill.drill}
-                  </p>
-                  <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-300">
+                  <div className="mt-5 grid gap-4 lg:grid-cols-2">
+                    <div className="rounded-2xl border border-orange-300/15 bg-orange-300/5 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+                        Why it matters
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                        {drill.why}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">
+                        Run this
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                        {drill.drill}
+                      </p>
+                    </div>
+                  </div>
+                  <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-300">
                     {drill.cues.map((cue) => (
                       <li
                         key={cue}
-                        className="rounded-2xl bg-slate-950/60 px-3 py-2"
+                        className="rounded-2xl border border-white/8 bg-slate-950/60 px-3 py-3"
                       >
                         {cue}
                       </li>
@@ -954,21 +923,20 @@ export function FahkumramGuide() {
           <SectionHeading
             eyebrow="Gameplan"
             title="How Fahkumram should feel"
-            copy="The opponent should feel like they are losing before they are close enough to play their normal Tekken. Then, once they finally respect the range, Garuda turns their block into a guessing game."
+            copy="The opponent should feel behind before they are close enough to play normally. Once they finally respect the range, Garuda forces the guess."
+            accent="orange"
           />
-          <div className="grid gap-4">
+          <div className="grid gap-4 lg:grid-cols-2">
             {gameplan.map((step, index) => (
               <article
                 key={step.title}
                 className="rounded-3xl border border-white/10 bg-white/5 p-6"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
-                  Step {index + 1}
-                </p>
-                <h3 className="mt-3 text-xl font-semibold text-white">
+                <StepBadge step={index + 1} accent="orange" />
+                <h3 className="mt-4 text-xl font-semibold text-white">
                   {step.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-slate-300">
+                <p className="mt-3 text-sm leading-6 text-slate-300">
                   {step.copy}
                 </p>
               </article>
@@ -982,7 +950,8 @@ export function FahkumramGuide() {
           <SectionHeading
             eyebrow="Toolkit"
             title="The tools doing the real damage"
-            copy="These are the moves to review when your Fahkumram feels linear, slow, or too risky. Each one has a purpose and a way it gets you killed."
+            copy="These are the moves to recognise on sight. Learn the shape, then use the clip to refresh the timing."
+            accent="orange"
           />
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
             <div className="grid gap-5 md:grid-cols-2">
@@ -995,9 +964,7 @@ export function FahkumramGuide() {
                     {tool.role}
                   </p>
                   <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-                    <h3 className="text-2xl font-semibold text-white">
-                      {tool.move}
-                    </h3>
+                    <MoveNotation notation={tool.move} accent="orange" size="lg" />
                     <ClipButton
                       clip={tool.clip}
                       clipKey={`toolkit-${tool.move}-${tool.clip.search}`}
@@ -1005,14 +972,24 @@ export function FahkumramGuide() {
                       onPlay={playClip}
                     />
                   </div>
-                  <p className="mt-4 text-sm leading-7 text-slate-300">
-                    <span className="font-medium text-slate-200">When:</span>{" "}
-                    {tool.when}
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-slate-400">
-                    <span className="font-medium text-slate-200">Risk:</span>{" "}
-                    {tool.risk}
-                  </p>
+                  <div className="mt-5 grid gap-3">
+                    <div className="rounded-2xl border border-orange-300/15 bg-orange-300/5 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+                        When to use it
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-200">
+                        {tool.when}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-rose-300/15 bg-rose-300/5 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-300">
+                        What loses
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                        {tool.risk}
+                      </p>
+                    </div>
+                  </div>
                 </article>
               ))}
             </div>
@@ -1027,6 +1004,7 @@ export function FahkumramGuide() {
             eyebrow="Clips"
             title="Embedded Fahkumram clip packs"
             copy="Use these as quick visual presets for the moves you should actually be drilling."
+            accent="orange"
           />
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
             <div className="grid gap-5 lg:grid-cols-2">
@@ -1065,7 +1043,8 @@ export function FahkumramGuide() {
           <SectionHeading
             eyebrow="Secrets"
             title="The things that make Fahkumram unfair"
-            copy="The character becomes much scarier when you understand what the opponent is trying to do against him: step early, duck highs, punish lows, and wait out fake pressure."
+            copy="The character becomes much scarier when you can see the key stance routes and answers at a glance."
+            accent="orange"
           />
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
             <div className="grid gap-5 lg:grid-cols-2">
@@ -1080,19 +1059,27 @@ export function FahkumramGuide() {
                   <h3 className="mt-3 text-xl font-semibold text-white">
                     {secret.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-300">
+                  <p className="mt-4 text-sm leading-6 text-slate-300">
                     {secret.copy}
                   </p>
-                  <p className="mt-4 text-sm leading-7 text-slate-400">
-                    <span className="font-medium text-slate-200">Route:</span>{" "}
-                    {secret.route}
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-slate-400">
-                    <span className="font-medium text-slate-200">
-                      If they adapt:
-                    </span>{" "}
-                    {secret.counter}
-                  </p>
+                  <div className="mt-4 grid gap-3">
+                    <div className="rounded-2xl border border-orange-300/15 bg-orange-300/5 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+                        Route
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-200">
+                        {secret.route}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">
+                        If they adapt
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                        {secret.counter}
+                      </p>
+                    </div>
+                  </div>
                   <div className="mt-5 flex flex-wrap gap-3">
                     {secret.clips.map((clip) => (
                       <ClipButton
@@ -1117,7 +1104,8 @@ export function FahkumramGuide() {
           <SectionHeading
             eyebrow="Matchups"
             title="Loading-screen briefings"
-            copy="Current playable roster through Kunimitsu. Tap a character for a fast Fahkumram-specific plan."
+            copy="Tap a character for a fast Fahkumram-specific plan with action cards you can scan between rounds."
+            accent="orange"
           />
           <div className="flex flex-wrap gap-2">
             {matchups.map((matchup) => {
@@ -1147,9 +1135,14 @@ export function FahkumramGuide() {
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
                 Fahkumram vs {activeMatchup.name}
               </p>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 sm:text-base">
-                {activeMatchup.briefing}
-              </p>
+              <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+                  Quick read
+                </p>
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300 sm:text-base">
+                  {activeMatchup.briefing}
+                </p>
+              </div>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {[
