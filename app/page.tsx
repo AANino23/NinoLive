@@ -14,11 +14,10 @@ const sections = [
       "Learn Fahkumram in Tekken 8 with Garuda Force drills, Rama mixups, matchup reminders, and embedded move clips.",
   },
   {
-    title: "FootballManager",
-    href: "/football-manager",
+    title: "China Box",
+    href: "/china-box",
     description:
-      "Set up clubs, managers, tactics, fixtures, and the foundation for a daily football league.",
-    hidden: true,
+      "Start a live group order room, build your box, and collect everyone's order in one place.",
   },
   {
     title: "When Are You Free?",
