@@ -1,6 +1,11 @@
 import { list, put } from "@vercel/blob";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
+import {
+  getBlobClientOptions,
+  getBlobPutOptions,
+  shouldUseBlob,
+} from "@/lib/blob-storage";
 import { chinaBoxMenuItems, chinaBoxMenuVersion } from "@/lib/china-box-menu";
 
 export type ChinaBoxOrderItem = {
@@ -31,15 +36,7 @@ export type ChinaBoxRoom = {
 const LOCAL_DIR = path.join(process.cwd(), "data", "china-box-rooms");
 const BLOB_PREFIX = "china-box-rooms/";
 
-function isVercelRuntime() {
-  return Boolean(process.env.VERCEL);
-}
-
-function shouldUseBlob() {
-  return isVercelRuntime() || Boolean(process.env.BLOB_READ_WRITE_TOKEN);
-}
-
-function createRoomId() {
+export function createChinaBoxRoomId() {
   return `room-${Math.random().toString(36).slice(2, 8)}`;
 }
 
@@ -71,7 +68,10 @@ async function saveLocalRoom(room: ChinaBoxRoom) {
 
 async function getBlobRoom(roomId: string): Promise<ChinaBoxRoom | null> {
   try {
-    const { blobs } = await list({ prefix: `${BLOB_PREFIX}${roomFileName(roomId)}` });
+    const { blobs } = await list({
+      prefix: `${BLOB_PREFIX}${roomFileName(roomId)}`,
+      ...getBlobClientOptions(),
+    });
     const blob = blobs.find((entry) => entry.pathname === `${BLOB_PREFIX}${roomFileName(roomId)}`);
 
     if (!blob) {
@@ -91,22 +91,33 @@ async function getBlobRoom(roomId: string): Promise<ChinaBoxRoom | null> {
 }
 
 async function saveBlobRoom(room: ChinaBoxRoom) {
-  await put(`${BLOB_PREFIX}${roomFileName(room.roomId)}`, JSON.stringify(room), {
-    access: "public",
-    addRandomSuffix: false,
-    allowOverwrite: true,
-  });
+  await put(
+    `${BLOB_PREFIX}${roomFileName(room.roomId)}`,
+    JSON.stringify(room),
+    getBlobPutOptions({
+      access: "public",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+    }),
+  );
 }
 
 async function persistRoom(room: ChinaBoxRoom) {
   if (shouldUseBlob()) {
     await saveBlobRoom(room);
-  } else {
-    await saveLocalRoom(room);
+    return;
   }
+
+  if (process.env.VERCEL) {
+    throw new Error(
+      "Order storage is not configured. Connect Vercel Blob to the NinoLive project.",
+    );
+  }
+
+  await saveLocalRoom(room);
 }
 
-function createEmptyRoom(roomId = createRoomId()): ChinaBoxRoom {
+function createEmptyRoom(roomId = createChinaBoxRoomId()): ChinaBoxRoom {
   const timestamp = new Date().toISOString();
 
   return {
@@ -162,6 +173,13 @@ export async function getChinaBoxRoom(roomId: string): Promise<ChinaBoxRoom | nu
   }
 
   return readLocalRoom(roomId);
+}
+
+export async function getChinaBoxRoomOrDefault(
+  roomId: string,
+): Promise<ChinaBoxRoom> {
+  const existing = await getChinaBoxRoom(roomId);
+  return existing ?? createEmptyRoom(roomId);
 }
 
 export async function createChinaBoxRoom(roomId?: string) {

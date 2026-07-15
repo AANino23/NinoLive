@@ -1,6 +1,11 @@
 import { list, put } from "@vercel/blob";
 import { mkdir, readdir, readFile, writeFile } from "fs/promises";
 import path from "path";
+import {
+  getBlobClientOptions,
+  getBlobPutOptions,
+  shouldUseBlob,
+} from "@/lib/blob-storage";
 
 export type AvailabilityEntry = {
   id: string;
@@ -11,14 +16,6 @@ export type AvailabilityEntry = {
 
 const LOCAL_DIR = path.join(process.cwd(), "data", "availability");
 const BLOB_PREFIX = "availability/";
-
-function isVercelRuntime() {
-  return Boolean(process.env.VERCEL);
-}
-
-function shouldUseBlob() {
-  return isVercelRuntime() || Boolean(process.env.BLOB_READ_WRITE_TOKEN);
-}
 
 async function ensureLocalDir() {
   await mkdir(LOCAL_DIR, { recursive: true });
@@ -57,7 +54,10 @@ async function saveLocalSubmission(entry: AvailabilityEntry) {
 
 async function getBlobSubmissions(): Promise<AvailabilityEntry[]> {
   try {
-    const { blobs } = await list({ prefix: BLOB_PREFIX });
+    const { blobs } = await list({
+      prefix: BLOB_PREFIX,
+      ...getBlobClientOptions(),
+    });
 
     const entries = await Promise.all(
       blobs.map(async (blob) => {
@@ -78,11 +78,15 @@ async function getBlobSubmissions(): Promise<AvailabilityEntry[]> {
 }
 
 async function saveBlobSubmission(entry: AvailabilityEntry) {
-  await put(`${BLOB_PREFIX}${entry.id}.json`, JSON.stringify(entry), {
-    access: "public",
-    addRandomSuffix: false,
-    allowOverwrite: true,
-  });
+  await put(
+    `${BLOB_PREFIX}${entry.id}.json`,
+    JSON.stringify(entry),
+    getBlobPutOptions({
+      access: "public",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+    }),
+  );
 }
 
 export async function getSubmissions(): Promise<AvailabilityEntry[]> {
@@ -118,6 +122,10 @@ export async function saveSubmission(
 
   if (shouldUseBlob()) {
     await saveBlobSubmission(entry);
+  } else if (process.env.VERCEL) {
+    throw new Error(
+      "Availability storage is not configured. Connect Vercel Blob to the NinoLive project.",
+    );
   } else {
     await saveLocalSubmission(entry);
   }

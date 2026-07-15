@@ -21,6 +21,7 @@ import type { ChinaBoxOrderItem, ChinaBoxRoom } from "@/lib/china-box-rooms";
 type ChinaBoxRoomViewProps = {
   initialRoom: ChinaBoxRoom;
   menu: ChinaBoxMenuCategory[];
+  storageConfigured: boolean;
 };
 
 type CartState = Record<string, number>;
@@ -188,6 +189,7 @@ function buildSummaryText(
 export function ChinaBoxRoomView({
   initialRoom,
   menu,
+  storageConfigured,
 }: ChinaBoxRoomViewProps) {
   const [room, setRoom] = useState(initialRoom);
   const [activeTab, setActiveTab] = useState<ActiveTab>("menu");
@@ -673,6 +675,14 @@ export function ChinaBoxRoomView({
         {error ? (
           <p className="mt-6 rounded-xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
             {error}
+          </p>
+        ) : null}
+
+        {!storageConfigured ? (
+          <p className="mt-6 rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
+            Shared order storage is not configured on this deployment yet. The
+            page can open, but confirmed orders will not save until Vercel Blob
+            is connected to NinoLive.
           </p>
         ) : null}
 

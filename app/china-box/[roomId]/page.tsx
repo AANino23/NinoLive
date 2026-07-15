@@ -1,5 +1,6 @@
 import { chinaBoxMenu } from "@/lib/china-box-menu";
-import { ensureChinaBoxRoom } from "@/lib/china-box-rooms";
+import { isPersistentStorageConfigured } from "@/lib/blob-storage";
+import { getChinaBoxRoomOrDefault } from "@/lib/china-box-rooms";
 import { ChinaBoxRoomView } from "./china-box-room";
 
 type ChinaBoxRoomPageProps = {
@@ -12,7 +13,13 @@ export default async function ChinaBoxRoomPage({
   params,
 }: ChinaBoxRoomPageProps) {
   const { roomId } = await params;
-  const room = await ensureChinaBoxRoom(roomId);
+  const room = await getChinaBoxRoomOrDefault(roomId);
 
-  return <ChinaBoxRoomView initialRoom={room} menu={chinaBoxMenu} />;
+  return (
+    <ChinaBoxRoomView
+      initialRoom={room}
+      menu={chinaBoxMenu}
+      storageConfigured={isPersistentStorageConfigured()}
+    />
+  );
 }
