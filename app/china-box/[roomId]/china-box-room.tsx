@@ -212,7 +212,7 @@ export function ChinaBoxRoomView({
   const [isSavingExtra, setIsSavingExtra] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [armedAction, setArmedAction] = useState<string | null>(null);
-  const hasInitializedIdentity = useRef(false);
+  const hasInitializedName = useRef(false);
   const titleTapCountRef = useRef(0);
   const titleTapTimeoutRef = useRef<number | null>(null);
 
@@ -291,33 +291,18 @@ export function ChinaBoxRoomView({
   }, [room.extraPence]);
 
   useEffect(() => {
-    if (typeof window === "undefined" || hasInitializedIdentity.current) {
+    if (typeof window === "undefined" || hasInitializedName.current) {
       return;
     }
 
-    hasInitializedIdentity.current = true;
+    hasInitializedName.current = true;
 
     const savedName = window.localStorage.getItem(roomStorageKeys.name) ?? "";
-    const savedParticipant =
-      window.localStorage.getItem(roomStorageKeys.participant) ?? "";
 
     if (savedName) {
       setNameDraft(savedName);
-      setParticipantName(savedName);
     }
-
-    if (savedParticipant) {
-      setParticipantId(savedParticipant);
-      const existingOrder = room.orders.find(
-        (order) => order.participantId === savedParticipant,
-      );
-
-      if (existingOrder) {
-        setCart(buildCartFromOrder(existingOrder));
-        setNote(existingOrder.note);
-      }
-    }
-  }, [room.orders, roomStorageKeys]);
+  }, [roomStorageKeys.name]);
 
   useEffect(() => {
     let cancelled = false;
@@ -378,7 +363,11 @@ export function ChinaBoxRoomView({
       return;
     }
 
-    const nextParticipantId = participantId ?? createParticipantId();
+    const savedParticipant =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem(roomStorageKeys.participant)
+        : null;
+    const nextParticipantId = savedParticipant ?? createParticipantId();
     const existingOrder = room.orders.find(
       (order) => order.participantId === nextParticipantId,
     );
@@ -387,6 +376,7 @@ export function ChinaBoxRoomView({
     setParticipantName(nextName);
     setCart(buildCartFromOrder(existingOrder));
     setNote(existingOrder?.note ?? "");
+    setActiveTab("menu");
     setError("");
     setFeedback("");
 
@@ -614,7 +604,12 @@ export function ChinaBoxRoomView({
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 py-10 sm:px-10 sm:py-14">
+    <>
+      <main
+        className={`mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 py-10 sm:px-10 sm:py-14 ${
+          participantId && activeTab === "menu" ? "pb-44" : ""
+        }`}
+      >
       <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-slate-950/40 backdrop-blur sm:p-10">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
@@ -647,31 +642,35 @@ export function ChinaBoxRoomView({
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={() => setActiveTab("menu")}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-              activeTab === "menu"
-                ? "border border-sky-400/50 bg-sky-400/15 text-sky-100"
-                : "border border-white/10 bg-slate-950/60 text-slate-300 hover:border-sky-400/40"
-            }`}
-          >
-            Menu
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("group")}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-              activeTab === "group"
-                ? "border border-sky-400/50 bg-sky-400/15 text-sky-100"
-                : "border border-white/10 bg-slate-950/60 text-slate-300 hover:border-sky-400/40"
-            }`}
-          >
-            Group order
-            <span className="ml-2 rounded-full bg-white/10 px-2 py-0.5 text-xs text-slate-200">
-              {room.orders.length}
-            </span>
-          </button>
+          {participantId ? (
+            <>
+              <button
+                type="button"
+                onClick={() => setActiveTab("menu")}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                  activeTab === "menu"
+                    ? "border border-sky-400/50 bg-sky-400/15 text-sky-100"
+                    : "border border-white/10 bg-slate-950/60 text-slate-300 hover:border-sky-400/40"
+                }`}
+              >
+                Menu
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("group")}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                  activeTab === "group"
+                    ? "border border-sky-400/50 bg-sky-400/15 text-sky-100"
+                    : "border border-white/10 bg-slate-950/60 text-slate-300 hover:border-sky-400/40"
+                }`}
+              >
+                Group order
+                <span className="ml-2 rounded-full bg-white/10 px-2 py-0.5 text-xs text-slate-200">
+                  {room.orders.length}
+                </span>
+              </button>
+            </>
+          ) : null}
         </div>
 
         {feedback ? (
@@ -733,17 +732,22 @@ export function ChinaBoxRoomView({
         ) : null}
 
         {!participantId ? (
-          <section className="mt-8 rounded-3xl border border-white/10 bg-slate-950/70 p-6">
+          <section className="mt-8 rounded-3xl border border-white/10 bg-slate-950/70 p-6 sm:p-8">
             <h2 className="text-2xl font-semibold text-white">Who&apos;s ordering?</h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">
-              Enter your name once, then build your box and confirm it into this
-              live room.
+              Confirm your name first. Once you&apos;re in, you can build your box
+              and add it to the shared order.
             </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <input
                 value={nameDraft}
                 onChange={(event) => setNameDraft(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    handleEnterRoom();
+                  }
+                }}
                 placeholder="Your name"
                 autoComplete="name"
                 className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-sky-400/60"
@@ -753,42 +757,40 @@ export function ChinaBoxRoomView({
                 onClick={handleEnterRoom}
                 className="inline-flex shrink-0 items-center justify-center rounded-xl border border-sky-400/40 bg-sky-400/10 px-5 py-3 text-sm font-medium text-sky-200 transition hover:border-sky-300 hover:bg-sky-400/20"
               >
-                Open the menu
+                Confirm name
               </button>
             </div>
           </section>
         ) : null}
 
-        {participantId ? (
-          <div className="mt-8 flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-slate-300">
-            <p>
-              Ordering as <span className="font-medium text-white">{participantName}</span>
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setParticipantId(null);
-                setParticipantName("");
-                setNameDraft("");
-                setCart({});
-                setNote("");
-                setFeedback("");
-                setError("");
-
-                if (typeof window !== "undefined") {
-                  window.localStorage.removeItem(roomStorageKeys.name);
-                  window.localStorage.removeItem(roomStorageKeys.participant);
-                }
-              }}
-              className="rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-slate-300 transition hover:border-sky-400/40 hover:text-white"
-            >
-              Switch
-            </button>
-          </div>
-        ) : null}
-
-        {activeTab === "menu" ? (
+        {participantId && activeTab === "menu" ? (
           <section className="mt-8">
+            <div className="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-slate-300">
+              <p>
+                Ordering as{" "}
+                <span className="font-medium text-white">{participantName}</span>
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setParticipantId(null);
+                  setParticipantName("");
+                  setNameDraft(participantName);
+                  setCart({});
+                  setNote("");
+                  setFeedback("");
+                  setError("");
+
+                  if (typeof window !== "undefined") {
+                    window.localStorage.removeItem(roomStorageKeys.participant);
+                  }
+                }}
+                className="rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-slate-300 transition hover:border-sky-400/40 hover:text-white"
+              >
+                Switch
+              </button>
+            </div>
+
             <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
               <input
                 value={search}
@@ -907,64 +909,35 @@ export function ChinaBoxRoomView({
                 </section>
               ))}
             </div>
-
-            <div className="mt-8 rounded-3xl border border-white/10 bg-slate-950/70 p-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <p className="text-lg font-semibold text-white">
-                    {formatPence(cartSummary.totalPence)}
-                  </p>
-                  <p className="mt-1 text-sm text-slate-300">
-                    {cartSummary.count} {cartSummary.count === 1 ? "item" : "items"} in
-                    your box
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  {currentOrder ? (
-                    <button
-                      type="button"
-                      onClick={handleRemoveMyOrder}
-                      disabled={isSubmitting}
-                      className="inline-flex items-center justify-center rounded-full border border-rose-400/30 bg-rose-400/10 px-4 py-2 text-sm font-medium text-rose-200 transition hover:border-rose-300 disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      Remove my order
-                    </button>
-                  ) : null}
-                  <button
-                    type="button"
-                    onClick={handleConfirmOrder}
-                    disabled={isSubmitting || !participantId}
-                    className="inline-flex items-center justify-center rounded-full border border-sky-400/40 bg-sky-400/10 px-5 py-2.5 text-sm font-medium text-sky-200 transition hover:border-sky-300 hover:bg-sky-400/20 disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    {isSubmitting
-                      ? "Saving..."
-                      : currentOrder
-                        ? "Update my order"
-                        : "Confirm my order"}
-                  </button>
-                </div>
-              </div>
-
-              <div className="mt-5">
-                <label
-                  htmlFor="order-note"
-                  className="text-sm font-medium text-slate-200"
-                >
-                  Order notes
-                </label>
-                <textarea
-                  id="order-note"
-                  value={note}
-                  onChange={(event) => setNote(event.target.value)}
-                  rows={3}
-                  placeholder="Optional notes like no onions, extra sauce, or drink swaps."
-                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-sky-400/60"
-                />
-              </div>
-            </div>
           </section>
-        ) : (
+        ) : participantId ? (
           <section className="mt-8 space-y-6">
+            <div className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-slate-300">
+              <p>
+                Ordering as{" "}
+                <span className="font-medium text-white">{participantName}</span>
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setParticipantId(null);
+                  setParticipantName("");
+                  setNameDraft(participantName);
+                  setCart({});
+                  setNote("");
+                  setFeedback("");
+                  setError("");
+
+                  if (typeof window !== "undefined") {
+                    window.localStorage.removeItem(roomStorageKeys.participant);
+                  }
+                }}
+                className="rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-slate-300 transition hover:border-sky-400/40 hover:text-white"
+              >
+                Switch
+              </button>
+            </div>
+
             <div className="rounded-3xl border border-white/10 bg-slate-950/60 p-6">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div>
@@ -1208,7 +1181,7 @@ export function ChinaBoxRoomView({
               })}
             </div>
           </section>
-        )}
+        ) : null}
 
         <Link
           href="/"
@@ -1218,5 +1191,60 @@ export function ChinaBoxRoomView({
         </Link>
       </div>
     </main>
+
+      {participantId && activeTab === "menu" ? (
+        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-slate-950/95 px-4 py-4 shadow-2xl shadow-slate-950/60 backdrop-blur sm:px-6">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-3">
+            <label htmlFor="order-note" className="sr-only">
+              Order notes
+            </label>
+            <input
+              id="order-note"
+              value={note}
+              onChange={(event) => setNote(event.target.value)}
+              placeholder="Optional notes: no onions, extra sauce, drink swap..."
+              className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-4 py-2.5 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-sky-400/60"
+            />
+
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="min-w-0 flex-1">
+                <p className="text-lg font-semibold text-white sm:text-xl">
+                  {formatPence(cartSummary.totalPence)}
+                </p>
+                <p className="text-sm text-slate-300">
+                  {cartSummary.count}{" "}
+                  {cartSummary.count === 1 ? "item" : "items"} in your box
+                </p>
+              </div>
+
+              <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+                {currentOrder ? (
+                  <button
+                    type="button"
+                    onClick={handleRemoveMyOrder}
+                    disabled={isSubmitting}
+                    className="hidden rounded-full border border-rose-400/30 bg-rose-400/10 px-4 py-2.5 text-sm font-medium text-rose-200 transition hover:border-rose-300 disabled:cursor-not-allowed disabled:opacity-60 sm:inline-flex"
+                  >
+                    Remove
+                  </button>
+                ) : null}
+                <button
+                  type="button"
+                  onClick={handleConfirmOrder}
+                  disabled={isSubmitting}
+                  className="inline-flex items-center justify-center rounded-full border border-sky-400/40 bg-sky-400/15 px-5 py-2.5 text-sm font-medium text-sky-100 transition hover:border-sky-300 hover:bg-sky-400/25 disabled:cursor-not-allowed disabled:opacity-60 sm:px-6 sm:py-3"
+                >
+                  {isSubmitting
+                    ? "Saving..."
+                    : currentOrder
+                      ? "Update order"
+                      : "Confirm order"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }
