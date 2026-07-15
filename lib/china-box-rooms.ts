@@ -1,4 +1,4 @@
-import { get, head, put } from "@vercel/blob";
+import { get, head, list, put } from "@vercel/blob";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 import {
@@ -103,11 +103,49 @@ async function readBlobRoomContent(
   }
 }
 
+async function fetchBlobJson(url: string): Promise<ChinaBoxRoom | null> {
+  try {
+    const response = await fetch(url, { cache: "no-store" });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return (await response.json()) as ChinaBoxRoom;
+  } catch {
+    return null;
+  }
+}
+
 async function getBlobRoom(roomId: string): Promise<ChinaBoxRoom | null> {
   const pathname = blobPathname(roomId);
+  const clientOptions = getBlobClientOptions();
 
   try {
-    const metadata = await head(pathname, getBlobClientOptions());
+    const { blobs } = await list({
+      prefix: BLOB_PREFIX,
+      ...clientOptions,
+    });
+
+    const blob = blobs.find(
+      (entry) =>
+        entry.pathname === pathname ||
+        entry.pathname.endsWith(`/${roomFileName(roomId)}`),
+    );
+
+    if (blob) {
+      const room = await fetchBlobJson(blob.url);
+
+      if (room) {
+        return room;
+      }
+    }
+  } catch {
+    // Fall through to direct blob lookups below.
+  }
+
+  try {
+    const metadata = await head(pathname, clientOptions);
     return readBlobRoomContent(pathname, metadata.downloadUrl);
   } catch {
     return null;
@@ -232,20 +270,15 @@ export async function getChinaBoxRoomForPoll(
   };
 }
 
+async function loadRoomForMutation(roomId: string): Promise<ChinaBoxRoom> {
+  const existing = await getChinaBoxRoom(roomId);
+  return existing ?? createEmptyRoom(roomId);
+}
+
 export async function createChinaBoxRoom(roomId?: string) {
   const room = createEmptyRoom(roomId);
   await persistRoom(room);
   return room;
-}
-
-export async function ensureChinaBoxRoom(roomId: string) {
-  const existing = await getChinaBoxRoom(roomId);
-
-  if (existing) {
-    return existing;
-  }
-
-  return createChinaBoxRoom(roomId);
 }
 
 export async function upsertChinaBoxOrder(input: {
@@ -255,7 +288,7 @@ export async function upsertChinaBoxOrder(input: {
   note?: string;
   items: ChinaBoxOrderItem[];
 }) {
-  const room = await ensureChinaBoxRoom(input.roomId);
+  const room = await loadRoomForMutation(input.roomId);
   const sanitizedItems = sanitizeOrderItems(input.items);
 
   if (sanitizedItems.length === 0) {
@@ -309,7 +342,7 @@ export async function upsertChinaBoxOrder(input: {
 }
 
 export async function removeChinaBoxOrder(roomId: string, participantId: string) {
-  const room = await ensureChinaBoxRoom(roomId);
+  const room = await loadRoomForMutation(roomId);
   const nextOrders = room.orders.filter(
     (order) => order.participantId !== participantId,
   );
@@ -333,7 +366,7 @@ export async function updateChinaBoxRoomExtra(
   roomId: string,
   extraPence: number,
 ) {
-  const room = await ensureChinaBoxRoom(roomId);
+  const room = await loadRoomForMutation(roomId);
   const nextRoom: ChinaBoxRoom = {
     ...room,
     extraPence: Math.max(0, Math.floor(extraPence)),
@@ -346,7 +379,7 @@ export async function updateChinaBoxRoomExtra(
 }
 
 export async function clearChinaBoxRoom(roomId: string) {
-  const room = await ensureChinaBoxRoom(roomId);
+  const room = await loadRoomForMutation(roomId);
   const nextRoom: ChinaBoxRoom = {
     ...room,
     orders: [],
@@ -363,7 +396,7 @@ export async function removeChinaBoxItemGlobally(
   roomId: string,
   itemId: string,
 ) {
-  const room = await ensureChinaBoxRoom(roomId);
+  const room = await loadRoomForMutation(roomId);
   const now = new Date().toISOString();
 
   const nextOrders = room.orders
@@ -399,7 +432,7 @@ export async function removeChinaBoxItemFromOrder(
   participantId: string,
   itemId: string,
 ) {
-  const room = await ensureChinaBoxRoom(roomId);
+  const room = await loadRoomForMutation(roomId);
   const now = new Date().toISOString();
 
   const nextOrders = room.orders

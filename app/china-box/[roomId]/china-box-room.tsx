@@ -39,6 +39,21 @@ function createParticipantId() {
   return `guest-${crypto.randomUUID()}`;
 }
 
+function shouldAcceptPollUpdate(
+  current: ChinaBoxRoom,
+  next: ChinaBoxRoom,
+): boolean {
+  if (next.revision > current.revision) {
+    return true;
+  }
+
+  if (next.updatedAt > current.updatedAt) {
+    return true;
+  }
+
+  return next.orders.length !== current.orders.length;
+}
+
 function buildCartFromOrder(order: ChinaBoxRoom["orders"][number] | undefined) {
   if (!order) {
     return {};
@@ -215,6 +230,9 @@ export function ChinaBoxRoomView({
   const hasInitializedName = useRef(false);
   const titleTapCountRef = useRef(0);
   const titleTapTimeoutRef = useRef<number | null>(null);
+  const roomRef = useRef(room);
+  roomRef.current = room;
+  const pollRoomRef = useRef<() => Promise<void>>(async () => {});
 
   const roomStorageKeys = useMemo(
     () => ({
@@ -313,17 +331,19 @@ export function ChinaBoxRoomView({
           cache: "no-store",
         });
 
-        if (!response.ok) {
+        if (!response.ok || cancelled) {
           return;
         }
 
         const nextRoom = (await response.json()) as ChinaBoxRoomPollResponse;
 
-        if (
-          !cancelled &&
-          nextRoom.stored &&
-          nextRoom.revision > room.revision
-        ) {
+        if (!nextRoom.stored || cancelled) {
+          return;
+        }
+
+        const current = roomRef.current;
+
+        if (shouldAcceptPollUpdate(current, nextRoom)) {
           setRoom(nextRoom);
         }
       } catch {
@@ -331,12 +351,21 @@ export function ChinaBoxRoomView({
       }
     };
 
+    pollRoomRef.current = poll;
+    void poll();
+
     const interval = window.setInterval(poll, POLL_INTERVAL_MS);
     return () => {
       cancelled = true;
       window.clearInterval(interval);
     };
-  }, [room.revision, room.roomId]);
+  }, [room.roomId]);
+
+  useEffect(() => {
+    if (activeTab === "group") {
+      void pollRoomRef.current();
+    }
+  }, [activeTab]);
 
   const roomLink =
     typeof window === "undefined" ? "" : window.location.href;
