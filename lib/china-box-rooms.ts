@@ -1,4 +1,4 @@
-import { list, put } from "@vercel/blob";
+import { get, head, put } from "@vercel/blob";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 import {
@@ -35,6 +35,11 @@ export type ChinaBoxRoom = {
 
 const LOCAL_DIR = path.join(process.cwd(), "data", "china-box-rooms");
 const BLOB_PREFIX = "china-box-rooms/";
+export const DEFAULT_CHINA_BOX_ROOM_ID = "room-live";
+
+function blobPathname(roomId: string) {
+  return `${BLOB_PREFIX}${roomFileName(roomId)}`;
+}
 
 export function createChinaBoxRoomId() {
   return `room-${Math.random().toString(36).slice(2, 8)}`;
@@ -66,19 +71,27 @@ async function saveLocalRoom(room: ChinaBoxRoom) {
   );
 }
 
-async function getBlobRoom(roomId: string): Promise<ChinaBoxRoom | null> {
+async function readBlobRoomContent(
+  pathname: string,
+  downloadUrl: string,
+): Promise<ChinaBoxRoom | null> {
   try {
-    const { blobs } = await list({
-      prefix: `${BLOB_PREFIX}${roomFileName(roomId)}`,
+    const result = await get(pathname, {
+      access: "public",
+      useCache: false,
       ...getBlobClientOptions(),
     });
-    const blob = blobs.find((entry) => entry.pathname === `${BLOB_PREFIX}${roomFileName(roomId)}`);
 
-    if (!blob) {
-      return null;
+    if (result?.statusCode === 200 && result.stream) {
+      const content = await new Response(result.stream).text();
+      return JSON.parse(content) as ChinaBoxRoom;
     }
+  } catch {
+    // Fall back to the blob download URL below.
+  }
 
-    const response = await fetch(blob.url, { cache: "no-store" });
+  try {
+    const response = await fetch(downloadUrl, { cache: "no-store" });
 
     if (!response.ok) {
       return null;
@@ -90,9 +103,20 @@ async function getBlobRoom(roomId: string): Promise<ChinaBoxRoom | null> {
   }
 }
 
+async function getBlobRoom(roomId: string): Promise<ChinaBoxRoom | null> {
+  const pathname = blobPathname(roomId);
+
+  try {
+    const metadata = await head(pathname, getBlobClientOptions());
+    return readBlobRoomContent(pathname, metadata.downloadUrl);
+  } catch {
+    return null;
+  }
+}
+
 async function saveBlobRoom(room: ChinaBoxRoom) {
   await put(
-    `${BLOB_PREFIX}${roomFileName(room.roomId)}`,
+    blobPathname(room.roomId),
     JSON.stringify(room),
     getBlobPutOptions({
       access: "public",
@@ -180,6 +204,32 @@ export async function getChinaBoxRoomOrDefault(
 ): Promise<ChinaBoxRoom> {
   const existing = await getChinaBoxRoom(roomId);
   return existing ?? createEmptyRoom(roomId);
+}
+
+export type ChinaBoxRoomPollResponse =
+  | (ChinaBoxRoom & { stored: true })
+  | {
+      stored: false;
+      roomId: string;
+      revision: 0;
+      orders: [];
+    };
+
+export async function getChinaBoxRoomForPoll(
+  roomId: string,
+): Promise<ChinaBoxRoomPollResponse> {
+  const existing = await getChinaBoxRoom(roomId);
+
+  if (existing) {
+    return { stored: true, ...existing };
+  }
+
+  return {
+    stored: false,
+    roomId,
+    revision: 0,
+    orders: [],
+  };
 }
 
 export async function createChinaBoxRoom(roomId?: string) {

@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { getChinaBoxRoomOrDefault } from "@/lib/china-box-rooms";
+import { getChinaBoxRoomForPoll } from "@/lib/china-box-rooms";
 
 export async function GET(
   _request: Request,
   context: { params: Promise<{ roomId: string }> },
 ) {
   const { roomId } = await context.params;
-  const room = await getChinaBoxRoomOrDefault(roomId);
+  const room = await getChinaBoxRoomForPoll(roomId);
 
   return NextResponse.json(room, {
     headers: {

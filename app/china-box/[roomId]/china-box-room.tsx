@@ -16,7 +16,11 @@ import {
   type ChinaBoxMenuCategory,
   type ChinaBoxMenuItem,
 } from "@/lib/china-box-menu";
-import type { ChinaBoxOrderItem, ChinaBoxRoom } from "@/lib/china-box-rooms";
+import type {
+  ChinaBoxOrderItem,
+  ChinaBoxRoom,
+  ChinaBoxRoomPollResponse,
+} from "@/lib/china-box-rooms";
 
 type ChinaBoxRoomViewProps = {
   initialRoom: ChinaBoxRoom;
@@ -328,9 +332,13 @@ export function ChinaBoxRoomView({
           return;
         }
 
-        const nextRoom = (await response.json()) as ChinaBoxRoom;
+        const nextRoom = (await response.json()) as ChinaBoxRoomPollResponse;
 
-        if (!cancelled && nextRoom.revision !== room.revision) {
+        if (
+          !cancelled &&
+          nextRoom.stored &&
+          nextRoom.revision > room.revision
+        ) {
           setRoom(nextRoom);
         }
       } catch {
