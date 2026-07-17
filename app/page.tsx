@@ -14,12 +14,6 @@ const sections = [
       "Learn Fahkumram in Tekken 8 with Garuda Force drills, Rama mixups, matchup reminders, and embedded move clips.",
   },
   {
-    title: "China Box",
-    href: "/china-box",
-    description:
-      "Start a live group order room, build your box, and collect everyone's order in one place.",
-  },
-  {
     title: "When Are You Free?",
     href: "/when-are-you-free",
     description: "Share your name and the date you are available.",

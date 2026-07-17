@@ -26,6 +26,3 @@ next-env.d.ts
 
 # local availability submissions
 /data/availability/*.json
-
-# local china box room snapshots
-/data/china-box-rooms/*.json
