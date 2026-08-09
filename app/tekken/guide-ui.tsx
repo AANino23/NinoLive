@@ -12,23 +12,23 @@ export type GuideAccent =
 type SizeName = "sm" | "md" | "lg";
 
 const accentText: Record<GuideAccent, string> = {
-  sky: "text-sky-300",
-  orange: "text-orange-300",
-  cyan: "text-cyan-300",
-  violet: "text-violet-300",
-  emerald: "text-emerald-300",
-  amber: "text-amber-300",
-  rose: "text-rose-300",
+  sky: "text-sky-600",
+  orange: "text-orange-600",
+  cyan: "text-cyan-600",
+  violet: "text-violet-600",
+  emerald: "text-emerald-600",
+  amber: "text-amber-600",
+  rose: "text-rose-600",
 };
 
 const accentTint: Record<GuideAccent, string> = {
-  sky: "border-sky-300/25 bg-sky-300/10 text-sky-100",
-  orange: "border-orange-300/25 bg-orange-300/10 text-orange-100",
-  cyan: "border-cyan-300/25 bg-cyan-300/10 text-cyan-100",
-  violet: "border-violet-300/25 bg-violet-300/10 text-violet-100",
-  emerald: "border-emerald-300/25 bg-emerald-300/10 text-emerald-100",
-  amber: "border-amber-300/25 bg-amber-300/10 text-amber-100",
-  rose: "border-rose-300/25 bg-rose-300/10 text-rose-100",
+  sky: "border-sky-200 bg-sky-50 text-sky-700",
+  orange: "border-orange-200 bg-orange-50 text-orange-700",
+  cyan: "border-cyan-200 bg-cyan-50 text-cyan-700",
+  violet: "border-violet-200 bg-violet-50 text-violet-700",
+  emerald: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  amber: "border-amber-200 bg-amber-50 text-amber-700",
+  rose: "border-rose-200 bg-rose-50 text-rose-700",
 };
 
 const tokenSizeClasses: Record<SizeName, string> = {
@@ -292,7 +292,7 @@ function renderCoreToken(
     return <StanceToken value={upper} accent={accent} size={size} />;
   }
 
-  return <span className="text-slate-100">{token}</span>;
+  return <span className="text-slate-800">{token}</span>;
 }
 
 function renderNotationToken(
@@ -380,8 +380,8 @@ export function SectionHeading({
       <p className={cx("text-xs font-semibold uppercase tracking-[0.3em]", accentText[accent])}>
         {eyebrow}
       </p>
-      <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">{title}</h2>
-      <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">{copy}</p>
+      <h2 className="mt-4 text-2xl font-semibold text-slate-950 sm:text-3xl">{title}</h2>
+      <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">{copy}</p>
     </div>
   );
 }
@@ -402,7 +402,7 @@ export function ClipButtonLabel({
       <span
         className={cx(
           "inline-flex h-7 w-7 items-center justify-center rounded-full border text-[0.68rem] font-black",
-          active ? "border-slate-950/15 bg-slate-950/10 text-slate-950" : accentTint[accent],
+          active ? "border-slate-300 bg-slate-100 text-slate-900" : accentTint[accent],
         )}
       >
         {verb === "Watch" ? ">" : "+"}
@@ -432,7 +432,7 @@ export function ClipPlayerEmpty({
   description: string;
 }) {
   return (
-    <aside className="rounded-3xl border border-dashed border-white/10 bg-slate-950/50 p-6 text-sm leading-7 text-slate-400 xl:sticky xl:top-6">
+    <aside className="rounded-3xl border border-dashed border-slate-200 bg-white/75 p-6 text-sm leading-7 text-slate-500 xl:sticky xl:top-6">
       <p className={cx("text-xs font-semibold uppercase tracking-[0.3em]", accentText[accent])}>
         {title}
       </p>
@@ -455,8 +455,8 @@ export function ClipPlayerFrame({
   const { move } = splitClipLabel(label);
 
   return (
-    <aside className={cx("overflow-hidden rounded-3xl border bg-slate-950/80 shadow-2xl shadow-slate-950/40 xl:sticky xl:top-6", accentTint[accent])}>
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-slate-950 px-4 py-3">
+    <aside className={cx("overflow-hidden rounded-3xl border bg-white/90 shadow-2xl shadow-slate-300/40 xl:sticky xl:top-6", accentTint[accent])}>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3">
         <div>
           <p className={cx("text-xs font-semibold uppercase tracking-[0.3em]", accentText[accent])}>
             Now watching
@@ -469,7 +469,7 @@ export function ClipPlayerFrame({
           href={href}
           target="_blank"
           rel="noreferrer"
-          className="rounded-full border border-white/10 px-3 py-2 text-xs text-slate-300 transition hover:text-white"
+          className="rounded-full border border-slate-200 px-3 py-2 text-xs text-slate-600 transition hover:text-slate-950"
         >
           Full move card
         </a>
@@ -492,7 +492,7 @@ function TabIcon({
     <span
       className={cx(
         "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border",
-        active ? "border-slate-950/20 bg-slate-950/10 text-slate-950" : accentTint[accent],
+        active ? "border-slate-300 bg-slate-100 text-slate-900" : accentTint[accent],
       )}
     >
       {children}

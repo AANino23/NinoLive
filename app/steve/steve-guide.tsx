@@ -1555,7 +1555,7 @@ function ClipButton({
       className={`rounded-2xl border px-3 py-2 text-sm transition ${
         isActive
           ? "border-sky-300 bg-sky-300 text-slate-950 shadow-lg shadow-sky-950/20"
-          : "border-sky-400/35 bg-sky-400/5 text-sky-100 hover:border-sky-300 hover:bg-sky-400/10 hover:text-white"
+          : "border-sky-400/35 bg-sky-400/5 text-sky-700 hover:border-sky-300 hover:bg-sky-400/10 hover:text-slate-950"
       }`}
     >
       <ClipButtonLabel label={clip.label} accent="sky" active={isActive} />
@@ -1661,27 +1661,27 @@ export function SteveGuide() {
 
   return (
     <div className="mt-10 space-y-8">
-      <section className="rounded-3xl border border-white/10 bg-slate-950/70 p-6 shadow-xl shadow-slate-950/30 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
+      <section className="rounded-3xl border border-slate-200 bg-white/85 p-6 shadow-xl shadow-slate-300/40 sm:p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-600">
           Tekken 8
         </p>
         <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
               Steve Fox Study Hall
             </h2>
-            <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
               Steve works best when every tiny hesitation becomes pressure. This
               version of the guide leans on visual move chips, short drill
               cards, and live clips so you can scan it like a study board.
             </p>
           </div>
-          <div className="rounded-2xl border border-sky-400/25 bg-sky-400/10 px-4 py-3 text-sm text-sky-100">
+          <div className="rounded-2xl border border-sky-400/25 bg-sky-400/10 px-4 py-3 text-sm text-sky-700">
             Focus: counter hits, stance pressure, wall snowballing
           </div>
         </div>
 
-        <div className="mt-8 grid gap-3 rounded-3xl border border-white/10 bg-slate-950/80 p-2 shadow-inner shadow-black/30 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-3 rounded-3xl border border-slate-200 bg-white/90 p-2 shadow-inner shadow-slate-200/70 sm:grid-cols-2 lg:grid-cols-3">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -1695,7 +1695,7 @@ export function SteveGuide() {
                 className={`group relative overflow-hidden rounded-2xl border p-3 text-left transition duration-200 ${
                   isActive
                     ? "border-sky-300/70 bg-sky-300 text-slate-950 shadow-lg shadow-sky-950/30"
-                    : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-sky-300/40 hover:bg-white/[0.07] hover:text-white"
+                    : "border-slate-200 bg-white/70 text-slate-600 hover:border-sky-300/40 hover:bg-white hover:text-slate-950"
                 }`}
               >
                 <span
@@ -1725,7 +1725,7 @@ export function SteveGuide() {
           })}
         </div>
 
-        <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-400">
+        <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-500">
           {activeCopy}
         </p>
 
@@ -1745,41 +1745,41 @@ export function SteveGuide() {
               {dojoDrills.map((drill) => (
                 <article
                   key={drill.title}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                  className="rounded-3xl border border-slate-200 bg-white/80 p-6"
                 >
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-600">
                     Drill board
                   </p>
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold text-slate-950">
                     {drill.title}
                   </h3>
-                  <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-200">
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-700">
                     {drill.summary}
                   </p>
                   <div className="mt-5 grid gap-4 lg:grid-cols-2">
                     <div className="rounded-2xl border border-sky-300/15 bg-sky-300/5 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-600">
                         Why it matters
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
                         {drill.why}
                       </p>
                     </div>
-                    <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">
+                    <div className="rounded-2xl border border-slate-200 bg-white/85 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-700">
                         Run this
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
                         {drill.drill}
                       </p>
                     </div>
                   </div>
 
-                  <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-300">
+                  <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-600">
                     {drill.cues.map((cue) => (
                       <li
                         key={cue}
-                        className="rounded-2xl border border-white/8 bg-slate-950/60 px-3 py-3"
+                        className="rounded-2xl border border-slate-200 bg-slate-100/80 px-3 py-3"
                       >
                         {cue}
                       </li>
@@ -1818,13 +1818,13 @@ export function SteveGuide() {
             {gameplan.map((step, index) => (
               <article
                 key={step.title}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                className="rounded-3xl border border-slate-200 bg-white/80 p-6"
               >
                 <StepBadge step={index + 1} accent="sky" />
-                <h3 className="mt-4 text-xl font-semibold text-white">
+                <h3 className="mt-4 text-xl font-semibold text-slate-950">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">
+                <p className="mt-3 text-sm leading-6 text-slate-600">
                   {step.copy}
                 </p>
               </article>
@@ -1847,11 +1847,11 @@ export function SteveGuide() {
               {toolkit.map((tool) => (
                 <article
                   key={tool.move}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                  className="rounded-3xl border border-slate-200 bg-white/80 p-6"
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-600">
                         {tool.role}
                       </p>
                       <div className="mt-3">
@@ -1868,18 +1868,18 @@ export function SteveGuide() {
 
                   <div className="mt-5 grid gap-3 lg:grid-cols-2">
                     <div className="rounded-2xl border border-sky-300/15 bg-sky-300/5 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-600">
                         When to use it
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-200">
+                      <p className="mt-3 text-sm leading-6 text-slate-700">
                         {tool.when}
                       </p>
                     </div>
                     <div className="rounded-2xl border border-rose-300/15 bg-rose-300/5 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-600">
                         What loses
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
                         {tool.risk}
                       </p>
                     </div>
@@ -1906,12 +1906,12 @@ export function SteveGuide() {
               {clipPacks.map((pack) => (
                 <article
                   key={pack.title}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                  className="rounded-3xl border border-slate-200 bg-white/80 p-6"
                 >
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold text-slate-950">
                     {pack.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
                     {pack.notes}
                   </p>
 
@@ -1932,7 +1932,7 @@ export function SteveGuide() {
             <ClipPlayer activeClip={activeClip} />
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-6 text-sm leading-7 text-slate-400">
+          <div className="rounded-3xl border border-slate-200 bg-white/85 p-6 text-sm leading-7 text-slate-500">
             Source blend: high-level Steve identity and stance priorities were
             cross-checked against the Steve guide on TekkenDocs, community
             breakdowns, and live move searches on okizeme.gg. Treat this page
@@ -1954,38 +1954,38 @@ export function SteveGuide() {
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
             <div className="space-y-10">
               <div className="space-y-6">
-                <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">
                   Hidden tech
                 </h3>
                 <div className="grid gap-5">
                   {secretTech.map((tech) => (
                     <article
                       key={tech.title}
-                      className="rounded-3xl border border-amber-400/15 bg-white/5 p-6"
+                      className="rounded-3xl border border-amber-400/15 bg-white/80 p-6"
                     >
-                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">
                         {tech.tag}
                       </p>
-                      <h4 className="mt-3 text-xl font-semibold text-white">
+                      <h4 className="mt-3 text-xl font-semibold text-slate-950">
                         {tech.title}
                       </h4>
-                      <p className="mt-4 text-sm leading-6 text-slate-300">
+                      <p className="mt-4 text-sm leading-6 text-slate-600">
                         {tech.secret}
                       </p>
                       <div className="mt-4 grid gap-3 lg:grid-cols-2">
                         <div className="rounded-2xl border border-amber-300/15 bg-amber-300/5 p-4">
-                          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">
+                          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-600">
                             How to do it
                           </p>
-                          <p className="mt-3 text-sm leading-6 text-slate-200">
+                          <p className="mt-3 text-sm leading-6 text-slate-700">
                             {tech.execution}
                           </p>
                         </div>
-                        <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-                          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">
+                        <div className="rounded-2xl border border-slate-200 bg-slate-100/80 p-4">
+                          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-700">
                             Why it wins
                           </p>
-                          <p className="mt-3 text-sm leading-6 text-slate-300">
+                          <p className="mt-3 text-sm leading-6 text-slate-600">
                             {tech.payoff}
                           </p>
                         </div>
@@ -2008,19 +2008,19 @@ export function SteveGuide() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">
                   Flowcharts that catch people
                 </h3>
                 <div className="grid gap-5">
                   {secretFlowcharts.map((flow) => (
                     <article
                       key={flow.title}
-                      className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                      className="rounded-3xl border border-slate-200 bg-white/80 p-6"
                     >
-                      <h4 className="text-xl font-semibold text-white">
+                      <h4 className="text-xl font-semibold text-slate-950">
                         {flow.title}
                       </h4>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
                         {flow.hook}
                       </p>
 
@@ -2028,7 +2028,7 @@ export function SteveGuide() {
                         {flow.steps.map((step, index) => (
                           <li
                             key={step}
-                            className="flex gap-3 rounded-2xl border border-white/8 bg-slate-950/60 px-4 py-3 text-sm leading-6 text-slate-300"
+                            className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-100/80 px-4 py-3 text-sm leading-6 text-slate-600"
                           >
                             <StepBadge step={index + 1} accent="amber" />
                             <span>{step}</span>
@@ -2037,10 +2037,10 @@ export function SteveGuide() {
                       </ol>
 
                       <div className="mt-4 rounded-2xl border border-amber-300/15 bg-amber-300/5 p-4">
-                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">
+                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-amber-600">
                           If they adapt
                         </p>
-                        <p className="mt-3 text-sm leading-6 text-slate-300">
+                        <p className="mt-3 text-sm leading-6 text-slate-600">
                           {flow.escapeHatch}
                         </p>
                       </div>
@@ -2065,19 +2065,19 @@ export function SteveGuide() {
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">
               Habits of scary Steves
             </h3>
             <div className="grid gap-4">
               {secretHabits.map((habit) => (
                 <article
                   key={habit.title}
-                  className="rounded-3xl border border-white/10 bg-slate-950/70 p-6"
+                  className="rounded-3xl border border-slate-200 bg-white/85 p-6"
                 >
-                  <h4 className="text-lg font-semibold text-white">
+                  <h4 className="text-lg font-semibold text-slate-950">
                     {habit.title}
                   </h4>
-                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
                     {habit.copy}
                   </p>
                 </article>
@@ -2111,7 +2111,7 @@ export function SteveGuide() {
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                     isSelected
                       ? "border-rose-300 bg-rose-300 text-slate-950"
-                      : "border-white/10 bg-white/5 text-slate-300 hover:border-rose-300/60 hover:text-white"
+                      : "border-slate-200 bg-white/80 text-slate-600 hover:border-rose-300/60 hover:text-slate-950"
                   }`}
                 >
                   {matchup.name}
@@ -2122,36 +2122,36 @@ export function SteveGuide() {
 
           {activeMatchup ? (
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
-              <article className="rounded-3xl border border-rose-300/20 bg-slate-950/70 p-6 sm:p-8">
+              <article className="rounded-3xl border border-rose-300/20 bg-white/85 p-6 sm:p-8">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-600">
                       {activeMatchup.archetype}
                     </p>
-                    <h3 className="mt-3 text-2xl font-semibold text-white sm:text-3xl">
+                    <h3 className="mt-3 text-2xl font-semibold text-slate-950 sm:text-3xl">
                       Steve vs {activeMatchup.name}
                     </h3>
                   </div>
-                  <div className="rounded-2xl border border-rose-300/25 bg-rose-300/10 px-4 py-3 text-sm text-rose-100 lg:max-w-xs">
+                  <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700 lg:max-w-xs">
                     {activeMatchup.verdict}
                   </div>
                 </div>
 
-                <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-300">
+                <div className="mt-5 rounded-2xl border border-slate-200 bg-white/80 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-600">
                     Quick read
                   </p>
-                  <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300 sm:text-base">
+                  <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
                     {activeMatchup.overview}
                   </p>
                 </div>
 
                 {activeMatchupExtras ? (
                   <div className="mt-8 rounded-2xl border border-violet-300/20 bg-violet-300/5 p-5">
-                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-violet-300">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-violet-600">
                       Opponent threats to watch
                     </h4>
-                    <p className="mt-2 text-sm leading-6 text-slate-400">
+                    <p className="mt-2 text-sm leading-6 text-slate-500">
                       Tap a move to watch it loop in the player. These are the
                       patterns that cost Steve rounds most often.
                     </p>
@@ -2165,8 +2165,8 @@ export function SteveGuide() {
                             key={threat.search}
                             className={`rounded-xl border px-4 py-3 transition ${
                               isActive
-                                ? "border-violet-300/50 bg-violet-300/10"
-                                : "border-white/10 bg-slate-950/60"
+                                ? "border-violet-300/50 bg-violet-50"
+                                : "border-slate-200 bg-slate-100/80"
                             }`}
                           >
                             <button
@@ -2183,13 +2183,13 @@ export function SteveGuide() {
                               }
                               className={`text-left text-sm font-semibold transition ${
                                 isActive
-                                  ? "text-violet-200"
-                                  : "text-white hover:text-violet-200"
+                                  ? "text-violet-700"
+                                  : "text-slate-950 hover:text-violet-700"
                               }`}
                             >
                               {threat.label}
                             </button>
-                            <p className="mt-2 text-sm leading-5 text-slate-300">
+                            <p className="mt-2 text-sm leading-5 text-slate-600">
                               {threat.note}
                             </p>
                           </div>
@@ -2201,14 +2201,14 @@ export function SteveGuide() {
 
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
                   <div className="rounded-2xl border border-emerald-300/20 bg-emerald-300/5 p-5">
-                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">
                       Do this
                     </h4>
                     <ul className="mt-3 space-y-2">
                       {activeMatchup.doThis.map((item) => (
                         <li
                           key={item}
-                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                          className="rounded-xl bg-slate-100/80 px-3 py-2 text-sm leading-6 text-slate-700"
                         >
                           {item}
                         </li>
@@ -2217,14 +2217,14 @@ export function SteveGuide() {
                   </div>
 
                   <div className="rounded-2xl border border-sky-300/20 bg-sky-300/5 p-5">
-                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-600">
                       How to dodge
                     </h4>
                     <ul className="mt-3 space-y-2">
                       {activeMatchup.dodge.map((item) => (
                         <li
                           key={item}
-                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                          className="rounded-xl bg-slate-100/80 px-3 py-2 text-sm leading-6 text-slate-700"
                         >
                           {item}
                         </li>
@@ -2233,14 +2233,14 @@ export function SteveGuide() {
                   </div>
 
                   <div className="rounded-2xl border border-amber-300/20 bg-amber-300/5 p-5">
-                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-300">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">
                       Utilise
                     </h4>
                     <ul className="mt-3 space-y-2">
                       {activeMatchup.utilise.map((item) => (
                         <li
                           key={item}
-                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                          className="rounded-xl bg-slate-100/80 px-3 py-2 text-sm leading-6 text-slate-700"
                         >
                           {item}
                         </li>
@@ -2249,14 +2249,14 @@ export function SteveGuide() {
                   </div>
 
                   <div className="rounded-2xl border border-rose-300/20 bg-rose-300/5 p-5">
-                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
+                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-600">
                       Don&rsquo;t do
                     </h4>
                     <ul className="mt-3 space-y-2">
                       {activeMatchup.avoid.map((item) => (
                         <li
                           key={item}
-                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                          className="rounded-xl bg-slate-100/80 px-3 py-2 text-sm leading-6 text-slate-700"
                         >
                           {item}
                         </li>
@@ -2268,10 +2268,10 @@ export function SteveGuide() {
                 {activeMatchupExtras?.deepDive.length ? (
                   <div className="mt-8 space-y-4">
                     <div>
-                      <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-300">
+                      <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-600">
                         Deep dive
                       </h4>
-                      <p className="mt-2 text-sm leading-6 text-slate-400">
+                      <p className="mt-2 text-sm leading-6 text-slate-500">
                         The matchup swing points: throw breaks, hard reads, and
                         the habits that steal the round.
                       </p>
@@ -2280,12 +2280,12 @@ export function SteveGuide() {
                       {activeMatchupExtras.deepDive.map((section) => (
                         <div
                           key={section.title}
-                          className="rounded-2xl border border-white/10 bg-slate-950/60 p-5"
+                          className="rounded-2xl border border-slate-200 bg-slate-100/80 p-5"
                         >
-                          <h5 className="text-base font-semibold text-white">
+                          <h5 className="text-base font-semibold text-slate-950">
                             {section.title}
                           </h5>
-                          <p className="mt-3 text-sm leading-6 text-slate-300">
+                          <p className="mt-3 text-sm leading-6 text-slate-600">
                             {section.body}
                           </p>
                         </div>
@@ -2298,7 +2298,7 @@ export function SteveGuide() {
               <ClipPlayer activeClip={activeClip} />
             </div>
           ) : (
-            <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-6 text-sm leading-7 text-slate-400">
+            <div className="rounded-3xl border border-slate-200 bg-white/85 p-6 text-sm leading-7 text-slate-500">
               No character selected yet. Pick who you&rsquo;re fighting and the
               briefing appears here, laid out for a quick scan while the
               loading screen counts down.

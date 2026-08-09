@@ -695,7 +695,7 @@ function ClipButton({
       className={`rounded-2xl border px-3 py-2 text-sm transition ${
         isActive
           ? "border-orange-300 bg-orange-300 text-slate-950 shadow-lg shadow-orange-950/20"
-          : "border-orange-400/35 bg-orange-400/5 text-orange-100 hover:border-orange-300 hover:bg-orange-400/10 hover:text-white"
+          : "border-orange-400/35 bg-orange-400/5 text-orange-700 hover:border-orange-300 hover:bg-orange-400/10 hover:text-slate-950"
       }`}
     >
       <ClipButtonLabel label={clip.label} accent="orange" active={isActive} />
@@ -784,27 +784,27 @@ export function FahkumramGuide() {
 
   return (
     <div className="mt-10 space-y-8">
-      <section className="rounded-3xl border border-white/10 bg-slate-950/70 p-6 shadow-xl shadow-slate-950/30 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
+      <section className="rounded-3xl border border-slate-200 bg-white/85 p-6 shadow-xl shadow-slate-300/40 sm:p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-600">
           Tekken 8
         </p>
         <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
               Fahkumram Muay Thai Lab
             </h2>
-            <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
               Fahkumram wins when his range and install pressure feel obvious at
               a glance. This guide leans on visual move chips, shorter drill
               cards, and live clips instead of long notes.
             </p>
           </div>
-          <div className="rounded-2xl border border-orange-400/25 bg-orange-400/10 px-4 py-3 text-sm text-orange-100">
+          <div className="rounded-2xl border border-orange-400/25 bg-orange-400/10 px-4 py-3 text-sm text-orange-700">
             Focus: range, Garuda Force, Rama stance, wall pressure
           </div>
         </div>
 
-        <div className="mt-8 grid gap-3 rounded-3xl border border-white/10 bg-slate-950/80 p-2 shadow-inner shadow-black/30 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-3 rounded-3xl border border-slate-200 bg-white/90 p-2 shadow-inner shadow-slate-200/70 sm:grid-cols-2 lg:grid-cols-3">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
 
@@ -819,7 +819,7 @@ export function FahkumramGuide() {
                 className={`group rounded-2xl border p-3 text-left transition ${
                   isActive
                     ? "border-orange-300/70 bg-orange-300 text-slate-950"
-                    : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-orange-300/40 hover:bg-white/[0.07] hover:text-white"
+                    : "border-slate-200 bg-white/70 text-slate-600 hover:border-orange-300/40 hover:bg-white hover:text-slate-950"
                 }`}
               >
                 <span className="flex items-center gap-3">
@@ -842,7 +842,7 @@ export function FahkumramGuide() {
           })}
         </div>
 
-        <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-400">
+        <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-500">
           {activeCopy}
         </p>
       </section>
@@ -860,40 +860,40 @@ export function FahkumramGuide() {
               {dojoDrills.map((drill) => (
                 <article
                   key={drill.title}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                  className="rounded-3xl border border-slate-200 bg-white/80 p-6"
                 >
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-600">
                     Drill board
                   </p>
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold text-slate-950">
                     {drill.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-200">
+                  <p className="mt-3 text-sm leading-7 text-slate-700">
                     {drill.summary}
                   </p>
                   <div className="mt-5 grid gap-4 lg:grid-cols-2">
                     <div className="rounded-2xl border border-orange-300/15 bg-orange-300/5 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-600">
                         Why it matters
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
                         {drill.why}
                       </p>
                     </div>
-                    <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">
+                    <div className="rounded-2xl border border-slate-200 bg-white/85 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-700">
                         Run this
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
                         {drill.drill}
                       </p>
                     </div>
                   </div>
-                  <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-300">
+                  <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-600">
                     {drill.cues.map((cue) => (
                       <li
                         key={cue}
-                        className="rounded-2xl border border-white/8 bg-slate-950/60 px-3 py-3"
+                        className="rounded-2xl border border-slate-200 bg-slate-100/80 px-3 py-3"
                       >
                         {cue}
                       </li>
@@ -930,13 +930,13 @@ export function FahkumramGuide() {
             {gameplan.map((step, index) => (
               <article
                 key={step.title}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                className="rounded-3xl border border-slate-200 bg-white/80 p-6"
               >
                 <StepBadge step={index + 1} accent="orange" />
-                <h3 className="mt-4 text-xl font-semibold text-white">
+                <h3 className="mt-4 text-xl font-semibold text-slate-950">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">
+                <p className="mt-3 text-sm leading-6 text-slate-600">
                   {step.copy}
                 </p>
               </article>
@@ -958,9 +958,9 @@ export function FahkumramGuide() {
               {toolkit.map((tool) => (
                 <article
                   key={tool.move}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                  className="rounded-3xl border border-slate-200 bg-white/80 p-6"
                 >
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-600">
                     {tool.role}
                   </p>
                   <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
@@ -974,18 +974,18 @@ export function FahkumramGuide() {
                   </div>
                   <div className="mt-5 grid gap-3">
                     <div className="rounded-2xl border border-orange-300/15 bg-orange-300/5 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-600">
                         When to use it
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-200">
+                      <p className="mt-3 text-sm leading-6 text-slate-700">
                         {tool.when}
                       </p>
                     </div>
                     <div className="rounded-2xl border border-rose-300/15 bg-rose-300/5 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-rose-600">
                         What loses
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
                         {tool.risk}
                       </p>
                     </div>
@@ -1011,12 +1011,12 @@ export function FahkumramGuide() {
               {clipPacks.map((pack) => (
                 <article
                   key={pack.title}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                  className="rounded-3xl border border-slate-200 bg-white/80 p-6"
                 >
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold text-slate-950">
                     {pack.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
                     {pack.notes}
                   </p>
                   <div className="mt-5 flex flex-wrap gap-3">
@@ -1051,31 +1051,31 @@ export function FahkumramGuide() {
               {secrets.map((secret) => (
                 <article
                   key={secret.title}
-                  className="rounded-3xl border border-orange-400/15 bg-white/5 p-6"
+                  className="rounded-3xl border border-orange-400/15 bg-white/80 p-6"
                 >
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-600">
                     {secret.tag}
                   </p>
-                  <h3 className="mt-3 text-xl font-semibold text-white">
+                  <h3 className="mt-3 text-xl font-semibold text-slate-950">
                     {secret.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-6 text-slate-300">
+                  <p className="mt-4 text-sm leading-6 text-slate-600">
                     {secret.copy}
                   </p>
                   <div className="mt-4 grid gap-3">
                     <div className="rounded-2xl border border-orange-300/15 bg-orange-300/5 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-600">
                         Route
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-200">
+                      <p className="mt-3 text-sm leading-6 text-slate-700">
                         {secret.route}
                       </p>
                     </div>
-                    <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-200">
+                    <div className="rounded-2xl border border-slate-200 bg-slate-100/80 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-700">
                         If they adapt
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                      <p className="mt-3 text-sm leading-6 text-slate-600">
                         {secret.counter}
                       </p>
                     </div>
@@ -1121,7 +1121,7 @@ export function FahkumramGuide() {
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                     isSelected
                       ? "border-orange-300 bg-orange-300 text-slate-950"
-                      : "border-white/10 bg-white/5 text-slate-300 hover:border-orange-300/60 hover:text-white"
+                      : "border-slate-200 bg-white/80 text-slate-600 hover:border-orange-300/60 hover:text-slate-950"
                   }`}
                 >
                   {matchup.name}
@@ -1131,29 +1131,29 @@ export function FahkumramGuide() {
           </div>
 
           {activeMatchup ? (
-            <article className="rounded-3xl border border-orange-300/20 bg-slate-950/70 p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-300">
+            <article className="rounded-3xl border border-orange-300/20 bg-white/85 p-6 sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-600">
                 Fahkumram vs {activeMatchup.name}
               </p>
-              <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-300">
+              <div className="mt-4 rounded-2xl border border-slate-200 bg-white/80 p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-orange-600">
                   Quick read
                 </p>
-                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300 sm:text-base">
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
                   {activeMatchup.briefing}
                 </p>
               </div>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {[
-                  ["Do this", activeMatchup.doThis, "text-emerald-300"],
-                  ["How to dodge", activeMatchup.dodge, "text-sky-300"],
-                  ["Utilise", activeMatchup.utilise, "text-amber-300"],
-                  ["Do not", activeMatchup.avoid, "text-rose-300"],
+                  ["Do this", activeMatchup.doThis, "text-emerald-600"],
+                  ["How to dodge", activeMatchup.dodge, "text-sky-600"],
+                  ["Utilise", activeMatchup.utilise, "text-amber-600"],
+                  ["Do not", activeMatchup.avoid, "text-rose-600"],
                 ].map(([title, items, colour]) => (
                   <div
                     key={title as string}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                    className="rounded-2xl border border-slate-200 bg-white/80 p-5"
                   >
                     <h3
                       className={`text-xs font-semibold uppercase tracking-[0.3em] ${colour}`}
@@ -1164,7 +1164,7 @@ export function FahkumramGuide() {
                       {(items as string[]).map((item) => (
                         <li
                           key={item}
-                          className="rounded-xl bg-slate-950/60 px-3 py-2 text-sm leading-6 text-slate-200"
+                          className="rounded-xl bg-slate-100/80 px-3 py-2 text-sm leading-6 text-slate-700"
                         >
                           {item}
                         </li>
@@ -1175,7 +1175,7 @@ export function FahkumramGuide() {
               </div>
             </article>
           ) : (
-            <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-6 text-sm leading-7 text-slate-400">
+            <div className="rounded-3xl border border-slate-200 bg-white/85 p-6 text-sm leading-7 text-slate-500">
               Pick a character and the briefing appears here.
             </div>
           )}
