@@ -14,6 +14,12 @@ const sections = [
       "Learn Fahkumram in Tekken 8 with Garuda Force drills, Rama mixups, matchup reminders, and embedded move clips.",
   },
   {
+    title: "Dragunov",
+    href: "/dragunov",
+    description:
+      "Study Sergei Dragunov in Tekken 8 with plus-frame drills, Sneak mix notes, matchup reminders, and embedded move clips.",
+  },
+  {
     title: "Secret Hitler",
     href: "/secret-hitler",
     description: "Open the Secret Hitler area.",
