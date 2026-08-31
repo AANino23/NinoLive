@@ -20,6 +20,12 @@ const sections = [
       "Study Sergei Dragunov in Tekken 8 with plus-frame drills, Sneak mix notes, matchup reminders, and embedded move clips.",
   },
   {
+    title: "Ling Xiaoyu",
+    href: "/ling",
+    description:
+      "Study Ling Xiaoyu in Tekken 8 with AOP drills, Hypnotist and Rain Dance notes, matchup reminders, and embedded move clips.",
+  },
+  {
     title: "Secret Hitler",
     href: "/secret-hitler",
     description: "Open the Secret Hitler area.",
