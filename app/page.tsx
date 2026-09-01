@@ -26,6 +26,12 @@ const sections = [
       "Study Ling Xiaoyu in Tekken 8 with AOP drills, Hypnotist and Rain Dance notes, matchup reminders, and embedded move clips.",
   },
   {
+    title: "Feng Wei",
+    href: "/feng",
+    description:
+      "Study Feng Wei in Tekken 8 with kenpo drills, back-sway bait notes, matchup reminders, and embedded move clips.",
+  },
+  {
     title: "Secret Hitler",
     href: "/secret-hitler",
     description: "Open the Secret Hitler area.",
