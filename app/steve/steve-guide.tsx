@@ -10,9 +10,9 @@ import {
   SectionHeading,
   StepBadge,
 } from "../tekken/guide-ui";
+import { OkizemeClipVideo } from "../tekken/clip-video";
 import {
   getMatchupExtras,
-  getOpponentClipUrl,
   getOpponentOkizemeUrl,
 } from "./matchup-extras";
 
@@ -1519,14 +1519,6 @@ function getOkizemeUrl(search: string) {
   return `https://okizeme.gg/database/steve?search=${encodeURIComponent(search)}`;
 }
 
-function getClipUrl(search: string, characterSlug = "steve") {
-  if (characterSlug === "steve") {
-    return `https://okizeme.b-cdn.net/steve/${encodeURIComponent(search)}.mp4`;
-  }
-
-  return getOpponentClipUrl(characterSlug, search);
-}
-
 function getClipDatabaseUrl(search: string, characterSlug = "steve") {
   if (characterSlug === "steve") {
     return getOkizemeUrl(search);
@@ -1590,19 +1582,12 @@ function ClipPlayer({
       label={activeClip.clip.label}
       href={getClipDatabaseUrl(activeClip.clip.search, characterSlug)}
     >
-      <video
-        key={activeClip.clipKey}
+      <OkizemeClipVideo
+        character={characterSlug}
+        search={activeClip.clip.search}
+        clipKey={activeClip.clipKey}
         className="aspect-video w-full bg-black"
-        controls
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        src={getClipUrl(activeClip.clip.search, characterSlug)}
-      >
-        Your browser does not support embedded video playback.
-      </video>
+      />
     </ClipPlayerFrame>
   );
 }

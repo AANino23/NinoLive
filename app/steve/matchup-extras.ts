@@ -1222,10 +1222,6 @@ export function getMatchupExtras(name: string): MatchupExtras | null {
   return matchupExtrasByName[name] ?? null;
 }
 
-export function getOpponentClipUrl(slug: string, search: string) {
-  return `https://okizeme.b-cdn.net/${slug}/${encodeURIComponent(search)}.mp4`;
-}
-
 export function getOpponentOkizemeUrl(slug: string, search: string) {
   return `https://okizeme.gg/database/${slug}?search=${encodeURIComponent(search)}`;
 }

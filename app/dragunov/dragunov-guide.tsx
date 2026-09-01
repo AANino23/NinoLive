@@ -10,6 +10,9 @@ import {
   SectionHeading,
   StepBadge,
 } from "../tekken/guide-ui";
+import { OkizemeClipVideo } from "../tekken/clip-video";
+
+const OKIZEME_CHARACTER = "dragunov";
 
 type Clip = {
   label: string;
@@ -881,10 +884,6 @@ function getOkizemeUrl(search: string) {
   return `https://okizeme.gg/database/dragunov?search=${encodeURIComponent(search)}`;
 }
 
-function getClipUrl(search: string) {
-  return `https://okizeme.b-cdn.net/dragunov/${encodeURIComponent(search)}.mp4`;
-}
-
 function ClipButton({
   clip,
   clipKey,
@@ -934,19 +933,11 @@ function ClipPlayer({
       label={activeClip.clip.label}
       href={getOkizemeUrl(activeClip.clip.search)}
     >
-      <video
-        key={activeClip.clipKey}
-        className="aspect-video w-full"
-        controls
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        src={getClipUrl(activeClip.clip.search)}
-      >
-        Your browser does not support embedded video playback.
-      </video>
+      <OkizemeClipVideo
+        character={OKIZEME_CHARACTER}
+        search={activeClip.clip.search}
+        clipKey={activeClip.clipKey}
+      />
     </ClipPlayerFrame>
   );
 }
