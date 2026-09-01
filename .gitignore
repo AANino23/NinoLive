@@ -24,3 +24,7 @@ npm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# editor / scratch (China Box removed in b2f0347)
+.cursor/
+data/china-box-rooms/
+
