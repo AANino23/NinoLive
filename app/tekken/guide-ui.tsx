@@ -437,7 +437,7 @@ export function ClipPlayerEmpty({
   description: string;
 }) {
   return (
-    <aside className="rounded-3xl border border-dashed border-slate-200 bg-white/75 p-6 text-sm leading-7 text-slate-500 xl:sticky xl:top-6">
+    <aside className="rounded-3xl border border-dashed border-slate-200 bg-white/75 p-6 text-sm leading-7 text-slate-500">
       <p className={cx("text-xs font-semibold uppercase tracking-[0.3em]", accentText[accent])}>
         {title}
       </p>
@@ -451,35 +451,77 @@ export function ClipPlayerFrame({
   label,
   href,
   children,
+  onDismiss,
+  variant = "stage",
 }: {
   accent: GuideAccent;
   label: string;
   href: string;
   children: ReactNode;
+  onDismiss?: () => void;
+  variant?: "stage" | "dock";
 }) {
   const { move } = splitClipLabel(label);
+  const isDock = variant === "dock";
 
   return (
-    <aside className={cx("overflow-hidden rounded-3xl border bg-white/90 shadow-2xl shadow-slate-300/40 xl:sticky xl:top-6", accentTint[accent])}>
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3">
-        <div>
-          <p className={cx("text-xs font-semibold uppercase tracking-[0.3em]", accentText[accent])}>
+    <aside
+      className={cx(
+        "overflow-hidden border bg-white/95 shadow-2xl shadow-slate-300/40",
+        isDock ? "rounded-t-3xl border-slate-200" : "rounded-3xl",
+        accentTint[accent],
+      )}
+    >
+      <div
+        className={cx(
+          "flex items-start justify-between gap-3 border-b border-slate-200 bg-white",
+          isDock ? "px-3 py-2.5" : "px-4 py-3",
+        )}
+      >
+        <div className="min-w-0 flex-1">
+          <p
+            className={cx(
+              "font-semibold uppercase tracking-[0.3em]",
+              isDock ? "text-[0.58rem]" : "text-xs",
+              accentText[accent],
+            )}
+          >
             Now watching
           </p>
-          <div className="mt-2">
-            <MoveNotation notation={move} accent={accent} size="md" />
+          <div className={cx(isDock ? "mt-1" : "mt-2")}>
+            <MoveNotation notation={move} accent={accent} size={isDock ? "sm" : "md"} />
           </div>
         </div>
-        <a
-          href={href}
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-full border border-slate-200 px-3 py-2 text-xs text-slate-600 transition hover:text-slate-950"
-        >
-          Full move card
-        </a>
+        <div className="flex shrink-0 items-center gap-2">
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className={cx(
+              "rounded-full border border-slate-200 text-slate-600 transition hover:text-slate-950",
+              isDock ? "px-2.5 py-1.5 text-[0.65rem]" : "px-3 py-2 text-xs",
+            )}
+          >
+            Move card
+          </a>
+          {onDismiss ? (
+            <button
+              type="button"
+              onClick={onDismiss}
+              aria-label="Close clip"
+              className={cx(
+                "inline-flex items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-slate-300 hover:text-slate-950",
+                isDock ? "h-8 w-8 text-base" : "h-9 w-9 text-lg",
+              )}
+            >
+              ×
+            </button>
+          ) : null}
+        </div>
       </div>
-      {children}
+      <div className={isDock ? "flex justify-center bg-black" : undefined}>
+        {children}
+      </div>
     </aside>
   );
 }

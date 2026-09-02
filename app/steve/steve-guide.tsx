@@ -1,16 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { GuideClipSection } from "../tekken/guide-clip-layout";
+import { MatchupPunishmentSection } from "../tekken/matchup-punishment";
 import {
   ClipButtonLabel,
-  ClipPlayerEmpty,
-  ClipPlayerFrame,
   GuideTabGlyph,
   MoveNotation,
   SectionHeading,
   StepBadge,
 } from "../tekken/guide-ui";
-import { OkizemeClipVideo } from "../tekken/clip-video";
 import {
   getMatchupExtras,
   getOpponentOkizemeUrl,
@@ -1555,43 +1554,6 @@ function ClipButton({
   );
 }
 
-function ClipPlayer({
-  activeClip,
-}: {
-  activeClip: {
-    clipKey: string;
-    clip: Clip;
-    characterSlug?: string;
-  } | null;
-}) {
-  if (!activeClip) {
-    return (
-      <ClipPlayerEmpty
-        accent="sky"
-        title="Video player"
-        description="Pick any clip tile and the loop opens here with a larger move card."
-      />
-    );
-  }
-
-  const characterSlug = activeClip.characterSlug ?? "steve";
-
-  return (
-    <ClipPlayerFrame
-      accent="sky"
-      label={activeClip.clip.label}
-      href={getClipDatabaseUrl(activeClip.clip.search, characterSlug)}
-    >
-      <OkizemeClipVideo
-        character={characterSlug}
-        search={activeClip.clip.search}
-        clipKey={activeClip.clipKey}
-        className="aspect-video w-full bg-black"
-      />
-    </ClipPlayerFrame>
-  );
-}
-
 export function SteveGuide() {
   const [activeTab, setActiveTab] = useState<TabId>("dojo");
   const [activeClip, setActiveClip] = useState<{
@@ -1725,8 +1687,13 @@ export function SteveGuide() {
             accent="sky"
           />
 
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
-            <div className="grid gap-5">
+          <GuideClipSection
+            accent="sky"
+            characterSlug="steve"
+            activeClip={activeClip}
+            onDismiss={() => setActiveClip(null)}
+            getHref={getClipDatabaseUrl}
+          >
               {dojoDrills.map((drill) => (
                 <article
                   key={drill.title}
@@ -1784,9 +1751,7 @@ export function SteveGuide() {
                   </div>
                 </article>
               ))}
-            </div>
-            <ClipPlayer activeClip={activeClip} />
-          </div>
+          </GuideClipSection>
         </section>
       ) : null}
 
@@ -1827,8 +1792,13 @@ export function SteveGuide() {
             accent="sky"
           />
 
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
-            <div className="grid gap-5">
+          <GuideClipSection
+            accent="sky"
+            characterSlug="steve"
+            activeClip={activeClip}
+            onDismiss={() => setActiveClip(null)}
+            getHref={getClipDatabaseUrl}
+          >
               {toolkit.map((tool) => (
                 <article
                   key={tool.move}
@@ -1871,9 +1841,7 @@ export function SteveGuide() {
                   </div>
                 </article>
               ))}
-            </div>
-            <ClipPlayer activeClip={activeClip} />
-          </div>
+          </GuideClipSection>
         </section>
       ) : null}
 
@@ -1886,8 +1854,13 @@ export function SteveGuide() {
             accent="sky"
           />
 
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
-            <div className="grid gap-5">
+          <GuideClipSection
+            accent="sky"
+            characterSlug="steve"
+            activeClip={activeClip}
+            onDismiss={() => setActiveClip(null)}
+            getHref={getClipDatabaseUrl}
+          >
               {clipPacks.map((pack) => (
                 <article
                   key={pack.title}
@@ -1913,9 +1886,7 @@ export function SteveGuide() {
                   </div>
                 </article>
               ))}
-            </div>
-            <ClipPlayer activeClip={activeClip} />
-          </div>
+          </GuideClipSection>
 
           <div className="rounded-3xl border border-slate-200 bg-white/85 p-6 text-sm leading-7 text-slate-500">
             Source blend: high-level Steve identity and stance priorities were
@@ -1936,7 +1907,14 @@ export function SteveGuide() {
             accent="amber"
           />
 
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
+          <GuideClipSection
+            accent="amber"
+            characterSlug="steve"
+            activeClip={activeClip}
+            onDismiss={() => setActiveClip(null)}
+            getHref={getClipDatabaseUrl}
+            contentClassName="grid-cols-1 gap-10"
+          >
             <div className="space-y-10">
               <div className="space-y-6">
                 <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">
@@ -2046,8 +2024,7 @@ export function SteveGuide() {
                 </div>
               </div>
             </div>
-            <ClipPlayer activeClip={activeClip} />
-          </div>
+          </GuideClipSection>
 
           <div className="space-y-6">
             <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">
@@ -2106,7 +2083,14 @@ export function SteveGuide() {
           </div>
 
           {activeMatchup ? (
-            <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+            <GuideClipSection
+              accent="rose"
+              characterSlug="steve"
+              activeClip={activeClip}
+              onDismiss={() => setActiveClip(null)}
+              getHref={getClipDatabaseUrl}
+              contentClassName="grid-cols-1"
+            >
               <article className="rounded-3xl border border-rose-300/20 bg-white/85 p-6 sm:p-8">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div>
@@ -2250,6 +2234,12 @@ export function SteveGuide() {
                   </div>
                 </div>
 
+                <MatchupPunishmentSection
+                  characterId="steve"
+                  opponentName={activeMatchup.name}
+                  accent="rose"
+                />
+
                 {activeMatchupExtras?.deepDive.length ? (
                   <div className="mt-8 space-y-4">
                     <div>
@@ -2279,9 +2269,7 @@ export function SteveGuide() {
                   </div>
                 ) : null}
               </article>
-
-              <ClipPlayer activeClip={activeClip} />
-            </div>
+            </GuideClipSection>
           ) : (
             <div className="rounded-3xl border border-slate-200 bg-white/85 p-6 text-sm leading-7 text-slate-500">
               No character selected yet. Pick who you&rsquo;re fighting and the

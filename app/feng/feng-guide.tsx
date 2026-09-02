@@ -1,16 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { GuideClipSection } from "../tekken/guide-clip-layout";
+import { MatchupPunishmentSection } from "../tekken/matchup-punishment";
 import {
   ClipButtonLabel,
-  ClipPlayerEmpty,
-  ClipPlayerFrame,
   GuideTabGlyph,
   MoveNotation,
   SectionHeading,
   StepBadge,
 } from "../tekken/guide-ui";
-import { OkizemeClipVideo } from "../tekken/clip-video";
 
 const OKIZEME_CHARACTER = "feng";
 
@@ -831,36 +830,6 @@ function ClipButton({
   );
 }
 
-function ClipPlayer({
-  activeClip,
-}: {
-  activeClip: { clipKey: string; clip: Clip } | null;
-}) {
-  if (!activeClip) {
-    return (
-      <ClipPlayerEmpty
-        accent="emerald"
-        title="Video player"
-        description="Pick any clip tile and the loop opens here with a larger move card."
-      />
-    );
-  }
-
-  return (
-    <ClipPlayerFrame
-      accent="emerald"
-      label={activeClip.clip.label}
-      href={getOkizemeUrl(activeClip.clip.search)}
-    >
-      <OkizemeClipVideo
-        character={OKIZEME_CHARACTER}
-        search={activeClip.clip.search}
-        clipKey={activeClip.clipKey}
-      />
-    </ClipPlayerFrame>
-  );
-}
-
 export function FengGuide() {
   const [activeTab, setActiveTab] = useState<TabId>("dojo");
   const [activeClip, setActiveClip] = useState<{
@@ -975,8 +944,13 @@ export function FengGuide() {
             copy="Run these as isolated reps. Each card focuses on one sway, kenpo, or punish idea so the clips can do the teaching."
             accent="emerald"
           />
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
-            <div className="grid gap-5">
+          <GuideClipSection
+            accent="emerald"
+            characterSlug={OKIZEME_CHARACTER}
+            activeClip={activeClip}
+            onDismiss={() => setActiveClip(null)}
+            getHref={(search) => getOkizemeUrl(search)}
+          >
               {dojoDrills.map((drill) => (
                 <article
                   key={drill.title}
@@ -1032,9 +1006,7 @@ export function FengGuide() {
                   </div>
                 </article>
               ))}
-            </div>
-            <ClipPlayer activeClip={activeClip} />
-          </div>
+          </GuideClipSection>
         </section>
       ) : null}
 
@@ -1073,8 +1045,14 @@ export function FengGuide() {
             copy="These are the moves to recognise on sight. Learn the shape, then use the clip to refresh the timing."
             accent="emerald"
           />
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
-            <div className="grid gap-5 md:grid-cols-2">
+          <GuideClipSection
+            accent="emerald"
+            characterSlug={OKIZEME_CHARACTER}
+            activeClip={activeClip}
+            onDismiss={() => setActiveClip(null)}
+            getHref={(search) => getOkizemeUrl(search)}
+            contentClassName="md:grid-cols-2"
+          >
               {toolkit.map((tool) => (
                 <article
                   key={tool.move}
@@ -1112,9 +1090,7 @@ export function FengGuide() {
                   </div>
                 </article>
               ))}
-            </div>
-            <ClipPlayer activeClip={activeClip} />
-          </div>
+          </GuideClipSection>
         </section>
       ) : null}
 
@@ -1126,8 +1102,14 @@ export function FengGuide() {
             copy="Use these as quick visual presets for the moves you should actually be drilling."
             accent="emerald"
           />
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
-            <div className="grid gap-5 lg:grid-cols-2">
+          <GuideClipSection
+            accent="emerald"
+            characterSlug={OKIZEME_CHARACTER}
+            activeClip={activeClip}
+            onDismiss={() => setActiveClip(null)}
+            getHref={(search) => getOkizemeUrl(search)}
+            contentClassName="lg:grid-cols-2"
+          >
               {clipPacks.map((pack) => (
                 <article
                   key={pack.title}
@@ -1152,9 +1134,7 @@ export function FengGuide() {
                   </div>
                 </article>
               ))}
-            </div>
-            <ClipPlayer activeClip={activeClip} />
-          </div>
+          </GuideClipSection>
         </section>
       ) : null}
 
@@ -1166,8 +1146,14 @@ export function FengGuide() {
             copy="The character becomes much scarier when you can see the sway routes, kenpo mix, and punish windows at a glance."
             accent="emerald"
           />
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] xl:items-start">
-            <div className="grid gap-5 lg:grid-cols-2">
+          <GuideClipSection
+            accent="emerald"
+            characterSlug={OKIZEME_CHARACTER}
+            activeClip={activeClip}
+            onDismiss={() => setActiveClip(null)}
+            getHref={(search) => getOkizemeUrl(search)}
+            contentClassName="lg:grid-cols-2"
+          >
               {secrets.map((secret) => (
                 <article
                   key={secret.title}
@@ -1213,9 +1199,7 @@ export function FengGuide() {
                   </div>
                 </article>
               ))}
-            </div>
-            <ClipPlayer activeClip={activeClip} />
-          </div>
+          </GuideClipSection>
         </section>
       ) : null}
 
@@ -1293,6 +1277,12 @@ export function FengGuide() {
                   </div>
                 ))}
               </div>
+
+              <MatchupPunishmentSection
+                characterId="feng"
+                opponentName={activeMatchup.name}
+                accent="emerald"
+              />
             </article>
           ) : (
             <div className="rounded-3xl border border-slate-200 bg-white/85 p-6 text-sm leading-7 text-slate-500">
