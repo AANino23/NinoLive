@@ -3,7 +3,8 @@ export type GuideCharacterId =
   | "feng"
   | "ling"
   | "dragunov"
-  | "fahkumram";
+  | "fahkumram"
+  | "kazuya";
 
 export type PunishTier = {
   frames: string;
@@ -160,6 +161,35 @@ export const CHARACTER_PROFILES: Record<GuideCharacterId, CharacterPunishProfile
       { frames: "i11", move: "ws4", note: "Toe Smash. Fastest while-standing punish." },
       { frames: "i13", move: "ws1", note: "Quick Elbow from crouch." },
       { frames: "i15", move: "ws3", launch: true, note: "Sumeru Knee. Launches any low that is -15 or worse." },
+    ],
+  },
+  kazuya: {
+    displayName: "Kazuya",
+    whiffPunish: "f,n,d,df+2 / df+2",
+    ladder: [
+      { frames: "i10", move: "1,2", note: "Jab punish. No launch — take it and keep your turn." },
+      {
+        frames: "i13",
+        move: "f,n,d,df+2",
+        launch: true,
+        note: "Electric. Kazuya launches from -13, which is why the whole character lives on this input.",
+      },
+      {
+        frames: "i15",
+        move: "df+2",
+        launch: true,
+        note: "Standing uppercut. Same launch reward with none of the electric input risk — use it when the wavedash is shaky.",
+      },
+    ],
+    crouchLadder: [
+      { frames: "i11", move: "ws4", note: "Fastest while-standing option after blocking a low." },
+      { frames: "i13", move: "ws1,2", note: "More damage than ws4 from -13, but no launch." },
+      {
+        frames: "i15",
+        move: "ws2",
+        launch: true,
+        note: "Demon God Fist. Launches any low that is -15 or worse.",
+      },
     ],
   },
 };
@@ -456,6 +486,7 @@ const MIRROR_ALIASES: Record<string, string> = {
   "Dragunov (mirror)": "Dragunov",
   "Fahkumram (mirror)": "Fahkumram",
   "Feng (mirror)": "Feng",
+  "Kazuya (mirror)": "Kazuya",
   "Steve (mirror)": "Steve",
   "Xiaoyu (mirror)": "Xiaoyu",
 };

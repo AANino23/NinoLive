@@ -32,6 +32,12 @@ const sections = [
       "Study Feng Wei in Tekken 8 with kenpo drills, back-sway bait notes, matchup reminders, and embedded move clips.",
   },
   {
+    title: "Kazuya",
+    href: "/kazuya",
+    description:
+      "Study Kazuya Mishima in Tekken 8 with wavedash drills, electric punish ladders, matchup reminders, and embedded move clips.",
+  },
+  {
     title: "Secret Hitler",
     href: "/secret-hitler",
     description: "Open the Secret Hitler area.",
