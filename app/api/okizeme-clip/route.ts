@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { fetchOkizemePresignedUrl } from "@/lib/okizeme-clips";
+import { fetchOkizemePresignedUrl, resolveOkizemeMove } from "@/lib/okizeme-clips";
 
 export async function GET(request: NextRequest) {
   const character = request.nextUrl.searchParams.get("character");
@@ -13,14 +13,15 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const presignedUrl = await fetchOkizemePresignedUrl(character, move);
+  const resolvedMove = (await resolveOkizemeMove(character, move)) ?? move;
+  const presignedUrl = await fetchOkizemePresignedUrl(character, resolvedMove);
 
   if (!presignedUrl) {
     return NextResponse.json({ error: "Clip unavailable" }, { status: 404 });
   }
 
   return NextResponse.json(
-    { presignedUrl },
+    { presignedUrl, command: resolvedMove },
     {
       headers: {
         "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",

@@ -7,6 +7,7 @@ import {
   ClipButtonLabel,
   GuideTabGlyph,
   MoveNotation,
+  NotationLegend,
   SectionHeading,
   StepBadge,
 } from "../tekken/guide-ui";
@@ -1676,6 +1677,8 @@ export function SteveGuide() {
           {activeCopy}
         </p>
 
+        <NotationLegend className="mt-6" />
+
       </section>
 
       {activeTab === "dojo" ? (
@@ -2238,6 +2241,8 @@ export function SteveGuide() {
                   characterId="steve"
                   opponentName={activeMatchup.name}
                   accent="rose"
+                  onPlayClip={playClip}
+                  activeClipKey={activeClipKey}
                 />
 
                 {activeMatchupExtras?.deepDive.length ? (

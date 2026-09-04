@@ -3,10 +3,12 @@
 import { useMemo, useState } from "react";
 import { GuideClipSection } from "../tekken/guide-clip-layout";
 import { MatchupPunishmentSection } from "../tekken/matchup-punishment";
+import { getOkizemeDatabaseUrl as getOpponentOkizemeUrl } from "../tekken/opponent-clips";
 import {
   ClipButtonLabel,
   GuideTabGlyph,
   MoveNotation,
+  NotationLegend,
   SectionHeading,
   StepBadge,
 } from "../tekken/guide-ui";
@@ -802,6 +804,14 @@ function getOkizemeUrl(search: string) {
   return `https://okizeme.gg/database/feng?search=${encodeURIComponent(search)}`;
 }
 
+function getClipDatabaseUrl(search: string, characterSlug = OKIZEME_CHARACTER) {
+  if (characterSlug === OKIZEME_CHARACTER) {
+    return getOkizemeUrl(search);
+  }
+
+  return getOpponentOkizemeUrl(characterSlug, search);
+}
+
 function ClipButton({
   clip,
   clipKey,
@@ -835,6 +845,7 @@ export function FengGuide() {
   const [activeClip, setActiveClip] = useState<{
     clipKey: string;
     clip: Clip;
+    characterSlug?: string;
   } | null>(null);
   const [activeMatchupName, setActiveMatchupName] = useState<string | null>(
     null,
@@ -846,9 +857,13 @@ export function FengGuide() {
     [activeMatchupName],
   );
 
-  function playClip(clipKey: string, clip: Clip) {
+  function playClip(
+    clipKey: string,
+    clip: Clip,
+    characterSlug = OKIZEME_CHARACTER,
+  ) {
     setActiveClip((currentClip) =>
-      currentClip?.clipKey === clipKey ? null : { clipKey, clip },
+      currentClip?.clipKey === clipKey ? null : { clipKey, clip, characterSlug },
     );
   }
 
@@ -934,6 +949,8 @@ export function FengGuide() {
         <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-500">
           {activeCopy}
         </p>
+
+        <NotationLegend className="mt-6" />
       </section>
 
       {activeTab === "dojo" ? (
@@ -949,7 +966,7 @@ export function FengGuide() {
             characterSlug={OKIZEME_CHARACTER}
             activeClip={activeClip}
             onDismiss={() => setActiveClip(null)}
-            getHref={(search) => getOkizemeUrl(search)}
+            getHref={getClipDatabaseUrl}
           >
               {dojoDrills.map((drill) => (
                 <article
@@ -1050,7 +1067,7 @@ export function FengGuide() {
             characterSlug={OKIZEME_CHARACTER}
             activeClip={activeClip}
             onDismiss={() => setActiveClip(null)}
-            getHref={(search) => getOkizemeUrl(search)}
+            getHref={getClipDatabaseUrl}
             contentClassName="md:grid-cols-2"
           >
               {toolkit.map((tool) => (
@@ -1107,7 +1124,7 @@ export function FengGuide() {
             characterSlug={OKIZEME_CHARACTER}
             activeClip={activeClip}
             onDismiss={() => setActiveClip(null)}
-            getHref={(search) => getOkizemeUrl(search)}
+            getHref={getClipDatabaseUrl}
             contentClassName="lg:grid-cols-2"
           >
               {clipPacks.map((pack) => (
@@ -1151,7 +1168,7 @@ export function FengGuide() {
             characterSlug={OKIZEME_CHARACTER}
             activeClip={activeClip}
             onDismiss={() => setActiveClip(null)}
-            getHref={(search) => getOkizemeUrl(search)}
+            getHref={getClipDatabaseUrl}
             contentClassName="lg:grid-cols-2"
           >
               {secrets.map((secret) => (
@@ -1219,9 +1236,10 @@ export function FengGuide() {
                 <button
                   key={matchup.name}
                   type="button"
-                  onClick={() =>
-                    setActiveMatchupName(isSelected ? null : matchup.name)
-                  }
+                  onClick={() => {
+                    setActiveMatchupName(isSelected ? null : matchup.name);
+                    setActiveClip(null);
+                  }}
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                     isSelected
                       ? "border-emerald-300 bg-emerald-300 text-slate-950"
@@ -1235,55 +1253,66 @@ export function FengGuide() {
           </div>
 
           {activeMatchup ? (
-            <article className="rounded-3xl border border-emerald-300/20 bg-white/85 p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">
-                Feng vs {activeMatchup.name}
-              </p>
-              <div className="mt-4 rounded-2xl border border-slate-200 bg-white/80 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600">
-                  Quick read
+            <GuideClipSection
+              accent="emerald"
+              characterSlug={OKIZEME_CHARACTER}
+              activeClip={activeClip}
+              onDismiss={() => setActiveClip(null)}
+              getHref={getClipDatabaseUrl}
+              contentClassName="grid-cols-1"
+            >
+              <article className="rounded-3xl border border-emerald-300/20 bg-white/85 p-6 sm:p-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">
+                  Feng vs {activeMatchup.name}
                 </p>
-                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-                  {activeMatchup.briefing}
-                </p>
-              </div>
+                <div className="mt-4 rounded-2xl border border-slate-200 bg-white/80 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-600">
+                    Quick read
+                  </p>
+                  <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+                    {activeMatchup.briefing}
+                  </p>
+                </div>
 
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
-                {[
-                  ["Do this", activeMatchup.doThis, "text-emerald-600"],
-                  ["How to dodge", activeMatchup.dodge, "text-sky-600"],
-                  ["Utilise", activeMatchup.utilise, "text-amber-600"],
-                  ["Do not", activeMatchup.avoid, "text-rose-600"],
-                ].map(([title, items, colour]) => (
-                  <div
-                    key={title as string}
-                    className="rounded-2xl border border-slate-200 bg-white/80 p-5"
-                  >
-                    <h3
-                      className={`text-xs font-semibold uppercase tracking-[0.3em] ${colour}`}
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  {[
+                    ["Do this", activeMatchup.doThis, "text-emerald-600"],
+                    ["How to dodge", activeMatchup.dodge, "text-sky-600"],
+                    ["Utilise", activeMatchup.utilise, "text-amber-600"],
+                    ["Do not", activeMatchup.avoid, "text-rose-600"],
+                  ].map(([title, items, colour]) => (
+                    <div
+                      key={title as string}
+                      className="rounded-2xl border border-slate-200 bg-white/80 p-5"
                     >
-                      {title as string}
-                    </h3>
-                    <ul className="mt-3 space-y-2">
-                      {(items as string[]).map((item) => (
-                        <li
-                          key={item}
-                          className="rounded-xl bg-slate-100/80 px-3 py-2 text-sm leading-6 text-slate-700"
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+                      <h3
+                        className={`text-xs font-semibold uppercase tracking-[0.3em] ${colour}`}
+                      >
+                        {title as string}
+                      </h3>
+                      <ul className="mt-3 space-y-2">
+                        {(items as string[]).map((item) => (
+                          <li
+                            key={item}
+                            className="rounded-xl bg-slate-100/80 px-3 py-2 text-sm leading-6 text-slate-700"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
 
-              <MatchupPunishmentSection
-                characterId="feng"
-                opponentName={activeMatchup.name}
-                accent="emerald"
-              />
-            </article>
+                <MatchupPunishmentSection
+                  characterId="feng"
+                  opponentName={activeMatchup.name}
+                  accent="emerald"
+                  onPlayClip={playClip}
+                  activeClipKey={activeClipKey}
+                />
+              </article>
+            </GuideClipSection>
           ) : (
             <div className="rounded-3xl border border-slate-200 bg-white/85 p-6 text-sm leading-7 text-slate-500">
               Pick a character and the briefing appears here.

@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { OkizemeClipVideo } from "./clip-video";
 import { ClipPlayerFrame, type GuideAccent } from "./guide-ui";
+import { getOkizemeDisplayName } from "./opponent-clips";
 
 type GuideClip = {
   label: string;
@@ -41,6 +42,7 @@ function GuideClipPlayer({
       accent={accent}
       label={activeClip.clip.label}
       href={getHref(activeClip.clip.search, slug)}
+      owner={getOkizemeDisplayName(slug)}
       onDismiss={onDismiss}
       variant={variant}
     >

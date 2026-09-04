@@ -253,7 +253,7 @@ const OPPONENT_MOVES: Record<string, OpponentPunishableMove[]> = {
     { move: "df+3 (Snake Edge)", minus: 26, crouching: true, note: "The classic. Block low, full combo, every time." },
     { move: "b,B+4 (Flying Knee Kick)", minus: 19, note: "Backdash-cancel knee. Very unsafe if you just block." },
     { move: "ub+1+2", minus: 16, note: "Committed mid string starter." },
-    { move: "SWA.3 (Hatchet Kick)", minus: 13, crouching: true, note: "Snake Eyes low — only -13, so take a fast ws punish." },
+    { move: "qcb+3 (Hatchet Kick)", minus: 13, crouching: true, note: "His fast low — only -13, so take a quick ws punish." },
   ],
   Claudio: [
     { move: "f+2,2 (Deadly Sin)", minus: 26, note: "The second hit is a free launch if you block it." },
@@ -417,7 +417,7 @@ const OPPONENT_MOVES: Record<string, OpponentPunishableMove[]> = {
   ],
   Nina: [
     { move: "d,DF+4 (Wipe the Floor)", minus: 37, crouching: true, note: "Her big low. Block it and take everything." },
-    { move: "CD.3 (Sideslip)", minus: 20, crouching: true, note: "Crouch-dash low; punish from crouch." },
+    { move: "qcf+3 (Sideslip)", minus: 20, crouching: true, note: "Her long low; punish from crouch." },
     { move: "db+3+4 (Geyser Cannon)", minus: 17, note: "Committed mid. Free launch on block." },
     { move: "3", minus: 16, note: "i14 high she pokes with. Duck it, or block and punish." },
   ],
