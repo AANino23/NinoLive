@@ -187,8 +187,9 @@ export function MatchupPunishmentSection({
         </h4>
         <p className="mt-2 text-sm leading-6 text-slate-600">
           Playing <span className="font-semibold text-slate-900">{data.characterName}</span> vs{" "}
-          <span className="font-semibold text-slate-900">{data.opponentName}</span>. Match their
-          minus frames to your punish tier — block first, then react with the right button.
+          <span className="font-semibold text-slate-900">{data.opponentName}</span>. Block first,
+          match their minus frames to your punish tier, and work through the full list below — not
+          just the signature moves.
           {onPlayClip ? " Tap any move to watch the clip." : null}
         </p>
       </div>
@@ -216,7 +217,7 @@ export function MatchupPunishmentSection({
 
       <div className="mt-8">
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
-          What to punish on {data.opponentName}
+          What to punish on {data.opponentName} ({data.opponentPunishes.length} entries)
         </p>
         {canPlayOpponentClips ? (
           <p className="mt-2 text-sm leading-6 text-slate-500">

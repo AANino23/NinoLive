@@ -3,6 +3,10 @@
 import { useMemo, useState } from "react";
 import { GuideClipSection } from "../tekken/guide-clip-layout";
 import { MatchupPunishmentSection } from "../tekken/matchup-punishment";
+import {
+  MatchupBeatAdviceSection,
+  MatchupOpponentProfileSection,
+} from "../tekken/matchup-opponent-sections";
 import { getOkizemeDatabaseUrl as getOpponentOkizemeUrl } from "../tekken/opponent-clips";
 import {
   ClipButtonLabel,
@@ -1275,6 +1279,12 @@ export function LingGuide() {
                   </p>
                 </div>
 
+                <MatchupOpponentProfileSection
+                  opponentName={activeMatchup.name}
+                  onPlayClip={playClip}
+                  activeClipKey={activeClipKey}
+                />
+
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
                   {[
                     ["Do this", activeMatchup.doThis, "text-emerald-600"],
@@ -1311,6 +1321,13 @@ export function LingGuide() {
                   accent="violet"
                   onPlayClip={playClip}
                   activeClipKey={activeClipKey}
+                />
+
+                <MatchupBeatAdviceSection
+                  characterId="ling"
+                  opponentName={activeMatchup.name}
+                  accent="rose"
+                  bullets={activeMatchup}
                 />
               </article>
             </GuideClipSection>

@@ -1,3 +1,5 @@
+import { EXTRA_OPPONENT_PUNISHES } from "./opponent-punishes-extended";
+
 export type GuideCharacterId =
   | "steve"
   | "feng"
@@ -519,12 +521,29 @@ export type MatchupPunishmentData = {
   opponentPunishes: ResolvedOpponentPunish[];
 };
 
+function mergeOpponentPunishes(opponentName: string): OpponentPunishableMove[] {
+  const baseName = opponentName.replace(/\s*\(mirror\)$/u, "").trim();
+  const base = OPPONENT_PUNISHABLE_MOVES[opponentName] ?? OPPONENT_PUNISHABLE_MOVES[baseName] ?? GENERIC_FALLBACK;
+  const extra = EXTRA_OPPONENT_PUNISHES[baseName] ?? [];
+  const seen = new Set<string>();
+  const merged: OpponentPunishableMove[] = [];
+
+  for (const entry of [...base, ...extra]) {
+    const key = entry.move.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(entry);
+  }
+
+  return merged.sort((a, b) => b.minus - a.minus);
+}
+
 export function getMatchupPunishment(
   characterId: GuideCharacterId,
   opponentName: string,
 ): MatchupPunishmentData {
   const profile = CHARACTER_PROFILES[characterId];
-  const moves = OPPONENT_PUNISHABLE_MOVES[opponentName] ?? GENERIC_FALLBACK;
+  const moves = mergeOpponentPunishes(opponentName);
 
   return {
     characterName: profile.displayName,

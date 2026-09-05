@@ -2,7 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { GuideClipSection } from "../tekken/guide-clip-layout";
+import {
+  MatchupBeatAdviceSection,
+  MatchupOpponentProfileSection,
+} from "../tekken/matchup-opponent-sections";
 import { MatchupPunishmentSection } from "../tekken/matchup-punishment";
+import { getOkizemeDatabaseUrl as getOpponentOkizemeUrl } from "../tekken/opponent-clips";
 import {
   ClipButtonLabel,
   GuideTabGlyph,
@@ -11,10 +16,6 @@ import {
   SectionHeading,
   StepBadge,
 } from "../tekken/guide-ui";
-import {
-  getMatchupExtras,
-  getOpponentOkizemeUrl,
-} from "./matchup-extras";
 
 type Clip = {
   label: string;
@@ -1571,11 +1572,6 @@ export function SteveGuide() {
     () => matchups.find((matchup) => matchup.name === activeMatchupName) ?? null,
     [activeMatchupName],
   );
-  const activeMatchupExtras = useMemo(
-    () => (activeMatchup ? getMatchupExtras(activeMatchup.name) : null),
-    [activeMatchup],
-  );
-
   function playClip(
     clipKey: string,
     clip: Clip,
@@ -2118,58 +2114,11 @@ export function SteveGuide() {
                   </p>
                 </div>
 
-                {activeMatchupExtras ? (
-                  <div className="mt-8 rounded-2xl border border-violet-300/20 bg-violet-300/5 p-5">
-                    <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-violet-600">
-                      Opponent threats to watch
-                    </h4>
-                    <p className="mt-2 text-sm leading-6 text-slate-500">
-                      Tap a move to watch it loop in the player. These are the
-                      patterns that cost Steve rounds most often.
-                    </p>
-                    <div className="mt-4 space-y-3">
-                      {activeMatchupExtras.threats.map((threat) => {
-                        const clipKey = `matchup-${activeMatchup.name}-${threat.search}`;
-                        const isActive = activeClipKey === clipKey;
-
-                        return (
-                          <div
-                            key={threat.search}
-                            className={`rounded-xl border px-4 py-3 transition ${
-                              isActive
-                                ? "border-violet-300/50 bg-violet-50"
-                                : "border-slate-200 bg-slate-100/80"
-                            }`}
-                          >
-                            <button
-                              type="button"
-                              onClick={() =>
-                                playClip(
-                                  clipKey,
-                                  {
-                                    label: `Watch ${threat.label}`,
-                                    search: threat.search,
-                                  },
-                                  activeMatchupExtras.slug,
-                                )
-                              }
-                              className={`text-left text-sm font-semibold transition ${
-                                isActive
-                                  ? "text-violet-700"
-                                  : "text-slate-950 hover:text-violet-700"
-                              }`}
-                            >
-                              {threat.label}
-                            </button>
-                            <p className="mt-2 text-sm leading-5 text-slate-600">
-                              {threat.note}
-                            </p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ) : null}
+                <MatchupOpponentProfileSection
+                  opponentName={activeMatchup.name}
+                  onPlayClip={playClip}
+                  activeClipKey={activeClipKey}
+                />
 
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
                   <div className="rounded-2xl border border-emerald-300/20 bg-emerald-300/5 p-5">
@@ -2245,34 +2194,18 @@ export function SteveGuide() {
                   activeClipKey={activeClipKey}
                 />
 
-                {activeMatchupExtras?.deepDive.length ? (
-                  <div className="mt-8 space-y-4">
-                    <div>
-                      <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-rose-600">
-                        Deep dive
-                      </h4>
-                      <p className="mt-2 text-sm leading-6 text-slate-500">
-                        The matchup swing points: throw breaks, hard reads, and
-                        the habits that steal the round.
-                      </p>
-                    </div>
-                    <div className="grid gap-4 lg:grid-cols-2">
-                      {activeMatchupExtras.deepDive.map((section) => (
-                        <div
-                          key={section.title}
-                          className="rounded-2xl border border-slate-200 bg-slate-100/80 p-5"
-                        >
-                          <h5 className="text-base font-semibold text-slate-950">
-                            {section.title}
-                          </h5>
-                          <p className="mt-3 text-sm leading-6 text-slate-600">
-                            {section.body}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : null}
+                <MatchupBeatAdviceSection
+                  characterId="steve"
+                  opponentName={activeMatchup.name}
+                  accent="rose"
+                  bullets={{
+                    briefing: activeMatchup.overview,
+                    doThis: activeMatchup.doThis,
+                    dodge: activeMatchup.dodge,
+                    utilise: activeMatchup.utilise,
+                    avoid: activeMatchup.avoid,
+                  }}
+                />
               </article>
             </GuideClipSection>
           ) : (
