@@ -90,6 +90,23 @@ A guide wires this up by storing a `characterSlug` alongside its active clip
 (the player is shared between you and the opponent) and wrapping the matchup
 card in `GuideClipSection`.
 
+## Auditing Clips
+
+Guide notation and okizeme's move keys drift apart silently: a typo in a new
+entry, or a rename on okizeme's side, leaves a clip button that only fails when
+somebody happens to tap that exact move.
+
+```bash
+npm run audit:clips
+```
+
+This walks every clip reference the six guides can play — guide `search` values,
+opponent signature moves, punish ladders, and punishment charts — resolves each
+through the same `resolveOkizemeCandidates` the `/api/okizeme-clip` route uses,
+confirms okizeme still has a clip behind the key it lands on, and exits non-zero
+with the file and line of anything broken. Add `-- --fast` to check move keys
+only and skip the ~500 clip requests behind that.
+
 ## Local Development
 
 ```bash
@@ -102,6 +119,7 @@ Useful checks:
 ```bash
 npm run lint
 npm run build
+npm run audit:clips
 ```
 
 ## Deployment
