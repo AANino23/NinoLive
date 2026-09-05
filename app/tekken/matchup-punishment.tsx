@@ -74,21 +74,12 @@ function ClipNotation({
       onClick={() => onPlayClip(clipKey, { label: `Watch ${search}`, search }, slug)}
       title={`Watch ${search}`}
       className={cx(
-        "inline-flex items-center gap-1.5 rounded-lg border px-2 py-1 transition",
+        "inline-flex items-center rounded-lg border px-2 py-1 transition",
         isActive
           ? "border-slate-900 bg-slate-100 ring-1 ring-slate-900"
           : "border-slate-200 bg-white hover:border-slate-400 hover:bg-slate-50",
       )}
     >
-      <span
-        className={cx(
-          "text-[0.6rem] font-black leading-none",
-          isActive ? "text-slate-900" : "text-slate-500",
-        )}
-        aria-hidden="true"
-      >
-        {isActive ? "||" : "▶"}
-      </span>
       <MoveNotation notation={notation} accent={accent} size={size} />
     </button>
   );
@@ -262,23 +253,12 @@ export function MatchupPunishmentSection({
                           )
                         }
                         className={cx(
-                          "flex items-center gap-2 text-left text-sm font-semibold transition",
+                          "text-left text-sm font-semibold transition",
                           isActive
                             ? "text-slate-950"
                             : "text-slate-900 hover:text-slate-950",
                         )}
                       >
-                        <span
-                          className={cx(
-                            "inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[0.6rem] font-black",
-                            isActive
-                              ? "border-slate-900 bg-slate-900 text-white"
-                              : "border-slate-300 bg-white text-slate-600",
-                          )}
-                          aria-hidden="true"
-                        >
-                          {isActive ? "||" : "▶"}
-                        </span>
                         <span className="underline decoration-slate-300 decoration-dotted underline-offset-4">
                           {entry.move}
                         </span>

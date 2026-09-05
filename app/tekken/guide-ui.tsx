@@ -486,23 +486,21 @@ export function ClipButtonLabel({
   active?: boolean;
 }) {
   const { verb, move } = splitClipLabel(label);
+  const isWatch = verb === "Watch";
 
   return (
     <span className="inline-flex items-center gap-2">
-      {verb !== "Watch" ? (
-        <span
-          className={cx(
-            "inline-flex h-7 w-7 items-center justify-center rounded-full border text-[0.68rem] font-black",
-            active ? "border-slate-300 bg-slate-100 text-slate-900" : accentTint[accent],
-          )}
-        >
-          +
-        </span>
-      ) : null}
       <span className="flex flex-col items-start">
-        <span className={cx("text-[0.62rem] font-semibold uppercase tracking-[0.22em]", active ? "text-slate-800" : accentText[accent])}>
-          {verb}
-        </span>
+        {isWatch ? (
+          <span
+            className={cx(
+              "text-[0.62rem] font-semibold uppercase tracking-[0.22em]",
+              active ? "text-slate-800" : accentText[accent],
+            )}
+          >
+            {verb}
+          </span>
+        ) : null}
         <MoveNotation
           notation={move}
           accent={active ? "sky" : accent}
