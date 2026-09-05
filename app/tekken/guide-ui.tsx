@@ -489,14 +489,16 @@ export function ClipButtonLabel({
 
   return (
     <span className="inline-flex items-center gap-2">
-      <span
-        className={cx(
-          "inline-flex h-7 w-7 items-center justify-center rounded-full border text-[0.68rem] font-black",
-          active ? "border-slate-300 bg-slate-100 text-slate-900" : accentTint[accent],
-        )}
-      >
-        {verb === "Watch" ? ">" : "+"}
-      </span>
+      {verb !== "Watch" ? (
+        <span
+          className={cx(
+            "inline-flex h-7 w-7 items-center justify-center rounded-full border text-[0.68rem] font-black",
+            active ? "border-slate-300 bg-slate-100 text-slate-900" : accentTint[accent],
+          )}
+        >
+          +
+        </span>
+      ) : null}
       <span className="flex flex-col items-start">
         <span className={cx("text-[0.62rem] font-semibold uppercase tracking-[0.22em]", active ? "text-slate-800" : accentText[accent])}>
           {verb}

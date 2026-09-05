@@ -78,16 +78,17 @@ export function GuideClipSection({
   contentClassName?: string;
 }) {
   const stageRef = useRef<HTMLDivElement>(null);
+  const activeClipKey = activeClip?.clipKey;
 
   useEffect(() => {
-    if (!activeClip || !stageRef.current) {
+    if (!activeClipKey || !stageRef.current) {
       return;
     }
 
     if (window.matchMedia("(min-width: 1024px)").matches) {
       stageRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
-  }, [activeClip?.clipKey]);
+  }, [activeClipKey]);
 
   return (
     <div className="relative space-y-6">
