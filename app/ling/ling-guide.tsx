@@ -84,33 +84,33 @@ const dojoDrills: Drill[] = [
     summary: "Xiaoyu wins neutral when opponents swing at air. AOP is not a gimmick; it is the default answer to lazy mids and highs.",
     why: "AOP evades linear highs and many mids on startup. If you cannot enter AOP cleanly and exit on your terms, every other stance trick becomes a coin flip.",
     drill:
-      "For five minutes, play only df+1, f+3, and AOP entry. After every blocked poke, hold AOP for one beat, then choose AOP.df+1, AOP.1, or cancel to standing movement.",
+      "For five minutes, play only df+1, f+3, and AOP entry. After every blocked poke, hold AOP for one beat, then choose AOP.1+2, AOP.1, or cancel to standing movement.",
     cues: [
       "df+1 is the safe mid that buys space for AOP.",
-      "AOP.df+1 is the plus mid that keeps you in stance.",
+      "AOP.1+2 (Phoenix Cannon) is the safest mid out of stance at -1 on block.",
       "Do not spam AOP against players who already stopped pressing.",
     ],
     clips: [
       { label: "Watch df+1", search: "df+1" },
-      { label: "Watch AOP.df+1", search: "AOP.df+1" },
+      { label: "Watch AOP.1+2", search: "AOP.1+2" },
       { label: "Watch AOP.1", search: "AOP.1" },
     ],
   },
   {
     title: "Hypnotist mix after respect",
     summary: "Once they stop swinging, Hypnotist is where Xiaoyu stops being evasive and starts being unfair.",
-    why: "HYP.1 and HYP.2 are the real open-up layer after AOP has already made them block. The mix only works if you have shown the boring AOP mid first.",
+    why: "HYP.2 and HYP.3 are the real open-up layer after AOP has already made them block. The mix only works if you have shown the boring AOP mid first.",
     drill:
-      "From AOP, rotate AOP→HYP cancel, HYP.1, and HYP.2. Do not repeat the same option twice. Track whether they duck, jab, or hold low.",
+      "From AOP, rotate AOP→HYP cancel, HYP.2, and HYP.3. Do not repeat the same option twice. Track whether they duck, jab, or hold low.",
     cues: [
       "AOP→HYP cancel is faster than raw stance entry on a read.",
-      "HYP.1 is the mid that keeps pressure honest.",
-      "HYP.2 is the low; only throw it after they respect HYP.1.",
+      "HYP.2 is the mid that keeps pressure honest.",
+      "HYP.3 is the low; only throw it after they respect HYP.2.",
     ],
     clips: [
-      { label: "Watch HYP.1", search: "HYP.1" },
       { label: "Watch HYP.2", search: "HYP.2" },
-      { label: "Watch AOP.df+1", search: "AOP.df+1" },
+      { label: "Watch HYP.3", search: "HYP.3" },
+      { label: "Watch AOP.1+2", search: "AOP.1+2" },
     ],
   },
   {
@@ -167,34 +167,34 @@ const dojoDrills: Drill[] = [
   {
     title: "Wall scramble and oki discipline",
     summary: "At the wall, Xiaoyu stops scrambling and starts pinning. Oki is where stance mix becomes a round-ender.",
-    why: "df+1, AOP.df+1, and BT oki only work after you have already knocked them down with intent. Random wall contact is not oki.",
+    why: "df+1, AOP.1+2, and BT oki only work after you have already knocked them down with intent. Random wall contact is not oki.",
     drill:
-      "Wall-splat with b+4 or u/f+2, then rotate df+1, AOP.df+1, b+3+4, and 1+4 on knockdown. Repeat until the three grounded options look similar.",
+      "Wall-splat with b+4 or u/f+2, then rotate df+1, AOP.1+2, b+3+4, and 1+3 on knockdown. Repeat until the three grounded options look similar.",
     cues: [
       "df+1 is the safe oki mid that sets up the next stance.",
       "b+3+4 is the low that catches tech and panic stand.",
-      "1+4 is the throw layer once they respect the mid.",
+      "1+3 is the throw layer once they respect the mid.",
     ],
     clips: [
       { label: "Watch df+1", search: "df+1" },
       { label: "Watch b+3+4", search: "b+3+4" },
-      { label: "Watch 1+4", search: "1+4" },
+      { label: "Watch 1+3", search: "1+3" },
     ],
   },
   {
     title: "Heat stance flow on momentum",
     summary: "Heat is not a panic button. It is the phase where stance routes become plus and scrambles become guaranteed.",
-    why: "H.u/f+2 and Heat-enhanced stance strings extend pressure after you already won neutral. Spending Heat while losing spacing wastes the best part of Xiaoyu's kit.",
+    why: "H.2+3 and Heat-enhanced stance strings extend pressure after you already won neutral. Spending Heat while losing spacing wastes the best part of Xiaoyu's kit.",
     drill:
-      "Activate Heat only after a knockdown, wall-splat, or confirmed CH. Loop H.u/f+2, AOP.df+1 in Heat, and one BT oki route per knockdown.",
+      "Activate Heat only after a knockdown, wall-splat, or confirmed CH. Loop H.2+3, AOP.1+2 in Heat, and one BT oki route per knockdown.",
     cues: [
-      "H.u/f+2 is the Heat launcher that keeps wall momentum.",
+      "H.2+3 is the Heat Smash — plus on block and it leaves you in BT for oki.",
       "Heat makes several stance strings safer; use them after a read, not on cooldown.",
       "Do not burn Heat trying to escape bad spacing.",
     ],
     clips: [
-      { label: "Watch H.u/f+2", search: "H.u/f+2" },
-      { label: "Watch AOP.df+1", search: "AOP.df+1" },
+      { label: "Watch H.2+3", search: "H.2+3" },
+      { label: "Watch AOP.1+2", search: "AOP.1+2" },
       { label: "Watch f+1+2", search: "f+1+2" },
     ],
   },
@@ -219,12 +219,12 @@ const gameplan = [
   {
     title: "Stance mix beats panic lows",
     copy:
-      "HYP.1 versus HYP.2 and BT.1 versus BT.3 are the honest 50/50 layers. Do not open turtles with launch-punishable lows before they have already respected your mids.",
+      "HYP.2 versus HYP.3 and BT.1 versus BT.3 are the honest 50/50 layers. Do not open turtles with launch-punishable lows before they have already respected your mids.",
   },
   {
     title: "Spend Heat on momentum, not recovery",
     copy:
-      "Heat belongs on knockdowns, wall-splats, and confirmed CH routes. H.u/f+2 and enhanced stance pressure extend a lead you already earned; they do not fix bad neutral.",
+      "Heat belongs on knockdowns, wall-splats, and confirmed CH routes. H.2+3 and enhanced stance pressure extend a lead you already earned; they do not fix bad neutral.",
   },
 ];
 
@@ -244,11 +244,11 @@ const toolkit: ToolCard[] = [
     clip: { label: "Play f+3", search: "f+3" },
   },
   {
-    move: "AOP.df+1 / AOP.1",
+    move: "AOP.1+2 / AOP.1",
     role: "Stance evasion and plus mid",
-    when: "Use AOP after they press or after your own blocked df+1. AOP.df+1 keeps stance; AOP.1 is the quick high check.",
+    when: "Use AOP after they press or after your own blocked df+1. AOP.1+2 is the near-safe mid; AOP.1 is the quick mid check that cancels into HYP.",
     risk: "AOP loses to delay mids and patient block. Do not hold it forever against turtles.",
-    clip: { label: "Play AOP.df+1", search: "AOP.df+1" },
+    clip: { label: "Play AOP.1+2", search: "AOP.1+2" },
   },
   {
     move: "1 / ws4 / b+4",
@@ -272,11 +272,11 @@ const toolkit: ToolCard[] = [
     clip: { label: "Play b+4", search: "b+4" },
   },
   {
-    move: "HYP.1 / HYP.2",
+    move: "HYP.2 / HYP.3",
     role: "Hypnotist mid/low mix",
-    when: "Use after AOP has already earned respect. HYP.1 for mids; HYP.2 once they start blocking high.",
+    when: "Use after AOP has already earned respect. HYP.2 for mids; HYP.3 once they start blocking high.",
     risk: "Raw Hypnotist without setup gets interrupted. Enter from AOP cancel, not from minus.",
-    clip: { label: "Play HYP.1", search: "HYP.1" },
+    clip: { label: "Play HYP.2", search: "HYP.2" },
   },
   {
     move: "BT.1 / BT.3 / f+3+4",
@@ -293,10 +293,10 @@ const clipPacks: ClipPack[] = [
     notes: "The AOP and Hypnotist routes that define Xiaoyu's neutral identity.",
     clips: [
       { label: "df+1", search: "df+1" },
-      { label: "AOP.df+1", search: "AOP.df+1" },
+      { label: "AOP.1+2", search: "AOP.1+2" },
       { label: "AOP.1", search: "AOP.1" },
-      { label: "HYP.1", search: "HYP.1" },
       { label: "HYP.2", search: "HYP.2" },
+      { label: "HYP.3", search: "HYP.3" },
     ],
   },
   {
@@ -327,7 +327,7 @@ const clipPacks: ClipPack[] = [
       { label: "b+3+4", search: "b+3+4" },
       { label: "BT.1", search: "BT.1" },
       { label: "BT.3", search: "BT.3" },
-      { label: "1+4", search: "1+4" },
+      { label: "1+3", search: "1+3" },
     ],
   },
 ];
@@ -339,13 +339,13 @@ const secrets: Secret[] = [
     copy:
       "Raw Hypnotist is slow enough to interrupt. Cancelling AOP into HYP on a read is how Xiaoyu keeps plus frames while threatening mids and lows in the same breath.",
     route:
-      "Block or evade with AOP, then cancel to HYP and rotate HYP.1 and HYP.2. Show AOP.df+1 first so they commit to a guard angle.",
+      "Block or evade with AOP, then cancel to HYP and rotate HYP.2 and HYP.3. Show AOP.1+2 first so they commit to a guard angle.",
     counter:
       "If they stop pressing, leave stance and return to df+1 footsies. Do not keep cancelling into mix against someone already blocking low.",
     clips: [
-      { label: "AOP.df+1", search: "AOP.df+1" },
-      { label: "HYP.1", search: "HYP.1" },
+      { label: "AOP.1+2", search: "AOP.1+2" },
       { label: "HYP.2", search: "HYP.2" },
+      { label: "HYP.3", search: "HYP.3" },
     ],
   },
   {
@@ -354,12 +354,12 @@ const secrets: Secret[] = [
     copy:
       "AOP does not just evade highs on paper. The low-crush window deletes hopkicks, rage arts, and panic df+1s if you enter on their startup instead of after their block.",
     route:
-      "After your df+1, hold AOP as they swing. On successful evade, immediately AOP.df+1 or cancel to HYP. Practice the timing against common i12-i15 highs.",
+      "After your df+1, hold AOP as they swing. On successful evade, immediately AOP.1+2 or cancel to HYP. Practice the timing against common i12-i15 highs.",
     counter:
       "Delay mids and lows beat empty AOP. If they stopped throwing highs, stop entering AOP without a read.",
     clips: [
       { label: "AOP.1", search: "AOP.1" },
-      { label: "AOP.df+1", search: "AOP.df+1" },
+      { label: "AOP.1+2", search: "AOP.1+2" },
       { label: "df+1", search: "df+1" },
     ],
   },
@@ -397,14 +397,14 @@ const secrets: Secret[] = [
     title: "Heat turns scramble into guaranteed pressure",
     tag: "Heat rule",
     copy:
-      "Heat is strongest when Xiaoyu already has wall or knockdown. H.u/f+2 and enhanced stance strings extend oki and make BT routes much harder to escape cleanly.",
+      "Heat is strongest when Xiaoyu already has wall or knockdown. H.2+3 and enhanced stance strings extend oki and make BT routes much harder to escape cleanly.",
     route:
-      "Activate Heat after splat or knockdown. Loop H.u/f+2, AOP.df+1 in Heat, and one full BT oki sequence before spending the bar on random neutral.",
+      "Activate Heat after splat or knockdown. Loop H.2+3, AOP.1+2 in Heat, and one full BT oki sequence before spending the bar on random neutral.",
     counter:
       "If they start backdashing Heat routes, use f+3+4 and df+1 to catch space instead of forcing the same launcher.",
     clips: [
-      { label: "H.u/f+2", search: "H.u/f+2" },
-      { label: "AOP.df+1", search: "AOP.df+1" },
+      { label: "H.2+3", search: "H.2+3" },
+      { label: "AOP.1+2", search: "AOP.1+2" },
       { label: "BT.1", search: "BT.1" },
     ],
   },
@@ -507,7 +507,7 @@ const matchupOverrides: Partial<
       "BT oki at the wall where parry timing gets tight.",
     ],
     avoid: [
-      "Do not autopilot HYP.2 into reversal.",
+      "Do not autopilot HYP.3 into reversal.",
       "Do not repeat the same AOP→HYP timing every time.",
     ],
   },
@@ -748,7 +748,7 @@ const matchupOverrides: Partial<
     ],
     avoid: [
       "Do not mirror scramble without wall intent.",
-      "Do not throw HYP.2 before showing HYP.1.",
+      "Do not throw HYP.3 before showing HYP.2.",
     ],
   },
   Zafina: {
@@ -790,7 +790,7 @@ const defaultMatchups: Record<(typeof matchupNames)[number], Matchup> =
         ],
         utilise: [
           "AOP evasion once they start throwing highs.",
-          "HYP.1 versus HYP.2 and BT oki after knockdown.",
+          "HYP.2 versus HYP.3 and BT oki after knockdown.",
         ],
         avoid: [
           "Do not high-check patient blockers.",

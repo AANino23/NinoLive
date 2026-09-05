@@ -82,7 +82,7 @@ const dojoDrills: Drill[] = [
     summary: "Feng wins neutral when opponents swing at air. Back-sway is not a gimmick; it is the default answer to committed strings and lazy highs.",
     why: "b evades linear mids and many highs on startup. If you cannot sway cleanly and punish the whiff, every kenpo trick becomes a coin flip.",
     drill:
-      "For five minutes, play only df+1, b sway, and movement. After every blocked poke, sway once, then choose ub+3, qcf+1 on their swing, or cancel back to standing df+1.",
+      "For five minutes, play only df+1, b sway, and movement. After every blocked poke, sway once, then choose ub+3, uf+4 on their swing, or cancel back to standing df+1.",
     cues: [
       "df+1 is the safe mid that buys space for the sway.",
       "ub+3 is the low that keeps you evasive after sway.",
@@ -91,7 +91,7 @@ const dojoDrills: Drill[] = [
     clips: [
       { label: "Watch df+1", search: "df+1" },
       { label: "Watch ub+3", search: "ub+3" },
-      { label: "Watch qcf+1", search: "qcf+1" },
+      { label: "Watch uf+4", search: "uf+4" },
     ],
   },
   {
@@ -112,36 +112,36 @@ const dojoDrills: Drill[] = [
     ],
   },
   {
-    title: "Whiff punish with qcf+1",
+    title: "Whiff punish with uf+4",
     summary: "Feng damage comes from punishing impatience, not from forcing mix every neutral.",
-    why: "qcf+1 is the whiff punish and keepout tool after sway. If you swing it as a block string, good players launch you for the round.",
+    why: "uf+4 (Soaring Eagle) is the whiff punish after sway — i15 and it launches for a full combo. If you swing it as a block string, good players launch you back for the round.",
     drill:
-      "Set the dummy to press after your sway whiffs. Drill qcf+1 on every recovery until the punish is automatic with no extra movement.",
+      "Set the dummy to press after your sway whiffs. Drill uf+4 on every recovery until the punish is automatic with no extra movement.",
     cues: [
       "Sway first, punish second; do not reverse the order.",
-      "qcf+1 is also your mid-range check when they stop swinging.",
+      "uf+4 also whiff punishes at mid-range once they stop swinging.",
       "At the wall, confirm into your bread-and-butter combo.",
     ],
     clips: [
-      { label: "Watch qcf+1", search: "qcf+1" },
-      { label: "Watch qcf+1,2", search: "qcf+1,2" },
+      { label: "Watch uf+4", search: "uf+4" },
+      { label: "Watch df+3", search: "df+3" },
       { label: "Watch u/f+2", search: "u/f+2" },
     ],
   },
   {
     title: "Kenpo stance mix after respect",
     summary: "Once they stop pressing, KNP is where Feng stops being evasive and starts being unfair.",
-    why: "KNP.d+2 and KNP follow-ups are the real open-up layer after sway has already made them block. The mix only works if you have shown the boring df+1 first.",
+    why: "KNP.1 and KNP follow-ups are the real open-up layer after sway has already made them block. The mix only works if you have shown the boring df+1 first.",
     drill:
-      "From df+1 or b+1+2 hit, enter KNP and rotate KNP.d+2, KNP.1, and standing throw. Do not repeat the same option twice.",
+      "From df+1 or b+1+2 hit, enter KNP and rotate KNP.1, KNP.3, and standing throw. Do not repeat the same option twice.",
     cues: [
-      "KNP.d+2 is the low that catches stand-blockers.",
-      "KNP.1 is the mid check that keeps kenpo alive.",
+      "KNP.1 is the low that catches stand-blockers.",
+      "KNP.3 is the mid check that keeps kenpo alive.",
       "Throw when they start holding low forever.",
     ],
     clips: [
-      { label: "Watch KNP.d+2", search: "KNP.d+2" },
       { label: "Watch KNP.1", search: "KNP.1" },
+      { label: "Watch KNP.3", search: "KNP.3" },
       { label: "Watch 1+2", search: "1+2" },
     ],
   },
@@ -184,16 +184,16 @@ const dojoDrills: Drill[] = [
     summary: "Heat is not a panic button. It is the phase where kenpo routes become plus and whiff punishes become guaranteed.",
     why: "Heat-enhanced shoulder and power mids extend pressure after you already won neutral. Spending Heat while losing spacing wastes Feng's best comeback tool.",
     drill:
-      "Activate Heat only after a whiff punish, wall-splat, or confirmed CH. Loop H.f+1+2, b+1+2 in Heat, and one qcf+1 confirm route per opening.",
+      "Activate Heat only after a whiff punish, wall-splat, or confirmed CH. Loop H.f,F+1+2, b+1+2 in Heat, and one uf+4 confirm route per opening.",
     cues: [
       "Heat belongs on momentum, not recovery.",
       "Use enhanced kenpo routes after a read, not on cooldown.",
       "Do not burn Heat trying to escape bad spacing.",
     ],
     clips: [
-      { label: "Watch H.f+1+2", search: "H.f+1+2" },
+      { label: "Watch H.f,F+1+2", search: "H.f,F+1+2" },
       { label: "Watch b+1+2", search: "b+1+2" },
-      { label: "Watch qcf+1", search: "qcf+1" },
+      { label: "Watch uf+4", search: "uf+4" },
     ],
   },
 ];
@@ -217,7 +217,7 @@ const gameplan = [
   {
     title: "Patience beats panic",
     copy:
-      "qcf+1 versus ub+3 and df+1 versus throw are the honest layers. Do not open turtles with launch-punishable kenpo step before they have already respected your sway.",
+      "uf+4 versus ub+3 and df+1 versus throw are the honest layers. Do not open turtles with launch-punishable kenpo step before they have already respected your sway.",
   },
   {
     title: "Spend Heat on momentum, not recovery",
@@ -256,11 +256,11 @@ const toolkit: ToolCard[] = [
     clip: { label: "Play d+2", search: "d+2" },
   },
   {
-    move: "qcf+1",
-    role: "Whiff punish and keepout",
-    when: "Use it after sway whiffs and as mid-range check when they stop swinging.",
-    risk: "Minus on block if used as a string starter. Confirm the whiff before committing.",
-    clip: { label: "Play qcf+1", search: "qcf+1" },
+    move: "uf+4",
+    role: "Whiff punish launcher",
+    when: "Use it on their recovery after sway makes them whiff, and at mid-range once they stop swinging.",
+    risk: "-13 on block, so Feng-tier punishers launch it. Confirm the whiff before committing.",
+    clip: { label: "Play uf+4", search: "uf+4" },
   },
   {
     move: "1 / ws4 / u/f+2",
@@ -277,11 +277,11 @@ const toolkit: ToolCard[] = [
     clip: { label: "Play f+1+2", search: "f+1+2" },
   },
   {
-    move: "KNP.d+2 / 1+2",
+    move: "KNP.1 / 1+2",
     role: "Kenpo mix and throw layer",
     when: "Use KNP after plus frames to open turtles. 1+2 is the throw layer once they respect the low.",
     risk: "KNP without a read becomes a block contest. Do not spam kenpo against patient players.",
-    clip: { label: "Play KNP.d+2", search: "KNP.d+2" },
+    clip: { label: "Play KNP.1", search: "KNP.1" },
   },
 ];
 
@@ -292,7 +292,7 @@ const clipPacks: ClipPack[] = [
     clips: [
       { label: "df+1", search: "df+1" },
       { label: "ub+3", search: "ub+3" },
-      { label: "qcf+1", search: "qcf+1" },
+      { label: "uf+4", search: "uf+4" },
       { label: "b+1+2", search: "b+1+2" },
     ],
   },
@@ -302,8 +302,8 @@ const clipPacks: ClipPack[] = [
     clips: [
       { label: "b+1+2", search: "b+1+2" },
       { label: "d+2", search: "d+2" },
-      { label: "KNP.d+2", search: "KNP.d+2" },
       { label: "KNP.1", search: "KNP.1" },
+      { label: "KNP.3", search: "KNP.3" },
       { label: "1+2", search: "1+2" },
     ],
   },
@@ -314,7 +314,7 @@ const clipPacks: ClipPack[] = [
       { label: "1", search: "1" },
       { label: "ws4", search: "ws4" },
       { label: "u/f+2", search: "u/f+2" },
-      { label: "qcf+1", search: "qcf+1" },
+      { label: "uf+4", search: "uf+4" },
       { label: "f+1+2", search: "f+1+2" },
     ],
   },
@@ -322,9 +322,9 @@ const clipPacks: ClipPack[] = [
     title: "Heat pack",
     notes: "The enhanced routes that steal rounds once you already have momentum.",
     clips: [
-      { label: "H.f+1+2", search: "H.f+1+2" },
+      { label: "H.f,F+1+2", search: "H.f,F+1+2" },
       { label: "b+1+2", search: "b+1+2" },
-      { label: "qcf+1,2", search: "qcf+1,2" },
+      { label: "df+3", search: "df+3" },
       { label: "f+3", search: "f+3" },
     ],
   },
@@ -335,15 +335,15 @@ const secrets: Secret[] = [
     title: "Back-sway is the real character",
     tag: "Core identity",
     copy:
-      "Kenpo step is the obvious version. Back-sway is the one that actually makes committed offense whiff and sets up qcf+1 for the round. If sway is sloppy, Feng feels honest.",
+      "Kenpo step is the obvious version. Back-sway is the one that actually makes committed offense whiff and sets up uf+4 for the round. If sway is sloppy, Feng feels honest.",
     route:
-      "Practice df+1 into b sway from mid-range. On their whiff, qcf+1. On their block, ub+3 or back to df+1. Never kenpo step before they have already committed.",
+      "Practice df+1 into b sway from mid-range. On their whiff, uf+4. On their block, ub+3 or back to df+1. Never kenpo step before they have already committed.",
     counter:
       "If they stop pressing, go back to df+1 and throws. Do not keep swaying into delay mids.",
     clips: [
       { label: "df+1", search: "df+1" },
       { label: "ub+3", search: "ub+3" },
-      { label: "qcf+1", search: "qcf+1" },
+      { label: "uf+4", search: "uf+4" },
     ],
   },
   {
@@ -362,17 +362,17 @@ const secrets: Secret[] = [
     ],
   },
   {
-    title: "qcf+1 is a whiff punish, not a block string",
+    title: "uf+4 is a whiff punish, not a block string",
     tag: "Punish secret",
     copy:
-      "Everyone knows qcf+1 hurts. Fewer people remember it is for whiffs and keepout, not for opening turtles. Good opponents launch greedy qcf+1 habits.",
+      "Everyone knows uf+4 hurts. Fewer people remember it is for whiffs, not for opening turtles. Good opponents launch greedy uf+4 habits.",
     route:
-      "Sway first, wait for the swing, then qcf+1. At mid-range use it only when they have already shown impatience.",
+      "Sway first, wait for the swing, then uf+4. At mid-range use it only when they have already shown impatience.",
     counter:
-      "If they stop swinging after sway, return to df+1 and kenpo step. Do not keep fishing qcf+1 on block.",
+      "If they stop swinging after sway, return to df+1 and kenpo step. Do not keep fishing uf+4 on block.",
     clips: [
-      { label: "qcf+1", search: "qcf+1" },
-      { label: "qcf+1,2", search: "qcf+1,2" },
+      { label: "uf+4", search: "uf+4" },
+      { label: "df+3", search: "df+3" },
       { label: "u/f+2", search: "u/f+2" },
     ],
   },
@@ -395,14 +395,14 @@ const secrets: Secret[] = [
     title: "KNP mix beats panic lows",
     tag: "Stance secret",
     copy:
-      "KNP.d+2 versus KNP.1 and throw is the honest 50/50 layer. Do not open turtles with launch-punishable d+2 before they have already respected your shoulder.",
+      "KNP.1 versus KNP.3 and throw is the honest 50/50 layer. Do not open turtles with launch-punishable kenpo lows before they have already respected your shoulder.",
     route:
       "Shoulder on hit or df+1 at plus, enter KNP, rotate low, mid, and throw. Show the boring option first.",
     counter:
       "If they delay tech or backroll consistently, stop kenpo on autopilot and just take df+1.",
     clips: [
-      { label: "KNP.d+2", search: "KNP.d+2" },
       { label: "KNP.1", search: "KNP.1" },
+      { label: "KNP.3", search: "KNP.3" },
       { label: "1+2", search: "1+2" },
     ],
   },
@@ -412,13 +412,13 @@ const secrets: Secret[] = [
     copy:
       "Heat enhances shoulder and power mids so blocking still costs health. Use it after you already have a whiff punish or wall, not as a reset after you lost spacing.",
     route:
-      "Activate Heat after qcf+1 confirm or wall-splat. Show one df+1, then H.f+1+2 or enhanced shoulder. Keep chip running between attempts.",
+      "Activate Heat after uf+4 confirm or wall-splat. Show one df+1, then H.f,F+1+2 or enhanced shoulder. Keep chip running between attempts.",
     counter:
       "If they start ducking Heat routes, interrupt with df+1 and throws. Heat is a layer, not a win button.",
     clips: [
-      { label: "H.f+1+2", search: "H.f+1+2" },
+      { label: "H.f,F+1+2", search: "H.f,F+1+2" },
       { label: "b+1+2", search: "b+1+2" },
-      { label: "qcf+1", search: "qcf+1" },
+      { label: "uf+4", search: "uf+4" },
     ],
   },
 ];
@@ -471,7 +471,7 @@ const matchupOverrides: Partial<
 > = {
   Alisa: {
     briefing:
-      "She wants to leave and return with chainsaws. Feng wins by making her swing into sway, then punishing DES entries with df+1 and qcf+1.",
+      "She wants to leave and return with chainsaws. Feng wins by making her swing into sway, then punishing DES entries with df+1 and uf+4.",
     doThis: [
       "Use df+1 and sway to punish her linear approach tools.",
       "Block chainsaws first, then punish the identified ender.",
@@ -481,7 +481,7 @@ const matchupOverrides: Partial<
       "Backdash after blocked DESTINY sequences instead of mashing.",
     ],
     utilise: [
-      "qcf+1 when she hesitates after a whiffed high.",
+      "uf+4 when she hesitates after a whiffed high.",
       "Throws once she starts waiting for chainsaw timing.",
     ],
     avoid: [
@@ -541,7 +541,7 @@ const matchupOverrides: Partial<
       "Sway his highs after plus frames, not his tracking lows.",
     ],
     utilise: [
-      "qcf+1 when he throws highs after your sway.",
+      "uf+4 when he throws highs after your sway.",
       "Shoulder once he has already respected df+1.",
     ],
     avoid: [
@@ -553,7 +553,7 @@ const matchupOverrides: Partial<
     briefing:
       "His legs outrange yours. Feng wins by not poking at limb tip, swaying his highs, then kenpo stepping once he is forced to approach.",
     doThis: [
-      "Block standing 3 and df+4, then punish with u/f+2 or qcf+1.",
+      "Block standing 3 and df+4, then punish with u/f+2 or uf+4.",
       "Make him come to you; sway deletes many of his highs.",
     ],
     dodge: [
@@ -578,7 +578,7 @@ const matchupOverrides: Partial<
     ],
     dodge: [
       "Mirror sway with ub+3; two evasive characters means the first to commit loses.",
-      "Step linear qcf+1 habits and launch.",
+      "Step his linear pokes after a blocked uf+4 and launch.",
     ],
     utilise: [
       "Throws when they start waiting for kenpo timing.",
@@ -601,7 +601,7 @@ const matchupOverrides: Partial<
       "Sway under some of his linear mid checks.",
     ],
     utilise: [
-      "qcf+1 when he mashes after your poke.",
+      "uf+4 when he mashes after your poke.",
       "Shoulder oki once he is wall-splatted.",
     ],
     avoid: [
@@ -622,7 +622,7 @@ const matchupOverrides: Partial<
     ],
     utilise: [
       "Throws when he starts waiting for hellsweep.",
-      "qcf+1 keepout to tax every wavedash entry.",
+      "uf+4 to launch every lazy wavedash entry.",
     ],
     avoid: [
       "Do not kenpo step at wavedash range.",
@@ -701,12 +701,12 @@ const matchupOverrides: Partial<
       "Backdash after blocked pokes before swinging.",
     ],
     utilise: [
-      "qcf+1 when she throws highs after your df+1.",
+      "uf+4 when she throws highs after your df+1.",
       "1+2 once she starts waiting for your kenpo mix.",
     ],
     avoid: [
       "Do not jab-scramble with her up close for long.",
-      "Do not let her walk around every linear qcf+1.",
+      "Do not let her walk around every linear uf+4.",
     ],
   },
   Steve: {
@@ -725,7 +725,7 @@ const matchupOverrides: Partial<
       "Shoulder at the wall where his movement matters less.",
     ],
     avoid: [
-      "Do not feed qcf+1 with predictable retaliation.",
+      "Do not feed uf+4 with predictable retaliation.",
       "Do not throw kenpo step on autopilot; he will duck-launch.",
     ],
   },
@@ -777,7 +777,7 @@ const defaultMatchups: Record<(typeof matchupNames)[number], Matchup> =
       name,
       {
         name,
-        briefing: `${name} is a loading-screen fundamentals check for Feng: sway with df+1, whiff punish with qcf+1, and kenpo step only after they overcommit.`,
+        briefing: `${name} is a loading-screen fundamentals check for Feng: sway with df+1, whiff punish with uf+4, and kenpo step only after they overcommit.`,
         doThis: [
           "Start with single-hit pokes before forcing kenpo step.",
           "Punish blocked shoulder and sweep every time.",
@@ -787,7 +787,7 @@ const defaultMatchups: Record<(typeof matchupNames)[number], Matchup> =
           "Backdash after safe mids instead of stealing turns blindly.",
         ],
         utilise: [
-          "qcf+1 and u/f+2 once they stop pressing.",
+          "uf+4 and u/f+2 once they stop pressing.",
           "KNP mix and throws after plus frames.",
         ],
         avoid: [
@@ -1036,7 +1036,7 @@ export function FengGuide() {
           <SectionHeading
             eyebrow="Gameplan"
             title="How Feng should feel"
-            copy="The opponent should whiff first. Once they finally respect the sway, kenpo step and qcf+1 finish the round."
+            copy="The opponent should whiff first. Once they finally respect the sway, kenpo step and uf+4 finish the round."
             accent="emerald"
           />
           <div className="grid gap-4 lg:grid-cols-2">

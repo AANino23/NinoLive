@@ -21,9 +21,20 @@ function normalizeCommand(value: string) {
     .replace(/\*+$/u, "");
 }
 
-function looseCommand(value: string) {
-  return normalizeCommand(value).replace(/[+,.~:]/gu, "");
+/**
+ * Separator characters carry no lookup meaning, so "u/f+2" can find "uf+2" and
+ * "f,n,d,df+2" can find "f,n,d,df:2".
+ *
+ * Exported for `scripts/audit-clips.ts`, which uses it to tell a punctuation-only match
+ * apart from the prefix fallback below — the latter plays a different move than the
+ * guide named, and is the only silent failure a clip request cannot report.
+ */
+export function looseCommand(value: string) {
+  return normalizeCommand(value).replace(/[+,.~:/]/gu, "");
 }
+
+/** Enough to cover notation collisions without turning one lookup into a crawl. */
+const MAX_CANDIDATES = 4;
 
 async function fetchCharacterCommands(character: string): Promise<string[]> {
   const response = await fetch(`https://okizeme.gg/api/${character}`, {
@@ -45,41 +56,73 @@ async function fetchCharacterCommands(character: string): Promise<string[]> {
     .filter((command): command is string => Boolean(command));
 }
 
+/**
+ * Ranks the move keys okizeme.gg might have filed a guide's notation under, best first.
+ * More than one can match — Reina's `f,n,d,df+2` normalises the same as `f,n,d,DF+2`, and
+ * only one of those pair has a clip — so the caller walks the list rather than betting on
+ * the first hit.
+ */
+export async function resolveOkizemeCandidates(
+  character: string,
+  query: string,
+): Promise<string[]> {
+  const wanted = normalizeCommand(query);
+  const wantedLoose = looseCommand(query);
+
+  if (!wantedLoose) {
+    return [];
+  }
+
+  const commands = await fetchCharacterCommands(character);
+  const ranked: string[] = [];
+  const push = (command: string) => {
+    if (!ranked.includes(command)) {
+      ranked.push(command);
+    }
+  };
+
+  for (const command of commands) {
+    if (normalizeCommand(command) === wanted) {
+      push(command);
+    }
+  }
+
+  for (const command of commands) {
+    if (looseCommand(command) === wantedLoose) {
+      push(command);
+    }
+  }
+
+  const prefixed = commands
+    .filter((command) => looseCommand(command).startsWith(wantedLoose))
+    .sort((a, b) => a.length - b.length);
+
+  for (const command of prefixed) {
+    push(command);
+  }
+
+  // The loose form drops separators, so "b+1+2" and "b+1,2" collapse together. That is
+  // fine for picking a single best guess, but a fallback must not quietly hand back a
+  // different move: past the top pick, only keep longer spellings of the same command.
+  const [primary, ...rest] = ranked;
+
+  if (!primary) {
+    return [];
+  }
+
+  return [
+    primary,
+    ...rest.filter((command) => normalizeCommand(command).startsWith(wanted)),
+  ].slice(0, MAX_CANDIDATES);
+}
+
 /** Maps a guide's notation onto the exact move key okizeme.gg has a clip for. */
 export async function resolveOkizemeMove(
   character: string,
   query: string,
 ): Promise<string | null> {
-  const wanted = normalizeCommand(query);
-  const wantedLoose = looseCommand(query);
-
-  if (!wantedLoose) {
-    return null;
-  }
-
-  const commands = await fetchCharacterCommands(character);
-
-  const exact = commands.find((command) => normalizeCommand(command) === wanted);
-  if (exact) {
-    return exact;
-  }
-
-  const loose = commands.find((command) => looseCommand(command) === wantedLoose);
-  if (loose) {
-    return loose;
-  }
-
-  const prefixed = commands.filter((command) =>
-    looseCommand(command).startsWith(wantedLoose),
-  );
-
-  if (prefixed.length) {
-    return prefixed.reduce((shortest, command) =>
-      command.length < shortest.length ? command : shortest,
-    );
-  }
-
-  return null;
+  const [best] = await resolveOkizemeCandidates(character, query);
+  return best ?? null;
 }
 
 export async function fetchOkizemePresignedUrl(
@@ -89,7 +132,7 @@ export async function fetchOkizemePresignedUrl(
   const encodedMove = encodeURIComponent(move);
   const response = await fetch(
     `https://okizeme.gg/api/${character}/${encodedMove}`,
-    { next: { revalidate: 3600 } },
+    { cache: "no-store" },
   );
 
   if (!response.ok) {

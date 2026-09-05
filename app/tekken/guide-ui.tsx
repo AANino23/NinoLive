@@ -68,6 +68,7 @@ const directionLabels: Record<string, string> = {
 const stanceLabels = new Set([
   "ALB",
   "AOP",
+  "BAO",
   "BT",
   "CD",
   "CH",
@@ -96,7 +97,7 @@ const stanceLabels = new Set([
   "MNT",
   "NSS",
   "PAB",
-  "PGN",
+  "PGR",
   "RAM",
   "REC",
   "RFS",
@@ -264,7 +265,7 @@ function renderCoreToken(
   }
 
   // `u/f` is the same input as `uf`; collapse it before the split below reads
-  // the slash as "or". `H.u/f+2` needs this mid-token, not just at the start.
+  // the slash as "or". `H.f,u/f+2` style tokens need this mid-token, not just at the start.
   const collapsed = collapseDiagonals(token);
   if (collapsed !== token) {
     return renderCoreToken(collapsed, accent, size, `${keyPrefix}-diag`);

@@ -43,9 +43,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Chaos low — enormous punish on block."
     },
     {
-      "move": "f+2,1",
-      "minus": 14,
-      "note": "String ender. Block both hits, then punish."
+      "move": "qcf+2,1",
+      "minus": 16,
+      "note": "Artemis Arrow. Two mids — block both, then launch."
     },
     {
       "move": "d+4",
@@ -81,9 +81,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Shoulder into grab range. Punish, do not freeze."
     },
     {
-      "move": "df+1,4",
+      "move": "d+2,4",
       "minus": 14,
-      "note": "String ender off df+1. Block all hits first."
+      "note": "Mid string ender. Block both hits, then punish."
     }
   ],
   "Asuka": [
@@ -126,9 +126,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Running attack. Punish on block instead of retreating."
     },
     {
-      "move": "df+1,2",
+      "move": "f+2,1,4",
       "minus": 14,
-      "note": "String ender. Block through, then answer."
+      "note": "Danza Del Cóndor. Block the full string, then answer."
     },
     {
       "move": "LIB.d+4",
@@ -165,9 +165,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Long keepout kick. Weave on approach."
     },
     {
-      "move": "df+1,4",
-      "minus": 14,
-      "note": "String ender. Jab punish tier."
+      "move": "DF+1,2",
+      "minus": 15,
+      "note": "Double Body Blow. His df+1 string ender — launch it."
     }
   ],
   "Claudio": [
@@ -277,9 +277,10 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "String ender off df+1."
     },
     {
-      "move": "wr2",
-      "minus": 17,
-      "note": "Running launcher. Block and take the turn."
+      "move": "WR.F+3",
+      "minus": 15,
+      "crouching": true,
+      "note": "Chernobog Sweep. His running low — block it and punish from crouch."
     }
   ],
   "Eddy": [
@@ -306,9 +307,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Relax stance low ender."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender between transitions."
+      "move": "b+3,3",
+      "minus": 15,
+      "note": "Knee Thruster into Relâmpago. Block through, then answer."
     }
   ],
   "Fahkumram": [
@@ -346,9 +347,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Hopkick — whiff punish his sway swings."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "Kenpo string ender."
+      "move": "f+3,4",
+      "minus": 16,
+      "note": "Climbing Dragon. Committed mid string — launch it."
     },
     {
       "move": "d+2",
@@ -458,9 +459,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Mid in wavedash mix — do not duck early."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "Fundamentals string ender."
+      "move": "1,2,1",
+      "minus": 16,
+      "note": "Black Wing Rondo ender. Block the jab string out, then launch."
     },
     {
       "move": "f+3",
@@ -611,10 +612,10 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "String ender after teleport."
     },
     {
-      "move": "d+4",
-      "minus": 14,
+      "move": "db+3,3",
+      "minus": 19,
       "crouching": true,
-      "note": "Fast low in hit-and-run flow."
+      "note": "Sweep repeat in her hit-and-run flow. Punish from crouch."
     }
   ],
   "Lars": [
@@ -629,9 +630,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Silent Entry string — jab interruptible gaps."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender."
+      "move": "df+3,3",
+      "minus": 15,
+      "note": "Outpost Blitz. Mid string ender."
     },
     {
       "move": "d+1+2",
@@ -686,9 +687,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Acid rain keepout — do not backdash predictably."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender."
+      "move": "f+3,3",
+      "minus": 18,
+      "note": "Two mids from his kick flow. Block both and launch."
     },
     {
       "move": "d+2",
@@ -799,9 +800,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Matterhorn flip — punish on block."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender."
+      "move": "f+2,3",
+      "minus": 15,
+      "note": "Mars Sword. High into mid — block, then launch."
     },
     {
       "move": "f+3",
@@ -822,9 +823,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Hopkick from spirit stance."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender — label minus enders early."
+      "move": "df+1,1,1+2",
+      "minus": 17,
+      "note": "Tandrokin'ny Ala. The df+1 string ender — launch it."
     },
     {
       "move": "f+2",
@@ -832,10 +833,10 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Empowered mid when buffed."
     },
     {
-      "move": "d+4",
-      "minus": 14,
+      "move": "BAO.4",
+      "minus": 24,
       "crouching": true,
-      "note": "Stance low layer."
+      "note": "Bao stance low. Huge punish from crouch."
     },
     {
       "move": "f+1+2,1+2,3+4",
@@ -888,9 +889,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Demolition man approach."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender."
+      "move": "d+1,2",
+      "minus": 17,
+      "note": "Phoenix Smasher ender. Block the mid string, then launch."
     },
     {
       "move": "b+4",
@@ -905,9 +906,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Hopkick through the theatre."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender — hold position on teleport."
+      "move": "df+2,4",
+      "minus": 15,
+      "note": "Bolt Stunner. Mid string ender — hold position on teleport."
     },
     {
       "move": "BT.1",
@@ -962,9 +963,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Hopkick in poke war."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender."
+      "move": "df+4,1,3",
+      "minus": 13,
+      "note": "Al-Faras. Three mids — block the full string, then answer."
     },
     {
       "move": "b+4",
@@ -1019,9 +1020,9 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "Hopkick from perfumer flow."
     },
     {
-      "move": "df+1,2",
-      "minus": 14,
-      "note": "String ender — duck known highs."
+      "move": "f+2,2",
+      "minus": 15,
+      "note": "Two highs. Duck the second and launch him for free."
     },
     {
       "move": "IAI.d+1+2",

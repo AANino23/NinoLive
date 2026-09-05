@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+/**
+ * okizeme hands out CDN links signed with a one-hour token. A clip that was opened, left
+ * on screen and seeked later can therefore fail on a link that was valid when it loaded,
+ * so a playback error is worth one silent retry with a freshly signed URL before the
+ * fallback message goes up.
+ */
+const MAX_ATTEMPTS = 2;
 
 function OkizemeClipVideoLoader({
   character,
@@ -13,6 +21,7 @@ function OkizemeClipVideoLoader({
 }) {
   const [src, setSrc] = useState<string | null>(null);
   const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -22,7 +31,7 @@ function OkizemeClipVideoLoader({
       move: search,
     });
 
-    fetch(`/api/okizeme-clip?${params.toString()}`)
+    fetch(`/api/okizeme-clip?${params.toString()}`, { cache: "no-store" })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Clip unavailable");
@@ -31,8 +40,14 @@ function OkizemeClipVideoLoader({
         return response.json() as Promise<{ presignedUrl?: string }>;
       })
       .then((data) => {
-        if (!cancelled && data.presignedUrl) {
+        if (cancelled) {
+          return;
+        }
+
+        if (data.presignedUrl) {
           setSrc(data.presignedUrl);
+        } else {
+          setError(true);
         }
       })
       .catch(() => {
@@ -44,7 +59,19 @@ function OkizemeClipVideoLoader({
     return () => {
       cancelled = true;
     };
-  }, [character, search]);
+  }, [character, search, attempt]);
+
+  const onPlaybackError = useCallback(() => {
+    if (attempt + 1 >= MAX_ATTEMPTS) {
+      setError(true);
+      return;
+    }
+
+    // Dropping the src first swaps the dead video back to the spinner while the effect
+    // re-runs for a freshly signed URL.
+    setSrc(null);
+    setAttempt(attempt + 1);
+  }, [attempt]);
 
   if (error) {
     return (
@@ -74,6 +101,7 @@ function OkizemeClipVideoLoader({
       playsInline
       preload="metadata"
       src={src}
+      onError={onPlaybackError}
     >
       Your browser does not support embedded video playback.
     </video>

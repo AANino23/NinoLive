@@ -217,7 +217,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
         },
         {
             "label": "Electric (f,n,d,df+2)",
-            "search": "f,n,d,df+2",
+            "search": "f,n,d,DF+2",
             "note": "High that ends rounds on counter hit. Weave under it for a free launch."
         }
     ],
@@ -327,7 +327,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
         },
         {
             "label": "Electric (f,n,d,df+2)",
-            "search": "f,n,d,df+2",
+            "search": "f,n,d,DF+2",
             "note": "High with devastating counter-hit damage. Weave for free launch."
         },
         {
@@ -391,7 +391,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
     threats: [
         {
             "label": "Electric (f,n,d,df+2)",
-            "search": "f,n,d,df+2",
+            "search": "f,n,d,DF+2",
             "note": "Core Mishima tool. Weave under it between strings."
         },
         {
@@ -442,7 +442,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
         },
         {
             "label": "Electric (f,n,d,df+2)",
-            "search": "f,n,d,df+2",
+            "search": "f,n,d,DF+2",
             "note": "High with launch-level reward on CH. Weave under for round-swinging punish."
         },
         {
@@ -787,7 +787,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
         },
         {
             "label": "Electric (f,n,d,df+2)",
-            "search": "f,n,d,df+2",
+            "search": "f,n,d,DF+2",
             "note": "Weave under for free launch."
         },
         {

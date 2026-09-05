@@ -165,18 +165,18 @@ const dojoDrills: Drill[] = [
   {
     title: "Pigeon Roll wall oki",
     summary: "At the wall, Pigeon Roll turns knockdowns into a second guessing game.",
-    why: "PGN 2 hits grounded and is a safe mid. PGN 3 is the launch-punishable sweep. The mix only works if you have already shown the boring grounded hit.",
+    why: "PGR.2 hits grounded and is a safe mid. PGR.3 is the launch-punishable sweep. The mix only works if you have already shown the boring grounded hit.",
     drill:
-      "At the wall, knockdown, then rotate 3+4,2, 3+4,3, and wait-for-tech. Repeat until the three options feel visually similar.",
+      "At the wall, knockdown, then rotate PGR.2, PGR.3, and wait-for-tech. Repeat until the three options feel visually similar.",
     cues: [
       "3+4 is the roll itself; use it to go under linear panic buttons.",
-      "3+4,2 is the safe grounded mid.",
-      "3+4,3 is the sweep; only throw it after they respect PGN 2.",
+      "PGR.2 is the safe grounded mid.",
+      "PGR.3 is the sweep; only throw it after they respect PGR.2.",
     ],
     clips: [
       { label: "Watch 3+4", search: "3+4" },
-      { label: "Watch 3+4,2", search: "3+4,2" },
-      { label: "Watch 3+4,3", search: "3+4,3" },
+      { label: "Watch PGR.2", search: "PGR.2" },
+      { label: "Watch PGR.3", search: "PGR.3" },
     ],
   },
   {
@@ -324,8 +324,8 @@ const clipPacks: ClipPack[] = [
     clips: [
       { label: "1,2,1", search: "1,2,1" },
       { label: "b+4,3", search: "b+4,3" },
-      { label: "3+4,2", search: "3+4,2" },
-      { label: "3+4,3", search: "3+4,3" },
+      { label: "PGR.2", search: "PGR.2" },
+      { label: "PGR.3", search: "PGR.3" },
       { label: "ws1+2", search: "ws1+2" },
     ],
   },
@@ -411,15 +411,15 @@ const secrets: Secret[] = [
     title: "Pigeon Roll is AOP with teeth at the wall",
     tag: "Oki secret",
     copy:
-      "3+4 and d+3+4 go under a surprising number of panic buttons, including some of Hwoarang and Bryan's favourite answers. At the wall, PGN 2 and PGN 3 become a real okizeme pair instead of a gimmick.",
+      "3+4 and d+3+4 go under a surprising number of panic buttons, including some of Hwoarang and Bryan's favourite answers. At the wall, PGR.2 and PGR.3 become a real okizeme pair instead of a gimmick.",
     route:
-      "Knock down at the wall, roll, then show 3+4,2 until they respect it. Only then throw 3+4,3 or wait and throw. If they press, the roll itself is the punish.",
+      "Knock down at the wall, roll, then show PGR.2 until they respect it. Only then throw PGR.3 or wait and throw. If they press, the roll itself is the punish.",
     counter:
       "If they delay tech or backroll consistently, stop rolling on autopilot and just take the plus mid.",
     clips: [
       { label: "3+4", search: "3+4" },
-      { label: "3+4,2", search: "3+4,2" },
-      { label: "3+4,3", search: "3+4,3" },
+      { label: "PGR.2", search: "PGR.2" },
+      { label: "PGR.3", search: "PGR.3" },
     ],
   },
 ];
