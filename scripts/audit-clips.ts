@@ -1,5 +1,5 @@
 /**
- * Audits every okizeme.gg clip the six Tekken guides can open.
+ * Audits every okizeme.gg clip the ten Tekken guides can open.
  *
  * Guides write notation the way players say a move out loud, while okizeme files its
  * clips under its own move keys. That gap is bridged at request time by

@@ -6,7 +6,11 @@ export type GuideCharacterId =
   | "ling"
   | "dragunov"
   | "fahkumram"
-  | "kazuya";
+  | "kazuya"
+  | "alisa"
+  | "law"
+  | "victor"
+  | "lars";
 
 export type PunishTier = {
   frames: string;
@@ -191,6 +195,114 @@ export const CHARACTER_PROFILES: Record<GuideCharacterId, CharacterPunishProfile
         move: "ws2",
         launch: true,
         note: "Demon God Fist. Launches any low that is -15 or worse.",
+      },
+    ],
+  },
+  victor: {
+    displayName: "Victor Chevalier",
+    whiffPunish: "f+2 / f,f,F+2",
+    ladder: [
+      { frames: "i10", move: "1,2", note: "Jab punish. No launch." },
+      {
+        frames: "i13",
+        move: "ws4",
+        launch: true,
+        note: "While-standing launcher — take the full combo from -13.",
+      },
+      {
+        frames: "i15",
+        move: "df+2",
+        launch: true,
+        note: "Arcadia hopkick. Victor's bread-and-butter launch punish.",
+      },
+      {
+        frames: "i15",
+        move: "uf+2",
+        launch: true,
+        note: "Alternate i15 launcher when df+2 spacing is wrong.",
+      },
+    ],
+    crouchLadder: [
+      { frames: "i11", move: "ws4", note: "Fastest while-standing option after blocking a low." },
+      { frames: "i13", move: "ws2", note: "Mid check from crouch, no launch." },
+      { frames: "i15", move: "ws3", launch: true, note: "Launches any low that is -15 or worse." },
+    ],
+  },
+  alisa: {
+    displayName: "Alisa",
+    whiffPunish: "uf+2 / db+2",
+    ladder: [
+      { frames: "i10", move: "1,2", note: "Typing Combo jab punish. No launch." },
+      { frames: "i14", move: "f+1+2", note: "Overflow. Good damage from -14, no launch." },
+      {
+        frames: "i16",
+        move: "df+2",
+        launch: true,
+        note: "Pickup hopkick. Full launch from -16.",
+      },
+      {
+        frames: "i18",
+        move: "db+2",
+        launch: true,
+        note: "Big launcher for -18 punishes.",
+      },
+    ],
+    crouchLadder: [
+      { frames: "i11", move: "ws4", note: "Key Smash. Fastest while-standing option." },
+      { frames: "i17", move: "ws2", launch: true, note: "Digital Lift from crouch at -17." },
+    ],
+  },
+  law: {
+    displayName: "Marshall Law",
+    whiffPunish: "b+4,3 / uf+2",
+    ladder: [
+      { frames: "i10", move: "1,2", note: "Jab punish. No launch." },
+      { frames: "i12", move: "f+2", note: "Fast mid that keeps your turn from -12." },
+      {
+        frames: "i15",
+        move: "df+2",
+        launch: true,
+        note: "Dragon Raise hopkick. Law's main launch punish.",
+      },
+      {
+        frames: "i18",
+        move: "ws2",
+        launch: true,
+        note: "Dragon Uppercut for -18 punishes.",
+      },
+    ],
+    crouchLadder: [
+      { frames: "i11", move: "ws4", note: "Fast while-standing option after blocking a low." },
+      { frames: "i15", move: "ws2", launch: true, note: "Dragon Uppercut from crouch at -15." },
+    ],
+  },
+  lars: {
+    displayName: "Lars",
+    whiffPunish: "b+4,1+2 / df+2",
+    ladder: [
+      { frames: "i10", move: "1,2", note: "Jab punish. No launch." },
+      {
+        frames: "i14",
+        move: "df+2",
+        launch: true,
+        note: "Flash Bullet. Lars launches from -14 — take it every time.",
+      },
+      {
+        frames: "i15",
+        move: "f+1+2",
+        launch: true,
+        note: "Ark Blast. Bigger launcher from -15.",
+      },
+      { frames: "i18", move: "b+1+2", note: "Wind Liger from -18 when you need extra damage." },
+    ],
+    crouchLadder: [
+      { frames: "i11", move: "ws4", note: "Shell Smash. Fastest while-standing option." },
+      { frames: "i13", move: "ws2", note: "Mid check from crouch, no launch." },
+      {
+        frames: "i15",
+        move: "FC.df+2",
+        launch: true,
+        note: "Power Spike. Full combo from -15 lows.",
       },
     ],
   },
@@ -485,11 +597,15 @@ const OPPONENT_MOVES: Record<string, OpponentPunishableMove[]> = {
 
 /** Guides label the player's own character "X (mirror)" in their matchup list. */
 const MIRROR_ALIASES: Record<string, string> = {
+  "Alisa (mirror)": "Alisa",
   "Dragunov (mirror)": "Dragunov",
   "Fahkumram (mirror)": "Fahkumram",
   "Feng (mirror)": "Feng",
   "Kazuya (mirror)": "Kazuya",
+  "Lars (mirror)": "Lars",
+  "Law (mirror)": "Law",
   "Steve (mirror)": "Steve",
+  "Victor (mirror)": "Victor",
   "Xiaoyu (mirror)": "Xiaoyu",
 };
 

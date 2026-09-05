@@ -134,6 +134,9 @@ export function MatchupBeatAdviceSection({
     amber: "text-amber-600",
     rose: "text-rose-600",
     orange: "text-orange-600",
+    fuchsia: "text-fuchsia-600",
+    teal: "text-teal-600",
+    indigo: "text-indigo-600",
   };
 
   return (

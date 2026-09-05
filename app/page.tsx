@@ -38,6 +38,30 @@ const sections = [
       "Study Kazuya Mishima in Tekken 8 with wavedash drills, electric punish ladders, matchup reminders, and embedded move clips.",
   },
   {
+    title: "Alisa",
+    href: "/alisa",
+    description:
+      "Study Alisa in Tekken 8 with destructive-form drills, boot mobility notes, matchup reminders, and embedded move clips.",
+  },
+  {
+    title: "Law",
+    href: "/law",
+    description:
+      "Study Marshall Law in Tekken 8 with dragon-sign drills, slide mix notes, matchup reminders, and embedded move clips.",
+  },
+  {
+    title: "Victor",
+    href: "/victor",
+    description:
+      "Study Victor in Tekken 8 with perfumer stance drills, iai flash notes, matchup reminders, and embedded move clips.",
+  },
+  {
+    title: "Lars",
+    href: "/lars",
+    description:
+      "Study Lars in Tekken 8 with silent-entry drills, burst offense notes, matchup reminders, and embedded move clips.",
+  },
+  {
     title: "Secret Hitler",
     href: "/secret-hitler",
     description: "Open the Secret Hitler area.",

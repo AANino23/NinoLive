@@ -18,7 +18,10 @@ export type GuideAccent =
   | "violet"
   | "emerald"
   | "amber"
-  | "rose";
+  | "rose"
+  | "fuchsia"
+  | "teal"
+  | "indigo";
 
 type SizeName = "sm" | "md" | "lg";
 
@@ -30,6 +33,9 @@ const accentText: Record<GuideAccent, string> = {
   emerald: "text-emerald-600",
   amber: "text-amber-600",
   rose: "text-rose-600",
+  fuchsia: "text-fuchsia-600",
+  teal: "text-teal-600",
+  indigo: "text-indigo-600",
 };
 
 const accentTint: Record<GuideAccent, string> = {
@@ -40,6 +46,9 @@ const accentTint: Record<GuideAccent, string> = {
   emerald: "border-emerald-200 bg-emerald-50 text-emerald-700",
   amber: "border-amber-200 bg-amber-50 text-amber-700",
   rose: "border-rose-200 bg-rose-50 text-rose-700",
+  fuchsia: "border-fuchsia-200 bg-fuchsia-50 text-fuchsia-700",
+  teal: "border-teal-200 bg-teal-50 text-teal-700",
+  indigo: "border-indigo-200 bg-indigo-50 text-indigo-700",
 };
 
 const tokenSizeClasses: Record<SizeName, string> = {

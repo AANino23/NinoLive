@@ -820,7 +820,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
         }
     ],
   },
-  "Steve (mirror)": {
+  "Steve": {
     slug: "steve",
     archetype: "The knowledge war",
     gamePlan: "The mirror is a knowledge test: who reads Flicker highs, low loops, and b+1 CH wars better. Neither player gets free damage — execution and conditioning decide it.",

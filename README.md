@@ -4,7 +4,7 @@
 
 ## Current Focus
 
-The site currently centers on Tekken study guides for Steve and Fahkumram.
+The site currently centers on Tekken 8 study guides for ten characters.
 These guides are designed as visual study boards rather than long note dumps:
 
 - shorter drill and matchup cards
@@ -28,6 +28,10 @@ The Tekken guides live in:
 - `app/ling/ling-guide.tsx`
 - `app/feng/feng-guide.tsx`
 - `app/kazuya/kazuya-guide.tsx`
+- `app/alisa/alisa-guide.tsx`
+- `app/law/law-guide.tsx`
+- `app/victor/victor-guide.tsx`
+- `app/lars/lars-guide.tsx`
 
 Shared visual notation and guide UI helpers live in:
 
