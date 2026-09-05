@@ -19,7 +19,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
     slug: "alisa",
     archetype: "Aerial mobility and chainsaw pressure",
     gamePlan: "Alisa wants to dance around backdashes, boots, and destructive form chainsaw pressure",
-    watchFor: ["Her primary backdash punisher. If you chase with dashing highs, this is what clips you.","Destructive form pressure. Block first — most entries are minus or interruptible on block.","Her main launcher from neutral. Whiff punish with qcf+1 or a full launch."],
+    watchFor: ["Backdash punisher if you chase with dashing highs.","Destructive form pressure — block first, most entries are minus.","Main launcher from neutral — whiff punish at mid-range."],
     threats: [
         {
             "label": "Boots (b+3)",
@@ -34,7 +34,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
         {
             "label": "Hopkick (df+2)",
             "search": "df+2",
-            "note": "Her main launcher from neutral. Whiff punish with qcf+1 or a full launch."
+            "note": "Main launcher from neutral — whiff punish at mid-range."
         }
     ],
   },
@@ -87,7 +87,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Asuka": {
     slug: "asuka",
     archetype: "Defensive reversals and counter-hit whiff punishing",
-    gamePlan: "Asuka's parry and counter-hit tools are built to punish exactly the punch pressure Steve lives on",
+    gamePlan: "Asuka sits back, baits your aggression, and converts whiffs and rhythm into counter-hit launchers. She wins when you keep pressing the same strings — her parry and CH tools punish predictable offense.",
     watchFor: ["Her core defensive tool. Feeding rhythmic punch strings is exactly what she wants.","Launcher that catches panic presses during her frame traps.","Safe pressure she loops. Most of her offense is minus when you stand block."],
     threats: [
         {
@@ -110,13 +110,13 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Azucena": {
     slug: "azucena",
     archetype: "Relentless forward pressure with evasive stance",
-    gamePlan: "Azucena runs at you all day and her Libertador stance ducks under highs mid-pressure. Steve has to be deliberate about which buttons he checks her with.",
-    watchFor: ["Her evasive stance ducks under highs mid-pressure. Do not Flicker spam into it.","Relentless forward pressure. Punish on block rather than trying to move away.","Her counter-hit fishing button. Contest with your own b+1 timing."],
+    gamePlan: "Azucena runs you down with relentless forward pressure and Libertador stance to duck under highs mid-string. She wants you panicking with dashing highs and giving her counter hits on block.",
+    watchFor: ["Libertador ducks highs mid-pressure — do not spam highs into her stance.","Relentless forward pressure. Punish on block rather than trying to move away.","Counter-hit fishing with b+1. Contest with your own check timing."],
     threats: [
         {
             "label": "Libertador stance (df+1)",
             "search": "df+1",
-            "note": "Her evasive stance ducks under highs mid-pressure. Do not Flicker spam into it."
+            "note": "Her evasive stance ducks under highs mid-pressure. Do not spam highs into Libertador."
         },
         {
             "label": "Running attack (f+2)",
@@ -133,7 +133,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Bryan": {
     slug: "bryan",
     archetype: "Keepout and counter-hit destruction",
-    gamePlan: "Bryan wants you at the tip of his kicks where his counter-hit machine is safest. Steve wants chest-to-chest where Bryan's minus frames actually matter",
+    gamePlan: "Bryan controls mid-range with keepout kicks and counter-hit fishing. He wants you at the tip of his range where his CH damage is safest — close the distance or make him whiff, then punish.",
     watchFor: ["Signature keepout kick. Block it every time — the punish is a full launch.","Slow low that Bryan players love to throw out. Block and launch — no guessing required.","Long-range poke that controls neutral. Weave on approach rather than running straight in."],
     threats: [
         {
@@ -156,7 +156,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Claudio": {
     slug: "claudio",
     archetype: "Simple, strong mids with Starburst spikes",
-    gamePlan: "Claudio's game is honest: strong mids, a hopkick, and scary Starburst-empowered moves. His lows are famously weak, which means Steve can stand block a frightening amount of this match.",
+    gamePlan: "Claudio plays honest: strong mids, a hopkick, and scary Starburst spikes. His lows are famously weak, so stand blocking covers most of his kit until Starburst is active.",
     watchFor: ["Scary when Starburst is loaded. Do not duck during empowered states.","Honest, strong mid he loops constantly. Stand block is your default here.","His main whiff-punish tool. Do not swing at mid-range without a read."],
     threats: [
         {
@@ -225,7 +225,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Dragunov": {
     slug: "dragunov",
     archetype: "Suffocating plus frames and running offense",
-    gamePlan: "Dragunov gets more plus frames than almost anyone, and Steve's instinct to press back is exactly what feeds him. This matchup rewards the most patient version of your defense.",
+    gamePlan: "Dragunov suffocates with plus frames and running offense — backdashing into his pressure feeds him more turns. He wants you pressing on his block strings; patience and sidesteps open the punish windows.",
     watchFor: ["Plus-frame running offense. Sidestep instead of backdashing — he catches retreat.","Suffocating frame advantage. Respect fully, then take your turn only when minus.","Committal low you can punish with while-standing offense every time."],
     threats: [
         {
@@ -248,7 +248,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Eddy": {
     slug: "eddy",
     archetype: "Stance flow and unfamiliar rhythm",
-    gamePlan: "Eddy wins on unfamiliarity: negativa, handstand, and constant transitions. Once you know when he is actually vulnerable, Steve's homing mids take the character apart.",
+    gamePlan: "Eddy wins on unfamiliar rhythm: negativa, handstand, and constant stance flow. Once you know which transitions are actually plus, his gimmicks become punishable.",
     watchFor: ["Ground stance low that low-profiles your highs. Hit negativa with mids on reaction.","Unfamiliar rhythm mid. Stand block first when unsure.","Stance transition that looks scarier than it is. Most flow is not real on block."],
     threats: [
         {
@@ -271,13 +271,13 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Fahkumram": {
     slug: "fahkumram",
     archetype: "Range tyrant with plus-frame kicks",
-    gamePlan: "Fahkumram's limbs control a zone Steve simply cannot poke into. But his up-close game and defense are much weaker, and Steve is one of the best characters at living inside someone's chest.",
-    watchFor: ["Long-range keepout that controls the zone Steve cannot poke into.","Frame-advantaged mid kick. Weave under his high kicks on approach.","Committal mid he throws out up close. Punish on block."],
+    gamePlan: "Fahkumram tyrannises range with long limbs and plus-frame kicks. He wants to keep you at kick distance where your pokes cannot reach — your win condition is closing to chest range where his defense breaks down.",
+    watchFor: ["Long-range keepout that controls neutral at mid-range.","Frame-advantaged mid kick on approach.","Committal mid he throws out up close. Punish on block."],
     threats: [
         {
             "label": "Knee (f+3)",
             "search": "f+3",
-            "note": "Long-range keepout that controls the zone Steve cannot poke into."
+            "note": "Long-range keepout that controls neutral at mid-range."
         },
         {
             "label": "Plus kick (df+2)",
@@ -294,7 +294,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Feng": {
     slug: "feng",
     archetype: "Evasive kenpo and punish-everything defense",
-    gamePlan: "Feng's back-sway makes committed offense whiff, and his keepout punishes impatience brutally. Steve has to play the mirror of his own game: bait, whiff punish, and refuse to overcommit.",
+    gamePlan: "Feng back-sways committed offense into whiffs and keepout punishes impatience. He wants you overextending on approach — bait, whiff punish, and refuse to commit to full strings.",
     watchFor: ["Kenpo approach move. Know the exact block punish cold.","Low from kenpo step. Punish properly on block.","Safe pressure that baits overextension. Short, safe pokes only."],
     threats: [
         {
@@ -317,7 +317,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Heihachi": {
     slug: "heihachi",
     archetype: "Mishima power with warrior instinct stance",
-    gamePlan: "Heihachi hits harder than nearly anyone and his stance pressure is real, but his approach lives on highs and hard commitments that Steve's evasion was built for.",
+    gamePlan: "Heihachi hits harder than almost anyone with stance pressure and Mishima mix, but his approach leans on highs and hard commitments. Evasive movement and blocking lows cleanly swing the match.",
     watchFor: ["Wavedash mix low. Launch on block every time.","High with devastating counter-hit damage. Weave for free launch.","Hard-hitting linear move. Fight at range 1 where your counter hits win."],
     threats: [
         {
@@ -363,7 +363,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Jack-8": {
     slug: "jack-8",
     archetype: "Long-limb spacing and crushing damage",
-    gamePlan: "Jack's arms occupy the space Steve wants to walk through, and his punishment is enormous",
+    gamePlan: "Jack's long arms control space at mid-range and his punishment is enormous. He wants you walking into his pokes — sidestep linear swings and punish whiffs in short approach bursts.",
     watchFor: ["Arms occupy the space you want to walk through. Sidestep linear pokes.","Slow recovery on whiff. Approach in short blocks and punish.","Round-ending mid near him. Do not duck without a read."],
     threats: [
         {
@@ -409,7 +409,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Jun": {
     slug: "jun",
     archetype: "Sabaki-laden flow with health-cost power",
-    gamePlan: "Jun's parries and sabakis punish punch-heavy offense, which sounds like a Steve nightmare until you remember his elbow and reversal-break exist. Her strings are also more punishable than they feel.",
+    gamePlan: "Jun's parries and sabakis punish rhythm and punch-heavy strings. Her flow feels plus but many strings are punishable on block once you stop feeding the same timing.",
     watchFor: ["Sabaki-laden flow that punishes punch-heavy offense.","Flow that feels plus but is punishable when finished. Learn ender punishes.","Her main kill condition. Delay string enders so parry timing whiffs."],
     threats: [
         {
@@ -478,7 +478,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Kuma / Panda": {
     slug: "kuma",
     archetype: "Giant hitbox with deceptive range",
-    gamePlan: "The bears out-range and out-damage you in raw trades, but their giant frame makes every Steve combo and string more consistent, and their movement cannot handle disciplined mids.",
+    gamePlan: "The bears out-range and out-damage in raw trades with a giant hitbox, but their movement is slow and their frame is easy to combo. Disciplined mids and sidesteps beat their linear paws.",
     watchFor: ["Deceptive range on a giant hitbox. Sidestep linear paws.","Big commitment. Punish on block or whiff.","Round-ending mid at their range. Keep them at range 1."],
     threats: [
         {
@@ -501,7 +501,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Kunimitsu": {
     slug: "kunimitsu",
     archetype: "Ninja hit-and-run with kunai tricks",
-    gamePlan: "Kunimitsu darts in, stabs, teleports, and leaves. Most of her gimmicks are minus or punishable once identified, and Steve's homing tools punish her constant repositioning.",
+    gamePlan: "Kunimitsu hit-and-runs: stabs, teleports, and repositioning. Most gimmicks are minus once identified — block first, label the follow-up, then punish her entries.",
     watchFor: ["Hit-and-run poke from backturn. Weave high approach pokes.","Minus once identified. Block first, then punish.","Gimmick entry. Block until you know which follow-ups are real."],
     threats: [
         {
@@ -547,13 +547,13 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Law": {
     slug: "law",
     archetype: "Dragon sign flow and slide mixups",
-    gamePlan: "Law's DSS flow and junkyard strings punish impatience, and his punch parry directly targets Steve's offense. The counters exist, but you have to actually use them.",
-    watchFor: ["DSS flow entry. Mix PAB df+2 elbow once he shows parry attempts.","Junkyard mixup tool. React at range — do not pre-emptively crouch.","Plus-on-block DSS mids. Respect, then counter."],
+    gamePlan: "Law's DSS flow and junkyard mix punish impatience, and his punch parry catches repetitive string offense. Vary timing and mix lows once he shows parry attempts.",
+    watchFor: ["DSS flow entry. Mix mid launchers once he shows parry attempts.","Junkyard mixup tool. React at range — do not pre-emptively crouch.","Plus-on-block DSS mids. Respect, then counter."],
     threats: [
         {
             "label": "Dragon sign (f+1+2)",
             "search": "f+1+2",
-            "note": "DSS flow entry. Mix PAB df+2 elbow once he shows parry attempts."
+            "note": "DSS flow entry. Mix mid launchers once he shows parry attempts."
         },
         {
             "label": "Slide (f+3)",
@@ -570,7 +570,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Lee": {
     slug: "lee",
     archetype: "Precision keepout and just-frame execution",
-    gamePlan: "Lee wants perfect spacing where his kicks and acid rain punish everything. His up-close defense and damage without walls are much weaker — Steve should turn this into a phone-booth fight.",
+    gamePlan: "Lee wants perfect spacing where acid rain and kicks punish every whiff. His up-close defense and wall-less damage are weaker — force a phone-booth fight once you get in.",
     watchFor: ["Precision keepout. Do not backdash predictably — he farms retreat.","Stance low to punish. Punish on block at range 0.","Range control tool. Weave high kick keepout on approach."],
     threats: [
         {
@@ -593,8 +593,8 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Leo": {
     slug: "leo",
     archetype: "Solid mids with stance layering",
-    gamePlan: "Leo's fundamentals mirror Steve's: strong mids, stance pressure, few weaknesses. Neither side gets gimmicks here, so the counter-hit war and wall control decide it.",
-    watchFor: ["Stance layering with lows. Block through KNK first — guessing early feeds the stance.","Honest fundamentals mirror Steve's. Contest mid-range with df+2 and qcf+1.","Strong mid — stand block is safer than ducking here."],
+    gamePlan: "Leo plays solid fundamentals: strong mids, KNK stance layering, and few real weaknesses. Neither side gets free gimmicks — counter-hit wars and wall control decide rounds.",
+    watchFor: ["Stance layering with lows. Block through KNK first — guessing early feeds the stance.","Honest mid-range contest. Block strings before pressing back.","Strong mid — stand block is safer than ducking here."],
     threats: [
         {
             "label": "KNK stance (KNK.2)",
@@ -604,7 +604,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
         {
             "label": "Mid poke (df+1)",
             "search": "df+1",
-            "note": "Honest fundamentals mirror Steve's. Contest mid-range with df+2 and qcf+1."
+            "note": "Honest mid-range poke. Contest with your own check tools."
         },
         {
             "label": "Launcher (df+2)",
@@ -616,7 +616,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Leroy": {
     slug: "leroy",
     archetype: "Parry-centric counter fighting",
-    gamePlan: "Leroy's parry directly answers punch offense, which makes lazy Steve play miserable. But Steve owns the cleanest parry counters in the game, and Leroy without parry momentum is just a slower poker.",
+    gamePlan: "Leroy's parry answers repetitive string offense and his sway-back keeps him safe while fishing CHs. Without parry momentum he is a slower poker — do not feed the same patterns twice.",
     watchFor: ["His entire gameplan. Do not feed the same string twice.","Low from sway-back. Punish committal strings on block.","Slow poker when parry is not working. Weave his high pokes."],
     threats: [
         {
@@ -709,7 +709,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
     slug: "nina",
     archetype: "Frame-tight pressure with evasive weaving",
     gamePlan: "Nina's blonde-bomb pressure, ss1 evasion, and wall loops make her one of the scariest offensive characters alive",
-    watchFor: ["Frame-tight pressure. Take your turn after minus strings.","Evasive approach tool — contest with homing LNH 1.","Wall loop starter. Fight for centre stage."],
+    watchFor: ["Frame-tight pressure. Take your turn after minus strings.","Evasive sidestep kick on approach — stand block or whiff punish.","Wall loop starter. Fight for centre stage."],
     threats: [
         {
             "label": "Blonde bomb (df+1)",
@@ -719,7 +719,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
         {
             "label": "Sidestep kick (f+3)",
             "search": "f+3",
-            "note": "Evasive approach tool — contest with homing LNH 1."
+            "note": "Evasive sidestep kick on approach — stand block or whiff punish."
         },
         {
             "label": "Launcher (df+2)",
@@ -800,7 +800,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Shaheen": {
     slug: "shaheen",
     archetype: "Honest mids with a slide wildcard",
-    gamePlan: "Shaheen fights clean: great mids, solid pokes, and the snake-step slide as his one trick. Steve simply has better counter-hit tools in the same weight class, so the fundamentals fight leans your way.",
+    gamePlan: "Shaheen fights clean: great mids, solid pokes, and the snake-step slide as his one trick. Fundamentals and counter-hit discipline beat him — react to the slide and own the mid-range war.",
     watchFor: ["His one trick slide. React at range and block for full launch punish.","Honest keepout. Out-poke with b+1 and df+2 in the CH war.","Solid check button. Weave high pokes between his turns."],
     threats: [
         {
@@ -823,7 +823,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Steve (mirror)": {
     slug: "steve",
     archetype: "The knowledge war",
-    gamePlan: "The mirror is a test of who actually understands Steve's weaknesses",
+    gamePlan: "The mirror is a knowledge test: who reads Flicker highs, low loops, and b+1 CH wars better. Neither player gets free damage — execution and conditioning decide it.",
     watchFor: ["Backbone of mirror pressure. Duck flicker highs on read.","Launch punish on block — never let the low loop start.","His best neutral button. Sidestep left and duck option-selects your offense too."],
     threats: [
         {
@@ -846,7 +846,7 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Victor": {
     slug: "victor",
     archetype: "Iai flash offense with stance loops",
-    gamePlan: "Victor's perfumer stance and sword dashes look overwhelming, but his pressure is riddled with duckable highs and minus transitions. Once labbed, Steve turns his flash into launch practice.",
+    gamePlan: "Victor's perfumer stance and sword dashes look overwhelming, but his pressure has duckable highs and minus transitions. Once labbed, his flash becomes launch practice.",
     watchFor: ["Flash stance flow. Duck known high enders for full launches.","Linear sword commitment. Sidestep rather than blocking passively.","Minus transition once labbed. Interrupt with jabs where not plus."],
     threats: [
         {
@@ -869,13 +869,13 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Xiaoyu": {
     slug: "xiaoyu",
     archetype: "AOP evasion and scrambling chaos",
-    gamePlan: "Art of Phoenix ducks under Steve's beloved highs, which deletes half your usual offense. The matchup flips once you commit to a mid-heavy game plan and stop feeding her evasion.",
-    watchFor: ["Ducks under your highs. Go mid-first — qcf+1, df+2, d+2,1 all tag AOP.","Low from AOP. Punish on block.","Scramble tool. Keep her at range 1 where scramble needs closeness."],
+    gamePlan: "Art of Phoenix ducks under highs and scrambles at close range. She wants you autopiloting jump-ins and highs — a mid-heavy plan that punishes stance lows on block flips the match.",
+    watchFor: ["AOP ducks under highs — lead with mids instead of jump-ins.","Low from AOP. Punish on block.","Scramble tool. Keep her at range 1 where scramble needs closeness."],
     threats: [
         {
             "label": "Art of Phoenix (AOP.1)",
             "search": "AOP.1",
-            "note": "Ducks under your highs. Go mid-first — qcf+1, df+2, d+2,1 all tag AOP."
+            "note": "Ducks under highs — lead with mids instead of jump-ins and high strings."
         },
         {
             "label": "Hypnotist low (d+4)",
@@ -915,13 +915,13 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   "Zafina": {
     slug: "zafina",
     archetype: "Low-profile stances and creeping chip",
-    gamePlan: "Zafina's stances low-profile highs and her Azazel arm chips you constantly. Steve needs the same fix as against Xiaoyu: lead with mids and punish her stance lows on block.",
-    watchFor: ["Low-profile posture chip. Feed stances mids — qcf+1 and d+2,1 tag them.","Launch-punishable stance low. Punish every time.","Costs her own health. Pressure her life bar directly."],
+    gamePlan: "Zafina's stances low-profile highs and her Azazel arm chips constantly. Lead with mids into her stance transitions and punish launch-punishable stance lows on block.",
+    watchFor: ["Low-profile posture that ducks highs — feed stances mids, not highs.","Launch-punishable stance low. Punish every time.","Costs her own health. Pressure her life bar directly."],
     threats: [
         {
             "label": "Stance mid (df+1)",
             "search": "df+1",
-            "note": "Low-profile posture chip. Feed stances mids — qcf+1 and d+2,1 tag them."
+            "note": "Low-profile posture that ducks highs — feed stances mids, not highs."
         },
         {
             "label": "Tarantula low (d+2)",
