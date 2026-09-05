@@ -258,14 +258,14 @@ export function NotationLegend({ className }: { className?: string }) {
   return (
     <div
       className={cx(
-        "rounded-3xl border border-slate-200 bg-white/75 p-5 text-slate-700",
+        "rounded-3xl border border-slate-200 bg-white/75 p-4 text-slate-700 sm:p-5",
         className,
       )}
     >
       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
         Reading the inputs
       </p>
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-4 grid gap-2.5 min-[360px]:grid-cols-2 sm:gap-3 lg:grid-cols-4">
         {legendRows.map((row) => (
           <li key={row.label} className="flex items-center gap-2.5 text-xs leading-5">
             <span className="text-slate-800">{row.icon}</span>

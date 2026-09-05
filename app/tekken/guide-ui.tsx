@@ -438,16 +438,21 @@ export function StepBadge({
   accent: GuideAccent;
 }) {
   return (
-    <span className="inline-flex items-center gap-3">
+    <span className="inline-flex items-center gap-2 sm:gap-3">
       <span
         className={cx(
-          "inline-flex h-11 w-11 items-center justify-center rounded-2xl border font-black",
+          "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border font-black sm:h-11 sm:w-11",
           accentTint[accent],
         )}
       >
         {step}
       </span>
-      <span className={cx("text-xs font-semibold uppercase tracking-[0.3em]", accentText[accent])}>
+      <span
+        className={cx(
+          "hidden text-xs font-semibold uppercase tracking-[0.3em] sm:inline",
+          accentText[accent],
+        )}
+      >
         Step
       </span>
     </span>
@@ -470,8 +475,8 @@ export function SectionHeading({
       <p className={cx("text-xs font-semibold uppercase tracking-[0.3em]", accentText[accent])}>
         {eyebrow}
       </p>
-      <h2 className="mt-4 text-2xl font-semibold text-slate-950 sm:text-3xl">{title}</h2>
-      <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">{copy}</p>
+      <h2 className="mt-3 text-xl font-semibold text-slate-950 sm:mt-4 sm:text-3xl">{title}</h2>
+      <p className="mt-3 text-sm leading-6 text-slate-600 sm:mt-4 sm:text-base sm:leading-7">{copy}</p>
     </div>
   );
 }
@@ -522,7 +527,7 @@ export function ClipPlayerEmpty({
   description: string;
 }) {
   return (
-    <aside className="rounded-3xl border border-dashed border-slate-200 bg-white/75 p-6 text-sm leading-7 text-slate-500">
+    <aside className="rounded-3xl border border-dashed border-slate-200 bg-white/75 p-4 text-sm leading-7 text-slate-500 sm:p-6">
       <p className={cx("text-xs font-semibold uppercase tracking-[0.3em]", accentText[accent])}>
         {title}
       </p>
@@ -547,37 +552,39 @@ export function ClipPlayerFrame({
   owner?: string | null;
   children: ReactNode;
   onDismiss?: () => void;
-  variant?: "stage" | "dock";
+  variant?: "stage" | "overlay";
 }) {
   const { move } = splitClipLabel(label);
-  const isDock = variant === "dock";
+  const isOverlay = variant === "overlay";
 
   return (
     <aside
       className={cx(
-        "overflow-hidden border bg-white/95 shadow-2xl shadow-slate-300/40",
-        isDock ? "rounded-t-3xl border-slate-200" : "rounded-3xl",
+        "overflow-hidden rounded-3xl border bg-white/95",
+        isOverlay
+          ? "shadow-2xl shadow-slate-950/50"
+          : "shadow-2xl shadow-slate-300/40",
         accentTint[accent],
       )}
     >
       <div
         className={cx(
           "flex items-start justify-between gap-3 border-b border-slate-200 bg-white",
-          isDock ? "px-3 py-2.5" : "px-4 py-3",
+          isOverlay ? "px-3 py-2.5" : "px-4 py-3",
         )}
       >
         <div className="min-w-0 flex-1">
           <p
             className={cx(
-              "font-semibold uppercase tracking-[0.3em]",
-              isDock ? "text-[0.58rem]" : "text-xs",
+              "font-semibold uppercase",
+              isOverlay ? "text-[0.6rem] tracking-[0.24em]" : "text-xs tracking-[0.3em]",
               accentText[accent],
             )}
           >
             Now watching{owner ? ` · ${owner}` : ""}
           </p>
-          <div className={cx(isDock ? "mt-1" : "mt-2")}>
-            <MoveNotation notation={move} accent={accent} size={isDock ? "sm" : "md"} />
+          <div className={isOverlay ? "mt-1.5" : "mt-2"}>
+            <MoveNotation notation={move} accent={accent} size={isOverlay ? "sm" : "md"} />
           </div>
         </div>
         <div className="flex shrink-0 items-center gap-2">
@@ -587,7 +594,7 @@ export function ClipPlayerFrame({
             rel="noreferrer"
             className={cx(
               "rounded-full border border-slate-200 text-slate-600 transition hover:text-slate-950",
-              isDock ? "px-2.5 py-1.5 text-[0.65rem]" : "px-3 py-2 text-xs",
+              isOverlay ? "px-2.5 py-1.5 text-[0.65rem]" : "px-3 py-2 text-xs",
             )}
           >
             Move card
@@ -597,17 +604,14 @@ export function ClipPlayerFrame({
               type="button"
               onClick={onDismiss}
               aria-label="Close clip"
-              className={cx(
-                "inline-flex items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-slate-300 hover:text-slate-950",
-                isDock ? "h-8 w-8 text-base" : "h-9 w-9 text-lg",
-              )}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-lg text-slate-600 transition hover:border-slate-300 hover:text-slate-950"
             >
               ×
             </button>
           ) : null}
         </div>
       </div>
-      <div className={isDock ? "flex justify-center bg-black" : undefined}>
+      <div className={isOverlay ? "flex justify-center bg-black" : undefined}>
         {children}
       </div>
     </aside>
@@ -626,7 +630,7 @@ function TabIcon({
   return (
     <span
       className={cx(
-        "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border",
+        "flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border sm:h-10 sm:w-10",
         active ? "border-slate-300 bg-slate-100 text-slate-900" : accentTint[accent],
       )}
     >

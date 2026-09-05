@@ -55,25 +55,25 @@ const visibleSections = sections.filter((section) => !section.hidden);
 
 export default function Home() {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 py-10 sm:px-10 sm:py-14">
+    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-6 sm:px-10 sm:py-14">
       <section className="flex flex-1 flex-col justify-center">
-        <div className="rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-2xl shadow-slate-300/40 backdrop-blur sm:p-12">
+        <div className="rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-2xl shadow-slate-300/40 backdrop-blur sm:p-12">
           <p className="text-sm font-medium uppercase tracking-[0.35em] text-sky-600">
             NinoLive
           </p>
-          <h1 className="mt-6 text-4xl font-semibold tracking-tight text-slate-950 sm:text-6xl">
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:mt-6 sm:text-6xl">
             Dashboard
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:mt-6 sm:text-lg sm:leading-8">
             Pick a section below to open its page.
           </p>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4">
             {visibleSections.map((section) => (
               <Link
                 key={section.href}
                 href={section.href}
-                className="group rounded-2xl border border-slate-200 bg-slate-100/80 p-6 transition hover:border-sky-400/60 hover:bg-white"
+                className="group rounded-2xl border border-slate-200 bg-slate-100/80 p-4 transition hover:border-sky-400/60 hover:bg-white sm:p-6"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>

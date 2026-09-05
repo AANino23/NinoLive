@@ -106,7 +106,7 @@ function LadderTable({
     <div className="mt-8 first:mt-6">
       <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">{title}</p>
       <p className="mt-2 text-sm leading-6 text-slate-600">{caption}</p>
-      <div className="mt-3 overflow-x-auto">
+      <div className="-mx-3 mt-3 overflow-x-auto px-3 sm:mx-0 sm:px-0">
         <table className="min-w-full text-left text-sm">
           <thead>
             <tr className="border-b border-slate-200 text-xs uppercase tracking-[0.22em] text-slate-500">
@@ -180,7 +180,7 @@ export function MatchupPunishmentSection({
   const canPlayOpponentClips = Boolean(onPlayClip) && Boolean(opponentSlug);
 
   return (
-    <div className="mt-8 rounded-2xl border border-slate-200 bg-white/80 p-5 sm:p-6">
+    <div className="mt-8 rounded-2xl border border-slate-200 bg-white/80 p-3 sm:p-6">
       <div className="max-w-3xl">
         <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-700">
           Punishment chart
@@ -235,7 +235,7 @@ export function MatchupPunishmentSection({
               <div
                 key={`${entry.move}-${entry.minus}`}
                 className={cx(
-                  "rounded-xl border px-4 py-3 transition",
+                  "rounded-xl border px-3 py-3 transition sm:px-4",
                   isActive
                     ? "border-slate-400 bg-white"
                     : "border-slate-200 bg-slate-50/80",

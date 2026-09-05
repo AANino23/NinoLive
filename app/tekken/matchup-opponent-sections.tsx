@@ -29,7 +29,7 @@ export function MatchupOpponentProfileSection({
 
   return (
     <>
-      <div className="mt-6 rounded-2xl border border-indigo-300/25 bg-indigo-300/5 p-5 sm:p-6">
+      <div className="mt-6 rounded-2xl border border-indigo-300/25 bg-indigo-300/5 p-4 sm:p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-indigo-600">
           {profile.archetype}
         </p>
@@ -56,7 +56,7 @@ export function MatchupOpponentProfileSection({
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-violet-300/20 bg-violet-300/5 p-5 sm:p-6">
+      <div className="mt-6 rounded-2xl border border-violet-300/20 bg-violet-300/5 p-4 sm:p-6">
         <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-violet-600">
           Signature moves to recognise
         </h4>
@@ -74,7 +74,7 @@ export function MatchupOpponentProfileSection({
               <div
                 key={threat.search}
                 className={cx(
-                  "rounded-xl border px-4 py-3 transition",
+                  "rounded-xl border px-3 py-3 transition sm:px-4",
                   isActive
                     ? "border-violet-300/50 bg-violet-50"
                     : "border-slate-200 bg-slate-100/80",
@@ -150,7 +150,7 @@ export function MatchupBeatAdviceSection({
         {sections.map((section) => (
           <div
             key={section.title}
-            className="rounded-2xl border border-slate-200 bg-slate-100/80 p-5"
+            className="rounded-2xl border border-slate-200 bg-slate-100/80 p-4 sm:p-5"
           >
             <h5 className="text-base font-semibold text-slate-950">{section.title}</h5>
             <p className="mt-3 text-sm leading-6 text-slate-600">{section.body}</p>
