@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { DragunovCombos } from "./dragunov-combos";
 import { DragunovStudy } from "./dragunov-study";
 import { GuideClipSection } from "../tekken/guide-clip-layout";
 import { MatchupPunishmentSection } from "../tekken/matchup-punishment";
@@ -68,6 +69,7 @@ type Matchup = {
 
 const tabs = [
   { id: "study", label: "Study", icon: "GP" },
+  { id: "combos", label: "Combos", icon: "12" },
   { id: "dojo", label: "Dojo", icon: "SNK" },
   { id: "gameplan", label: "Gameplan", icon: "GP" },
   { id: "toolkit", label: "Toolkit", icon: "12" },
@@ -960,7 +962,9 @@ export function DragunovGuide() {
   const activeCopy = useMemo(() => {
     switch (activeTab) {
       case "study":
-        return "A five-minute lesson, recall questions, combo references, and your next practice goal.";
+        return "A five-minute lesson, recall questions, punishment references, and your next practice goal.";
+      case "combos":
+        return "Icon-led combo routes: starters, step-by-step inputs, timing cues, and practice checks.";
       case "dojo":
         return "Daily reps for plus-frame freeze, poke control, Sneak routing, and wall oki.";
       case "gameplan":
@@ -999,7 +1003,7 @@ export function DragunovGuide() {
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-2 rounded-3xl border border-slate-200 bg-white/90 p-2 shadow-inner shadow-slate-200/70 sm:mt-8 sm:gap-3 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-2 gap-2 rounded-3xl border border-slate-200 bg-white/90 p-2 shadow-inner shadow-slate-200/70 sm:mt-8 sm:gap-3 lg:grid-cols-4">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
 
@@ -1046,6 +1050,8 @@ export function DragunovGuide() {
       </section>
 
       <div hidden={activeTab !== "study"}><DragunovStudy /></div>
+
+      {activeTab === "combos" ? <DragunovCombos /> : null}
 
       {activeTab === "dojo" ? (
         <section className="space-y-6">

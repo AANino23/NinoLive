@@ -700,6 +700,7 @@ export function GuideTabGlyph({
           </svg>
         </TabIcon>
       );
+    case "combos":
     case "toolkit":
       return (
         <TabIcon accent={accent} active={active}>

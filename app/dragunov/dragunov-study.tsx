@@ -34,13 +34,6 @@ const lessons = [
   { title: "4. Add reward without adding confusion", body: "Learn one standing punish, one crouching punish, and one launch conversion first. Add wall carry and harder routes once you can recognise the launch without hesitating. Write the first point where a combo drops, not just ‘practise combos’." },
 ];
 
-const comboCards = [
-  { title: "First launch conversion", starter: "df+2 or ws2", route: "4,1 → 4,4 → FC.df+1,4 → SNK.2 T! → b+4,3", note: "A beginner reference from the version 2.04 guide. Learn the chunks before the rhythm; check that the combo counter stays continuous in your game version.", href: guideUrl },
-  { title: "Regular-launch carry reference", starter: "df+2", route: "4,4 → FC.df+1,4~2 T! → df+3+4 → 2,1,df~1+2", note: "Wavu bread-and-butter reference. ~2 uses the Sneak follow-up after the crouch string. Recheck spacing and wall distance; this is not a promise of identical damage on every axis.", href: combosUrl },
-  { title: "Wall conversion", starter: "Opponent already wall-splatted", route: "d+3,2,1+2", note: "Version 2.04 wall reference. Stop your open-ground route early enough to arrive at the wall. Test splat height and alignment; this string is not guaranteed in neutral.", href: guideUrl },
-  { title: "Small guaranteed follow-up", starter: "b+1+2 or uf+1 hits", route: "d+1+3", note: "Wavu lists this crouch-throw follow-up. It targets the opponent's crouching recovery; practise recognising the hit rather than attempting it on block.", href: combosUrl },
-];
-
 export function DragunovStudy() {
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
@@ -127,12 +120,6 @@ export function DragunovStudy() {
           {punishGroups.map(({ label, tiers }) => <div key={label}><h4 className="font-semibold text-slate-900">{label}</h4><ul className="mt-3 space-y-3">{tiers.map((tier) => <li key={tier.frames} className="rounded-xl bg-slate-50 p-3"><span className="text-sm font-semibold text-cyan-800">{tier.frames}</span><MoveNotation notation={tier.move} accent="cyan" /><p className="mt-2 text-sm leading-6 text-slate-700">{tier.note}</p></li>)}</ul></div>)}
         </div>
         <a href={framesUrl} className="mt-4 inline-block text-sm text-cyan-800 underline">Check Dragunov frame data</a>
-      </details>
-
-      <details className={panel}>
-        <summary className="cursor-pointer py-1 font-semibold text-slate-950">Combos · learn one route before optimising</summary>
-        <p className="mt-3 text-sm leading-6 text-slate-600">These are sourced reference routes, not in-game tests on the current patch. T! marks the Tornado point. Low parries and counter-hit launches need their own routes; do not assume this filler works after every launcher.</p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">{comboCards.map((combo) => <article key={combo.title} className="min-w-0 rounded-xl bg-slate-50 p-4"><h4 className="font-semibold text-slate-950">{combo.title}</h4><p className="mt-2 text-sm text-cyan-800">After: {combo.starter}</p><p className="mt-3 break-words font-mono text-sm leading-7 text-slate-950">{combo.route}</p><p className="mt-3 text-sm leading-6 text-slate-700">{combo.note}</p><a href={combo.href} className="mt-3 inline-block text-sm text-cyan-800 underline">Route source</a></article>)}</div>
       </details>
 
       <details className={panel}>
