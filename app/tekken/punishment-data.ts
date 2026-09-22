@@ -125,23 +125,21 @@ export const CHARACTER_PROFILES: Record<GuideCharacterId, CharacterPunishProfile
       },
     ],
   },
+  // Reviewed against https://tekkendocs.com/t8/dragunov on 2026-09-22.
+  // df+1,4 is natural on counter hit only; it is not a guaranteed i13 punish.
   dragunov: {
     displayName: "Dragunov",
-    whiffPunish: "df+2 / f,F+2",
+    whiffPunish: "df+2 / SNK.1",
     ladder: [
-      { frames: "i10", move: "1,2", note: "Jab punish. No launch." },
-      { frames: "i13", move: "df+1,4", note: "Switchblade Ripper. Small float and wall carry from -13." },
-      {
-        frames: "i15",
-        move: "df+2",
-        launch: true,
-        note: "Scimitar. Full launch — this is the -15 punish, not b+4,3.",
-      },
+      { frames: "i10", move: "2,1", note: "Reliable jab punish; 1,3 is a reach alternative." },
+      { frames: "i12", move: "4,1", note: "Natural hit string; check reach and standing recovery." },
+      { frames: "i14", move: "b+4,3", note: "Heat Engager; use without delaying the high follow-up." },
+      { frames: "i15", move: "df+2", launch: true, note: "Mid launcher; confirm range before committing." },
     ],
     crouchLadder: [
-      { frames: "i11", move: "ws4", note: "Gelid Smash. Fastest option out of crouch." },
-      { frames: "i12", move: "ws1+2", note: "Frost Tackle. Mini-launch from -12, but -14 if you are wrong." },
-      { frames: "i15", move: "ws2", launch: true, note: "Ballistic Upper. Same combo as df+2, from crouch." },
+      { frames: "i11", move: "ws4", note: "Fast crouching punish." },
+      { frames: "i12", move: "ws1+2", note: "Heat Engager. During Heat, a successful Heat Dash enables a combo; not an unconditional launcher." },
+      { frames: "i15", move: "ws2", launch: true, note: "Crouching launcher; check reach." },
     ],
   },
   fahkumram: {

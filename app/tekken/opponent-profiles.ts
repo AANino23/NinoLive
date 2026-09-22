@@ -224,25 +224,13 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
   },
   "Dragunov": {
     slug: "dragunov",
-    archetype: "Suffocating plus frames and running offense",
-    gamePlan: "Dragunov suffocates with plus frames and running offense — backdashing into his pressure feeds him more turns. He wants you pressing on his block strings; patience and sidesteps open the punish windows.",
-    watchFor: ["Plus-frame running offense. Sidestep instead of backdashing — he catches retreat.","Suffocating frame advantage. Respect fully, then take your turn only when minus.","Committal low you can punish with while-standing offense every time."],
+    archetype: "Plus-frame pressure and tracking low pokes",
+    gamePlan: "Separate his plus mids from his punishable launchers. Watch approach timing, guard when disadvantaged, and punish a recognised recovery rather than guessing after every blocked move.",
+    watchFor: ["Running mid: short step-right into guard is a read, not a universal escape.", "Close plus mid: avoid automatic retaliation.", "Low poke: normal hit and counter hit give different situations."],
     threats: [
-        {
-            "label": "Running mid (f+2)",
-            "search": "f+2",
-            "note": "Plus-frame running offense. Sidestep instead of backdashing — he catches retreat."
-        },
-        {
-            "label": "Plus mid (df+2)",
-            "search": "df+2",
-            "note": "Suffocating frame advantage. Respect fully, then take your turn only when minus."
-        },
-        {
-            "label": "Sweep (d+2)",
-            "search": "d+2",
-            "note": "Committal low you can punish with while-standing offense every time."
-        }
+      { label: "Running mid (wr2)", search: "f,f,F+2", note: "Plus on block. f+2 is a different move; watch the running animation." },
+      { label: "Close plus mid (b+1+2)", search: "b+1+2", note: "Do not confuse this with df+2, which is a punishable launcher." },
+      { label: "Low poke (d+2)", search: "d+2", note: "Block low and crouch-punish. On normal hit, Dragunov is slightly minus." }
     ],
   },
   "Eddy": {

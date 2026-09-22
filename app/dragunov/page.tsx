@@ -14,9 +14,8 @@ export default function DragunovPage() {
               Dragunov
             </h1>
             <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 sm:text-lg sm:leading-7">
-              A Tekken 8 Sergei Dragunov study board with visual move notation,
-              plus-frame drills, Sneak mix notes, and embedded okizeme.gg clips for
-              fast review.
+              Learn Dragunov on the go with short lessons, recall cards,
+              punishment and combo references, matchup plans, and move clips.
             </p>
           </div>
           <Link

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { DragunovStudy } from "./dragunov-study";
 import { GuideClipSection } from "../tekken/guide-clip-layout";
 import { MatchupPunishmentSection } from "../tekken/matchup-punishment";
 import {
@@ -66,6 +67,7 @@ type Matchup = {
 };
 
 const tabs = [
+  { id: "study", label: "Study", icon: "GP" },
   { id: "dojo", label: "Dojo", icon: "SNK" },
   { id: "gameplan", label: "Gameplan", icon: "GP" },
   { id: "toolkit", label: "Toolkit", icon: "12" },
@@ -82,7 +84,7 @@ const dojoDrills: Drill[] = [
     summary: "Dragunov wins when the opponent stops pressing because every blocked mid feels like your turn.",
     why: "wr2, b+1+2, and SNK 4 are the freeze buttons. If you cannot land these cleanly, the rest of the mix never gets respect.",
     drill:
-      "For five minutes, play only wr2, b+1+2, df+1, and backdash. After every blocked plus mid, wait one beat before choosing jab, throw, or another mid.",
+      "For five minutes, play only wr2, b+1+2, df+1, and backdash. Compare an immediate mid check with a deliberate delay. A delay gives up your frame advantage; it is a read, not a guaranteed trap.",
     cues: [
       "Instant wr2 is the main approach and freeze tool.",
       "b+1+2 is the close plus mid that makes them sit still.",
@@ -114,9 +116,9 @@ const dojoDrills: Drill[] = [
   {
     title: "Crouch mix after respect",
     summary: "Once they freeze, Dragunov becomes a 50/50 character from crouch.",
-    why: "b+2, SNK 4, and wr2 all leave you plus enough to threaten FC df+1,4 versus ws3. That is the real open-up layer.",
+    why: "Separate hit from block: b+2 is minus on block. Use confirmed advantage or observed hesitation to enter crouch; crouching after wr2 costs time.",
     drill:
-      "After every plus mid, enter crouch and rotate FC df+1,4, ws3, and ws4. Do not repeat the same option twice.",
+      "Compare b+2 on hit and on block. Defend on block first; on hit, test FC df+1,4, ws3, and ws4 against recorded responses. Choose based on their habit, not a fixed rotation.",
     cues: [
       "FC df+1,4 is the long-range crouch low into Sneak.",
       "ws3 is the matching-speed mid that knocks down.",
@@ -148,7 +150,7 @@ const dojoDrills: Drill[] = [
   {
     title: "Throw and tackle layer",
     summary: "A complete grab game is why turtles still lose to Dragunov.",
-    why: "Plus frames without throws become a block contest. Plus frames with 1+2, 1+4, 2+3, and Heat tackles make standing still lethal.",
+    why: "Use f+1+4, f+2+3, and uf+1+2 against standing defence. These demand different breaks; standing 1+2 is a power crush, not a throw.",
     drill:
       "After every blocked wr2 or b+1+2, rotate jab, throw, and another mid. In Heat, practice wr2 into 1+2 tackle instead of mashing a third poke.",
     cues: [
@@ -230,21 +232,21 @@ const toolkit: ToolCard[] = [
   {
     move: "1 / 1,2,1",
     role: "Jab and CH wall splat",
-    when: "Use 1 as your default poke and 1,2,1 when you think they will mash after it.",
-    risk: "The full string is launch-punishable if they sit still. Confirm the CH; do not throw it as a block string.",
+    when: "Use 1 as a poke. Commit to 1,2,1 on a counter-hit read or practised confirm; the follow-up is not guaranteed after an ordinary jab hit.",
+    risk: "The full string is -14 on block. It is punishable; whether it can be launched depends on the opponent and their state/resources.",
     clip: { label: "Play 1,2,1", search: "1,2,1" },
   },
   {
     move: "df+1",
     role: "Main mid poke",
-    when: "Use it to check, create pushback, and threaten df+1,4 if they start ducking.",
+    when: "Use the single mid to check crouching opponents. The high extension targets retaliation; it does not beat ducking.",
     risk: "The high extension is duckable. If they duck once, stop finishing it.",
     clip: { label: "Play df+1", search: "df+1" },
   },
   {
     move: "f,f,F+2",
     role: "Signature plus mid",
-    when: "Use it to approach, freeze, and CH launch mashers. Instant wr2 is the real version.",
+    when: "Use it to approach and threaten counter hits. Learn both quick execution and varied approach timing; predictable instant inputs can still be stepped.",
     risk: "Linear. Sidestep right and interruption beat it if you throw it without a reason.",
     clip: { label: "Play wr2", search: "f,f,F+2" },
   },
@@ -252,7 +254,7 @@ const toolkit: ToolCard[] = [
     move: "d+2",
     role: "Tracking low poke",
     when: "Use it to high-crush, catch step, and force crouch. Pair it with wr2 so they cannot walk forever.",
-    risk: "It is -13 on block and not plus on hit. Take your turn if they swing after it.",
+    risk: "At -13 on block you owe a punish. On normal hit you are -1 in crouch: defend first. Counter hit is a different situation.",
     clip: { label: "Play d+2", search: "d+2" },
   },
   {
@@ -355,7 +357,7 @@ const secrets: Secret[] = [
     route:
       "Jab, wait for the mash, then 1,2,1. At the wall this becomes a round-ender. In Heat, ws1+2 is the even nastier i12 crouch punish.",
     counter:
-      "If they stop mashing, go back to plus mids and throws. Do not keep finishing 1,2,1 into a launch punish.",
+      "If they stop mashing, return to pokes and throws. Repeating the full string gives them a block punish.",
     clips: [
       { label: "1,2,1", search: "1,2,1" },
       { label: "df+1", search: "df+1" },
@@ -396,11 +398,11 @@ const secrets: Secret[] = [
     title: "d+2 is a trap for greedy Dragunovs",
     tag: "Frame secret",
     copy:
-      "Everyone knows d+2 is annoying. Fewer people remember it is -1 on hit. If you swing after it, you are the one getting counter-hit. Good opponents take their turn here.",
+      "Everyone knows d+2 is annoying. On normal hit it is -1; on counter hit the advantage changes. Attacking automatically after the normal hit can lose to a faster response.",
     route:
-      "Use d+2 to crush highs and catch step, then either backdash, throw, or go into a real plus mid. Save the CH follow-up for when they actually mash.",
+      "After a normal-hit d+2, practise blocking the response before trying movement. Choose a slower attack only after observing hesitation; it is not a frame trap.",
     counter:
-      "If they start pressing after every d+2, that is your 1,2,1 or wr2 turn, not another low.",
+      "If they press after every normal-hit d+2, defend and identify their response. Do not use wr2 or 1,2,1 as an automatic answer from disadvantage.",
     clips: [
       { label: "d+2", search: "d+2" },
       { label: "1,2,1", search: "1,2,1" },
@@ -413,7 +415,7 @@ const secrets: Secret[] = [
     copy:
       "3+4 and d+3+4 go under a surprising number of panic buttons, including some of Hwoarang and Bryan's favourite answers. At the wall, PGR.2 and PGR.3 become a real okizeme pair instead of a gimmick.",
     route:
-      "Knock down at the wall, roll, then show PGR.2 until they respect it. Only then throw PGR.3 or wait and throw. If they press, the roll itself is the punish.",
+      "Knock down at the wall, roll, then show PGR.2 until they respect it. Only then throw PGR.3 or wait and throw. A roll is an evasive read, not a guaranteed punish; delayed attacks can catch it.",
     counter:
       "If they delay tech or backroll consistently, stop rolling on autopilot and just take the plus mid.",
     clips: [
@@ -492,9 +494,9 @@ const matchupOverrides: Partial<
   },
   Asuka: {
     briefing:
-      "Parries and panic buttons punish greedy strings. Play small Tekken, then freeze her with plus mids she cannot parry on reaction.",
+      "Parries and panic buttons punish predictable attacks. Use short sequences and pauses to observe her defensive choice before committing.",
     doThis: [
-      "Use kicks, d+2, and delayed wr2 to make parry attempts look late.",
+      "Bait a reversal by pausing, then punish its recovery. Do not assume kicks bypass her reversal.",
       "Throw when she starts holding for reversal timing.",
     ],
     dodge: [
@@ -502,7 +504,7 @@ const matchupOverrides: Partial<
       "Step her linear hopkicks and punish recovery.",
     ],
     utilise: [
-      "b+3 and d+1 to beat punch parry habits.",
+      "Use throws and vary timing against reversal habits; verify each attack interaction before relying on it.",
       "FC df+1,4 after she has frozen from plus frames.",
     ],
     avoid: [
@@ -518,11 +520,11 @@ const matchupOverrides: Partial<
       "Use d+2 to crush highs and keep him from walking your wr2.",
     ],
     dodge: [
-      "Sidestep right against raw wr2-style linear kicks of his own.",
+      "Study one identified linear move at a time; a character-wide stepping rule is not a defence plan.",
       "Backdash after blocked plus frames; do not mash into taunt setups.",
     ],
     utilise: [
-      "1,3 for far i10 punishes on moves with pushback like b+4.",
+      "Use 1,3 when a confirmed punish needs reach. Do not assume every move with pushback is punishable.",
       "Pigeon Roll under some of his big mid answers at the wall.",
     ],
     avoid: [
@@ -555,10 +557,10 @@ const matchupOverrides: Partial<
       "The mirror is a plus-frame and step-right test. The worse Dragunov throws wr2 on cooldown; the better one chips, tracks, then freezes.",
     doThis: [
       "Sidestep right against raw wr2 and SNK 4.",
-      "Take your turn after blocked d+2; it is not plus on hit.",
+      "Block d+2 and use a crouching punish. If it hits normally, Dragunov is slightly disadvantaged; a counter hit is different.",
     ],
     dodge: [
-      "Duck b+4,3 and 1,2,1 only on a read, then launch.",
+      "The high ender of b+4,3 can be ducked on a read. Stand-block 1,2,1: its second and third hits are mids.",
       "Walk Heat tackles to the right when they are not meaty.",
     ],
     utilise: [
@@ -594,7 +596,7 @@ const matchupOverrides: Partial<
     briefing:
       "He wants range 2 to feel like range 0. Dragunov wins by not swinging at limb tip, then taking the freeze turn once he is close.",
     doThis: [
-      "Block standing 3 and df+4, then wr2 or d+2 the recovery.",
+      "After blocking a poke, identify its recovery before retaliating. wr2 and d+2 are pressure choices, not automatic block punishes.",
       "Step charged kick routes if he has not conditioned you.",
     ],
     dodge: [
@@ -678,7 +680,7 @@ const matchupOverrides: Partial<
       "Launch blocked hellsweep without hesitation.",
     ],
     dodge: [
-      "Sidestep right against linear EWGF if your character can.",
+      "Test a short sidestep-left into guard against his approach. Electric tracking, timing, and realignment can beat a lazy sidewalk.",
       "Backdash after blocked plus frames; do not mash into pewgf.",
     ],
     utilise: [
@@ -695,7 +697,7 @@ const matchupOverrides: Partial<
       "Your pokes beat his approach, but throws beat blocking. Prove you can break, then freeze him out of grab range.",
     doThis: [
       "Use df+1 and wr2 to stop him entering throw range.",
-      "Break 1+2 and 1+4 on reaction as the default.",
+      "Learn the break for the specific throw: 1, 2, or 1+2. A throw command is not its break input; King also has ambiguous animations.",
     ],
     dodge: [
       "Duck command grabs on hard reads only.",
@@ -712,7 +714,7 @@ const matchupOverrides: Partial<
   },
   Kunimitsu: {
     briefing:
-      "Season 3 Kunimitsu is speed and misdirection. Do not chase teleports; hold space, block, then freeze her on re-entry.",
+      "Kunimitsu study starts with recognising her approach. Do not chase teleports; hold space, block, then freeze her on re-entry.",
     doThis: [
       "Hold centre stage and let her run into df+1 / d+2.",
       "Punish blocked flip and teleport follow-ups once identified.",
@@ -814,7 +816,7 @@ const matchupOverrides: Partial<
     briefing:
       "AOP deletes lazy highs. Play mid-first and use d+2 / wr2 to tag her before the scramble starts.",
     doThis: [
-      "Use df+1, d+1, and wr2 against AOP.",
+      "Do not assume a mid will hit AOP. Record the exact stance entry and test reach, timing, and side before choosing an answer.",
       "Keep her at poke range, where your legs hit and her scramble is slower.",
     ],
     dodge: [
@@ -864,7 +866,7 @@ const defaultMatchups: Record<(typeof matchupNames)[number], Matchup> =
           "Use d+2 and b+3 if they are already walking.",
         ],
         dodge: [
-          "Sidestep right against linear pressure of your own only after you have seen it.",
+          "Identify the exact opposing move before choosing a step direction; step briefly and return to guard.",
           "Backdash after your safe mids instead of stealing turns blindly.",
         ],
         utilise: [
@@ -926,7 +928,7 @@ function ClipButton({
 }
 
 export function DragunovGuide() {
-  const [activeTab, setActiveTab] = useState<TabId>("dojo");
+  const [activeTab, setActiveTab] = useState<TabId>("study");
   const [activeClip, setActiveClip] = useState<{
     clipKey: string;
     clip: Clip;
@@ -935,6 +937,9 @@ export function DragunovGuide() {
   const [activeMatchupName, setActiveMatchupName] = useState<string | null>(
     null,
   );
+
+  const [matchupSearch, setMatchupSearch] = useState("");
+  const filteredMatchups = matchups.filter((matchup) => matchup.name.toLowerCase().includes(matchupSearch.trim().toLowerCase()));
 
   const activeClipKey = activeClip?.clipKey ?? null;
   const activeMatchup = useMemo(
@@ -954,6 +959,8 @@ export function DragunovGuide() {
 
   const activeCopy = useMemo(() => {
     switch (activeTab) {
+      case "study":
+        return "A five-minute lesson, recall questions, combo references, and your next practice goal.";
       case "dojo":
         return "Daily reps for plus-frame freeze, poke control, Sneak routing, and wall oki.";
       case "gameplan":
@@ -963,7 +970,7 @@ export function DragunovGuide() {
       case "clips":
         return "Visual packs for freeze buttons, pokes, Sneak threats, and wall oki.";
       case "secrets":
-        return "The habits that make Dragunov unfair, presented as short study cards.";
+        return "Advanced ideas to test once the basic decisions are reliable.";
       case "matchups":
         return "Pick a character for a quick loading-screen plan and fast action cards.";
       default:
@@ -983,9 +990,8 @@ export function DragunovGuide() {
               Dragunov Sambo Lab
             </h2>
             <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
-              Dragunov wins when plus frames feel obvious at a glance. This
-              guide leans on visual move chips, shorter drill cards, and live
-              clips instead of long notes.
+              Learn one decision at a time, test your recall away from the game,
+              then take a specific practice goal into your next session.
             </p>
           </div>
           <div className="rounded-2xl border border-cyan-400/25 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-700">
@@ -1001,6 +1007,7 @@ export function DragunovGuide() {
               <button
                 key={tab.id}
                 type="button"
+                aria-pressed={isActive}
                 onClick={() => {
                   setActiveTab(tab.id);
                   setActiveClip(null);
@@ -1012,7 +1019,7 @@ export function DragunovGuide() {
                 }`}
               >
                 <span className="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:items-center sm:gap-3 sm:text-left">
-                  <GuideTabGlyph tabId={tab.id} accent="cyan" active={isActive} />
+                  <GuideTabGlyph tabId={tab.id === "study" ? "gameplan" : tab.id} accent="cyan" active={isActive} />
                   <span>
                     <span className="block text-[0.8rem] font-semibold sm:text-sm">
                       {tab.label}
@@ -1037,6 +1044,8 @@ export function DragunovGuide() {
 
         <NotationLegend className="mt-6" />
       </section>
+
+      <div hidden={activeTab !== "study"}><DragunovStudy /></div>
 
       {activeTab === "dojo" ? (
         <section className="space-y-6">
@@ -1117,7 +1126,7 @@ export function DragunovGuide() {
           <SectionHeading
             eyebrow="Gameplan"
             title="How Dragunov should feel"
-            copy="The opponent should feel behind after two blocked pokes. Once they finally respect the plus frames, crouch mix and throws finish the round."
+            copy="Check whether each poke hit or was blocked. Earn hesitation, then choose pressure, throws, or movement from the actual situation."
             accent="cyan"
           />
           <div className="grid gap-4 lg:grid-cols-2">
@@ -1244,7 +1253,7 @@ export function DragunovGuide() {
         <section className="space-y-6">
           <SectionHeading
             eyebrow="Secrets"
-            title="The things that make Dragunov unfair"
+            title="Advanced pressure and execution"
             copy="The character becomes much scarier when you can see the plus-frame routes, crouch cancels, and wall answers at a glance."
             accent="cyan"
           />
@@ -1313,14 +1322,21 @@ export function DragunovGuide() {
             copy="Tap a character for a fast Dragunov-specific plan with action cards you can scan between rounds."
             accent="cyan"
           />
+          <label className="block text-sm font-semibold text-slate-700">
+            Find an opponent
+            <input type="search" value={matchupSearch} onChange={(event) => setMatchupSearch(event.target.value)} placeholder="Character name" className="mt-2 block min-h-11 w-full rounded-xl border border-slate-300 bg-white p-3" />
+          </label>
+          <p className="text-sm leading-6 text-slate-600">Learn one recognisable threat, one defensive response, and one punish per opponent. Older shared opponent charts have not received a full patch audit; verify the exact move before memorising a punish.</p>
+          {filteredMatchups.length === 0 ? <p role="status">No opponent matches that name.</p> : null}
           <div className="flex flex-wrap gap-2">
-            {matchups.map((matchup) => {
+            {filteredMatchups.map((matchup) => {
               const isSelected = activeMatchupName === matchup.name;
 
               return (
                 <button
                   key={matchup.name}
                   type="button"
+                  aria-pressed={isSelected}
                   onClick={() => {
                     setActiveMatchupName(isSelected ? null : matchup.name);
                     setActiveClip(null);
@@ -1350,6 +1366,7 @@ export function DragunovGuide() {
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-600">
                   Dragunov vs {activeMatchup.name}
                 </p>
+                <p className="mt-2 text-sm text-slate-600">{matchupOverrides[activeMatchup.name as (typeof matchupNames)[number]] ? "Tailored starting plan — confirm move-specific answers in practice." : "General Dragunov plan — a dedicated matchup lesson is still missing."}</p>
                 <div className="mt-4 rounded-2xl border border-slate-200 bg-white/80 p-4 sm:p-5">
                   <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-600">
                     Quick read

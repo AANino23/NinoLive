@@ -254,34 +254,13 @@ export const EXTRA_OPPONENT_PUNISHES: Record<string, OpponentPunishableMove[]> =
       "note": "While-standing launcher on block."
     }
   ],
+  // Dragunov entries reviewed against TekkenDocs, 2026-09-22.
   "Dragunov": [
-    {
-      "move": "df+2",
-      "minus": 15,
-      "note": "Plus mid in many situations — respect, then punish when minus."
-    },
-    {
-      "move": "f+2",
-      "minus": 17,
-      "note": "Running mid. Sidestep instead of backdash."
-    },
-    {
-      "move": "d+2",
-      "minus": 16,
-      "crouching": true,
-      "note": "Committal sweep — ws launch punish."
-    },
-    {
-      "move": "df+1,4",
-      "minus": 14,
-      "note": "String ender off df+1."
-    },
-    {
-      "move": "WR.F+3",
-      "minus": 15,
-      "crouching": true,
-      "note": "Chernobog Sweep. His running low — block it and punish from crouch."
-    }
+    { "move": "df+2", "minus": 12, "note": "Mid launcher; punish on block if in range." },
+    { "move": "d+2", "minus": 13, "crouching": true, "note": "Low poke; punish from crouch, not with a standing launcher." },
+    { "move": "1,2,1", "minus": 14, "note": "High, mid, mid. Stand-block the end and punish." },
+    { "move": "ws2", "minus": 12, "note": "While-standing launcher; punish on block if in range." },
+    { "move": "WR.F+3", "minus": 15, "crouching": true, "note": "Running low; block low and punish from crouch." }
   ],
   "Eddy": [
     {
