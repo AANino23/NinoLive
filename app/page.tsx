@@ -62,6 +62,12 @@ const sections = [
       "Study Lars in Tekken 8 with silent-entry drills, burst offense notes, matchup reminders, and embedded move clips.",
   },
   {
+    title: "Bryan",
+    href: "/bryan",
+    description:
+      "Study Bryan Fury in Tekken 8 with keepout kick drills, snake edge notes, matchup reminders, and embedded move clips.",
+  },
+  {
     title: "Secret Hitler",
     href: "/secret-hitler",
     description: "Open the Secret Hitler area.",

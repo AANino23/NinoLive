@@ -142,8 +142,8 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
             "note": "Signature keepout kick. Block it every time — the punish is a full launch."
         },
         {
-            "label": "Snake edge (b+4)",
-            "search": "b+4",
+            "label": "Snake edge (df+3)",
+            "search": "df+3",
             "note": "Slow low that Bryan players love to throw out. Block and launch — no guessing required."
         },
         {

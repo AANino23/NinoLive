@@ -10,7 +10,8 @@ export type GuideCharacterId =
   | "alisa"
   | "law"
   | "victor"
-  | "lars";
+  | "lars"
+  | "bryan";
 
 export type PunishTier = {
   frames: string;
@@ -304,6 +305,31 @@ export const CHARACTER_PROFILES: Record<GuideCharacterId, CharacterPunishProfile
       },
     ],
   },
+  bryan: {
+    displayName: "Bryan",
+    whiffPunish: "uf+2 / f+1+2",
+    ladder: [
+      { frames: "i10", move: "1,2", note: "Jab punish. No launch." },
+      { frames: "i12", move: "4,1", note: "Fast high that keeps your turn from -12." },
+      {
+        frames: "i15",
+        move: "df+2",
+        launch: true,
+        note: "Tombstone. Bryan's main standing launch punish — take it from -15 up.",
+      },
+      { frames: "i18", move: "ws1", note: "Tailspin option from -18 when you want damage without launch risk." },
+    ],
+    crouchLadder: [
+      { frames: "i11", move: "ws4", note: "Fastest while-standing option after blocking a low." },
+      { frames: "i13", move: "ws1", note: "Fast while-standing check from crouch, no launch." },
+      {
+        frames: "i15",
+        move: "ws2",
+        launch: true,
+        note: "Spinning Twin Hammer — full combo from -15 lows.",
+      },
+    ],
+  },
 };
 
 const tierStartup = (frames: string) => parseInt(frames.replace(/\D/g, ""), 10);
@@ -365,7 +391,7 @@ const OPPONENT_MOVES: Record<string, OpponentPunishableMove[]> = {
     { move: "df+3 (Snake Edge)", minus: 26, crouching: true, note: "The classic. Block low, full combo, every time." },
     { move: "b,B+4 (Flying Knee Kick)", minus: 19, note: "Backdash-cancel knee. Very unsafe if you just block." },
     { move: "ub+1+2", minus: 16, note: "Committed mid string starter." },
-    { move: "qcb+3 (Hatchet Kick)", minus: 13, crouching: true, note: "His fast low — only -13, so take a quick ws punish." },
+    { move: "d,db,b+3 (Hatchet Kick)", minus: 13, crouching: true, note: "His fast low — only -13, so take a quick ws punish." },
   ],
   Claudio: [
     { move: "f+2,2 (Deadly Sin)", minus: 26, note: "The second hit is a free launch if you block it." },

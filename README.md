@@ -4,7 +4,7 @@
 
 ## Current Focus
 
-The site currently centers on Tekken 8 study guides for ten characters.
+The site currently centers on Tekken 8 study guides for eleven characters.
 These guides are designed as visual study boards rather than long note dumps:
 
 - shorter drill and matchup cards
@@ -32,6 +32,7 @@ The Tekken guides live in:
 - `app/law/law-guide.tsx`
 - `app/victor/victor-guide.tsx`
 - `app/lars/lars-guide.tsx`
+- `app/bryan/bryan-guide.tsx`
 
 Shared visual notation and guide UI helpers live in:
 
