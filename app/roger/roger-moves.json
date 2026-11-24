@@ -1,0 +1,1322 @@
+[
+  {
+    "command": "1",
+    "name": "Jab",
+    "hitLevel": "h",
+    "startup": "i10",
+    "block": "+1",
+    "hit": "+8",
+    "counter": null,
+    "notes": "Recovers 2f faster on hit or block (t27 r17)"
+  },
+  {
+    "command": "1+2",
+    "name": "Double Spin",
+    "hitLevel": "h,h",
+    "startup": "i13~14",
+    "block": "+0",
+    "hit": "+6",
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Jail from 1st block"
+  },
+  {
+    "command": "1+2+3+4",
+    "name": "Ki Charge",
+    "hitLevel": null,
+    "startup": null,
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": "* Can't block for 5 seconds\r\n* CH state on your next attack for 5 seconds ''(Tekken 7 and prior games)''\r\n* 10% damage increase on the next attack for 5 seconds ''(Tekken 8 season 2 patch onward)''\r\n* Attacks taken will be CH for 5 seconds"
+  },
+  {
+    "command": "1+2,3",
+    "name": "Double Spin Castanet Kick",
+    "hitLevel": "h,h, m",
+    "startup": "i13~14, ",
+    "block": "-13",
+    "hit": null,
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "1+3",
+    "name": "Head Stomp",
+    "hitLevel": "t",
+    "startup": "i12~14",
+    "block": "-3",
+    "hit": "+0d",
+    "counter": null,
+    "notes": "* Homing\r\n* Throw break 1 or 2\r\n* Floor Break"
+  },
+  {
+    "command": "1,2",
+    "name": "Left Right Combo",
+    "hitLevel": "h, h",
+    "startup": "i10, ",
+    "block": "-3",
+    "hit": "+8",
+    "counter": null,
+    "notes": "* Combo from 1st hit"
+  },
+  {
+    "command": "1,2,1",
+    "name": "Left Right Body Blow",
+    "hitLevel": "h, h, m",
+    "startup": "i10, ",
+    "block": "-10",
+    "hit": "+5",
+    "counter": null,
+    "notes": "* Combo from 1st CH"
+  },
+  {
+    "command": "1,2,2",
+    "name": "Left Right Arrow",
+    "hitLevel": "h, h, h",
+    "startup": "i10, ",
+    "block": "-6",
+    "hit": null,
+    "counter": null,
+    "notes": "* Heat Engager\r\n\r\n* Combo from 1st CH"
+  },
+  {
+    "command": "1,2,3",
+    "name": "One Two Kangaroo Combo",
+    "hitLevel": "h, h, h",
+    "startup": "i10, ",
+    "block": "-5",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st CH"
+  },
+  {
+    "command": "2",
+    "name": null,
+    "hitLevel": "h",
+    "startup": "i10",
+    "block": "+0",
+    "hit": "+6",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "2+3",
+    "name": "Heat Burst",
+    "hitLevel": "m",
+    "startup": "i16",
+    "block": "+1",
+    "hit": "+2c",
+    "counter": null,
+    "notes": "* Heat Burst\r\n* 46f timestop at frame 14 of activation (t92)\r\n* Cancel to r87 with b,b on frame 42 (frame 28 of timestop)\r\n** t41 r27 effective recovery\r\n* 20f timestop on block or hit\r\n* 2 chip damage on block\r\n* 12 chip damage on hit\r\n* Only deals recoverable damage\r\n* Cannot cause a K.O.\r\n* Power crush 7~16"
+  },
+  {
+    "command": "2+4",
+    "name": "Tasmanian Doormat",
+    "hitLevel": "t",
+    "startup": "i12~14",
+    "block": "-3",
+    "hit": "+0d",
+    "counter": null,
+    "notes": "* Homing\r\n* Throw break 1 or 2"
+  },
+  {
+    "command": "2,1",
+    "name": "Half Beat Combo",
+    "hitLevel": "h, m",
+    "startup": "i10, ",
+    "block": "-1",
+    "hit": "+9 ROC",
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Cancel ROC transition with B, +6 on hit instead"
+  },
+  {
+    "command": "3",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i13",
+    "block": "-6",
+    "hit": "+8",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "3+4",
+    "name": "Tail Launcher",
+    "hitLevel": "m",
+    "startup": "i18~19",
+    "block": "-20",
+    "hit": null,
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "3,4",
+    "name": "Animal Sobat Combo",
+    "hitLevel": "m, m",
+    "startup": "i13, ",
+    "block": "-13",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st CH\r\n* Balcony Break"
+  },
+  {
+    "command": "4",
+    "name": null,
+    "hitLevel": "h",
+    "startup": "i13",
+    "block": "-5",
+    "hit": "+6",
+    "counter": "+41d (+33)",
+    "notes": null
+  },
+  {
+    "command": "AST.1",
+    "name": "Milky Way",
+    "hitLevel": "m",
+    "startup": "i18~19",
+    "block": "-5",
+    "hit": null,
+    "counter": null,
+    "notes": "* Heat Engager\r\n\r\n* Balcony Break"
+  },
+  {
+    "command": "AST.3",
+    "name": "Cosmo Fluff",
+    "hitLevel": "m",
+    "startup": "i21",
+    "block": "+3",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break"
+  },
+  {
+    "command": "AST.3+4",
+    "name": "Space Slam",
+    "hitLevel": "t",
+    "startup": "i22~23",
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": "* Unbreakable throw"
+  },
+  {
+    "command": "AST.4",
+    "name": "Planetary Ring",
+    "hitLevel": "h",
+    "startup": "i20~21",
+    "block": "+4",
+    "hit": "+11g",
+    "counter": null,
+    "notes": "* Homing\r\n* Balcony Break\r\n* Tailspin"
+  },
+  {
+    "command": "AST.d",
+    "name": null,
+    "hitLevel": null,
+    "startup": null,
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "BOB.1",
+    "name": "Windmill Punch",
+    "hitLevel": "h!",
+    "startup": "i13",
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "BOB.2",
+    "name": "Galaxy Uppercut",
+    "hitLevel": "m",
+    "startup": "i17~18",
+    "block": "+0",
+    "hit": "+57a (+41)",
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "BT.1",
+    "name": null,
+    "hitLevel": "h",
+    "startup": "i8",
+    "block": "-3",
+    "hit": "+8",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "BT.1+2",
+    "name": null,
+    "hitLevel": "h,h",
+    "startup": "i13",
+    "block": "+0",
+    "hit": "+6",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "BT.1+2,3",
+    "name": null,
+    "hitLevel": "h,h, m",
+    "startup": "i13, ",
+    "block": "-13",
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "BT.2",
+    "name": null,
+    "hitLevel": "h",
+    "startup": "i8",
+    "block": "-3",
+    "hit": "+8",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "BT.3",
+    "name": "Twirl Tail",
+    "hitLevel": "m",
+    "startup": "i22~23",
+    "block": "+5c BT",
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "BT.3+4",
+    "name": "Shrimp Kick",
+    "hitLevel": "m",
+    "startup": "i14~15",
+    "block": "-13",
+    "hit": "+32a (+22)",
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "BT.4",
+    "name": "Dingo Kick",
+    "hitLevel": "l",
+    "startup": "i17~18",
+    "block": "-8 BT",
+    "hit": "+7c BT",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "Back throw",
+    "name": "Wild Piggyback",
+    "hitLevel": "t",
+    "startup": null,
+    "block": null,
+    "hit": "+0",
+    "counter": null,
+    "notes": "* Unbreakable"
+  },
+  {
+    "command": "FUFT.b+3+4",
+    "name": "Whirling Spring Kick",
+    "hitLevel": "m",
+    "startup": "i16~28",
+    "block": "-25~-13",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break"
+  },
+  {
+    "command": "H.2+3",
+    "name": "Mum's Instinct",
+    "hitLevel": "m",
+    "startup": "i18~33",
+    "block": "+13 AST",
+    "hit": null,
+    "counter": null,
+    "notes": "* Heat Smash\r\n* Floor Break"
+  },
+  {
+    "command": "H.d+3+4",
+    "name": null,
+    "hitLevel": "l",
+    "startup": "i20~21",
+    "block": "-14",
+    "hit": "+10 BOB",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "H.f+2,1",
+    "name": null,
+    "hitLevel": "h,h",
+    "startup": "i13",
+    "block": "-1",
+    "hit": "+27g",
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Jail from 1st block\r\n* Balcony Break"
+  },
+  {
+    "command": "H.f+2,1,2",
+    "name": "Goo Goo Rush Straight",
+    "hitLevel": "h,h, h",
+    "startup": "i13, ",
+    "block": "+10 BOB",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Balcony Break"
+  },
+  {
+    "command": "H.f+2,1,df+2",
+    "name": "Goo Goo Rush Upper",
+    "hitLevel": "h,h, m",
+    "startup": "i13, ",
+    "block": "-9",
+    "hit": null,
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "H.f+3+4",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i15~40",
+    "block": "+0",
+    "hit": "+10 BOB",
+    "counter": null,
+    "notes": "* Tornado\r\n* Power crush 6~"
+  },
+  {
+    "command": "Left throw",
+    "name": "Animal Face Crusher",
+    "hitLevel": "t",
+    "startup": null,
+    "block": "-3",
+    "hit": "+0",
+    "counter": null,
+    "notes": "* Throw break 1\r\n* Floor Break"
+  },
+  {
+    "command": "R.df+1+2",
+    "name": null,
+    "hitLevel": "m,t",
+    "startup": "i20",
+    "block": "-18",
+    "hit": "+0d",
+    "counter": null,
+    "notes": "* Rage Art\r\n* Removes Recoverable Health\r\n* Reversal Break\r\n* Damage increases with lower health, maximum 82\r\n* Freezes match timer on activation equal to (total frame idle recovery - 5F) or 57F when canceled by any action\r\n* Freezes match timer on hit by 15F\r\n* 114F timestop on activation\r\n* 20F timestop on block\r\n* r24 opponent blockstun (r44 effective blockstun w/ timestop)\r\n* Restores 13 recoverable health on hit\r\n* Transition to attack throw on hit\r\n* Consumes Rage\r\n* Power crush 8~20"
+  },
+  {
+    "command": "ROC.1",
+    "name": "Wind-up Hook",
+    "hitLevel": "m",
+    "startup": "i28~29",
+    "block": "+7",
+    "hit": "+55a",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "ROC.1+2",
+    "name": "Road Roller",
+    "hitLevel": "m,m,m",
+    "startup": "i18~19",
+    "block": "-14c",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Floor Break"
+  },
+  {
+    "command": "ROC.1+2,1+2",
+    "name": "Rolling Joey",
+    "hitLevel": "m,m,m",
+    "startup": "i18~19, ",
+    "block": "-19",
+    "hit": null,
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "ROC.2",
+    "name": "Wind-up Straight",
+    "hitLevel": "h",
+    "startup": "i15",
+    "block": "+3",
+    "hit": "+23g",
+    "counter": null,
+    "notes": "* Balcony Break"
+  },
+  {
+    "command": "ROC.3",
+    "name": "Wind-up Low Kick",
+    "hitLevel": "l",
+    "startup": "i18",
+    "block": "-11",
+    "hit": "+6",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "ROC.3+4",
+    "name": "Wind-up Hip Press",
+    "hitLevel": "m",
+    "startup": "i14~15",
+    "block": "-9",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break"
+  },
+  {
+    "command": "ROC.4",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i17~18",
+    "block": "-5",
+    "hit": "+5",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "ROC.4,3",
+    "name": "Horse Kick Combo",
+    "hitLevel": "m, m",
+    "startup": "i17~18, ",
+    "block": "-13",
+    "hit": "+10",
+    "counter": null,
+    "notes": "* Heat Engager\r\n\r\n* Combo from 1st hit\r\n* Balcony Break"
+  },
+  {
+    "command": "ROC.df",
+    "name": "Nature Step",
+    "hitLevel": null,
+    "startup": null,
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "Right throw",
+    "name": "Animal Rolling Arm Lock",
+    "hitLevel": "t",
+    "startup": null,
+    "block": "-3",
+    "hit": "+0",
+    "counter": null,
+    "notes": "* Throw break 2"
+  },
+  {
+    "command": "SS.4",
+    "name": "Animal Sweep",
+    "hitLevel": "l",
+    "startup": "i21~22",
+    "block": "-37",
+    "hit": "+5",
+    "counter": null,
+    "notes": "* High crush"
+  },
+  {
+    "command": "WALL.b,b,UB",
+    "name": null,
+    "hitLevel": null,
+    "startup": null,
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "b+1+2",
+    "name": "Animal Headbutt",
+    "hitLevel": "m",
+    "startup": "i15",
+    "block": "+1c",
+    "hit": "+6c",
+    "counter": "+14c",
+    "notes": null
+  },
+  {
+    "command": "b+1+4",
+    "name": "Wind Up Punch",
+    "hitLevel": "m!",
+    "startup": "i69",
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break"
+  },
+  {
+    "command": "b+2",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i14",
+    "block": "-6",
+    "hit": "+5",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "b+2,1",
+    "name": null,
+    "hitLevel": "m, m",
+    "startup": "i14, ",
+    "block": "-8",
+    "hit": "-2",
+    "counter": null,
+    "notes": "* Combo from 1st hit"
+  },
+  {
+    "command": "b+2,1,1+2",
+    "name": "Generation Combo",
+    "hitLevel": "m, m, m",
+    "startup": "i14, ",
+    "block": "-17",
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "b+2,4",
+    "name": "Space Walk",
+    "hitLevel": "m, m",
+    "startup": "i14, ",
+    "block": "-13",
+    "hit": null,
+    "counter": null,
+    "notes": "* Heat Engager\r\n\r\n* Combo from 1st hit\r\n* Balcony Break"
+  },
+  {
+    "command": "b+3",
+    "name": "Rocket Stance",
+    "hitLevel": null,
+    "startup": null,
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "b+3+4",
+    "name": "Armadillo Crash",
+    "hitLevel": "m",
+    "startup": "i25~35",
+    "block": "+5 AST",
+    "hit": "+13g AST",
+    "counter": null,
+    "notes": "* Low crush"
+  },
+  {
+    "command": "b+4",
+    "name": "Spinning Snap Kick",
+    "hitLevel": "l",
+    "startup": "i29",
+    "block": "-10",
+    "hit": "+7c",
+    "counter": "+32a",
+    "notes": null
+  },
+  {
+    "command": "d+1",
+    "name": null,
+    "hitLevel": "sl",
+    "startup": "i10",
+    "block": "-5",
+    "hit": "+6",
+    "counter": null,
+    "notes": "* High crush"
+  },
+  {
+    "command": "d+1+2",
+    "name": null,
+    "hitLevel": "h,h",
+    "startup": "i17",
+    "block": "-12",
+    "hit": "-8",
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Jail from 1st block\r\n* Transition to BT with B (-3/+1)"
+  },
+  {
+    "command": "d+1+2,1+2",
+    "name": null,
+    "hitLevel": "h,h, h,h",
+    "startup": "i17, ",
+    "block": "-11",
+    "hit": "-7",
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Transition to BT with B (-3/+1)"
+  },
+  {
+    "command": "d+1+2,1+2,2",
+    "name": "Animal Roundhouse",
+    "hitLevel": "h,h, h,h, m",
+    "startup": "i17, ",
+    "block": "-13",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 4th CH"
+  },
+  {
+    "command": "d+1,2",
+    "name": "Animal Dig-up",
+    "hitLevel": "sl, m",
+    "startup": "i10, ",
+    "block": "-11",
+    "hit": "+5",
+    "counter": null,
+    "notes": "* Combo from 1st CH"
+  },
+  {
+    "command": "d+2",
+    "name": "Diving Low Punch",
+    "hitLevel": "l",
+    "startup": "i18",
+    "block": "-12",
+    "hit": "+1",
+    "counter": null,
+    "notes": "* High crush"
+  },
+  {
+    "command": "d+3",
+    "name": "Tail Mopping",
+    "hitLevel": "l",
+    "startup": "i16",
+    "block": "-14",
+    "hit": "-1",
+    "counter": "+27g",
+    "notes": "* High crush"
+  },
+  {
+    "command": "d+4",
+    "name": null,
+    "hitLevel": "l",
+    "startup": "i14",
+    "block": "-15",
+    "hit": "-4",
+    "counter": null,
+    "notes": "* High crush"
+  },
+  {
+    "command": "db+1+2",
+    "name": "Table Flip",
+    "hitLevel": "m",
+    "startup": "i21~22",
+    "block": "-13",
+    "hit": "+13g AST",
+    "counter": null,
+    "notes": "* Tornado\r\n* Cancel AST transition with B, +4 on hit instead\r\n* Power crush"
+  },
+  {
+    "command": "db+3",
+    "name": null,
+    "hitLevel": "l",
+    "startup": "i20~22",
+    "block": "-27",
+    "hit": "+3",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "db+3+4",
+    "name": "Animal Drop Kick",
+    "hitLevel": "m",
+    "startup": "i25",
+    "block": "-17",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break"
+  },
+  {
+    "command": "db+3,3",
+    "name": "Twin Roo Cutter",
+    "hitLevel": "l, m",
+    "startup": "i20~22, ",
+    "block": "-16",
+    "hit": "+9 ROC",
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Cancel ROC transition with B, -2 on hit instead"
+  },
+  {
+    "command": "db+4",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i21",
+    "block": "-19",
+    "hit": "-8",
+    "counter": null,
+    "notes": "* High crush"
+  },
+  {
+    "command": "db+4,3",
+    "name": null,
+    "hitLevel": "m, m",
+    "startup": "i21, ",
+    "block": "-19",
+    "hit": "-8",
+    "counter": null,
+    "notes": "* Combo from 1st hit"
+  },
+  {
+    "command": "db+4,3,4",
+    "name": null,
+    "hitLevel": "m, m, m",
+    "startup": "i21, ",
+    "block": "-19",
+    "hit": "-8",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "db+4,3,4,3",
+    "name": null,
+    "hitLevel": "m, m, m, m",
+    "startup": "i21, ",
+    "block": "-19",
+    "hit": "-8",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "db+4,3,4,3,4",
+    "name": "Animal Kick Rush",
+    "hitLevel": "m, m, m, m, m",
+    "startup": "i21, ",
+    "block": "-17",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break"
+  },
+  {
+    "command": "df+1",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i14~15",
+    "block": "-1",
+    "hit": "+4",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "df+1+4",
+    "name": "Animal Uppercut",
+    "hitLevel": "m",
+    "startup": "i21~24",
+    "block": "-16",
+    "hit": null,
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "df+1,2",
+    "name": "Lovely Slap Combo",
+    "hitLevel": "m, m",
+    "startup": "i14~15, ",
+    "block": "-10",
+    "hit": "+5",
+    "counter": null,
+    "notes": "* Combo from 1st hit"
+  },
+  {
+    "command": "df+2",
+    "name": "Bandicoot Bomb",
+    "hitLevel": "m",
+    "startup": "i15",
+    "block": "-7",
+    "hit": "+9 ROC",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "df+3",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i19~20",
+    "block": "-8",
+    "hit": "+2",
+    "counter": null,
+    "notes": "* Homing"
+  },
+  {
+    "command": "df+3+4",
+    "name": "Animal Rampage",
+    "hitLevel": "sm",
+    "startup": "i28~35",
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": "* Unbreakable throw\r\n* Low crush"
+  },
+  {
+    "command": "df+3,3",
+    "name": "Double Tail Flail",
+    "hitLevel": "m, h",
+    "startup": "i19~20, ",
+    "block": "-6",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Balcony Break"
+  },
+  {
+    "command": "df+4",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i15~16",
+    "block": "-9",
+    "hit": "+2",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "df+4,3",
+    "name": "Tail Pillar Combo",
+    "hitLevel": "m, h",
+    "startup": "i15~16, ",
+    "block": "-8",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Balcony Break"
+  },
+  {
+    "command": "f+1+2",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i24",
+    "block": "-9",
+    "hit": "+4",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "f+1+2,2",
+    "name": "Animal Gigaton Punch",
+    "hitLevel": "m, m",
+    "startup": "i24, ",
+    "block": "-15",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Balcony Break"
+  },
+  {
+    "command": "f+1+3",
+    "name": "Astra Climb",
+    "hitLevel": "t",
+    "startup": "i15~16",
+    "block": null,
+    "hit": "+13 AST",
+    "counter": null,
+    "notes": "* Unbreakable throw"
+  },
+  {
+    "command": "f+1+4",
+    "name": "Whirling Punishment",
+    "hitLevel": "t",
+    "startup": "i14",
+    "block": "+0",
+    "hit": "-10",
+    "counter": null,
+    "notes": "* Throw break 1"
+  },
+  {
+    "command": "f+2",
+    "name": "Goo Goo Slugger",
+    "hitLevel": "h",
+    "startup": "i13",
+    "block": "+3",
+    "hit": "+19g",
+    "counter": null,
+    "notes": "* Balcony Break"
+  },
+  {
+    "command": "f+2+3",
+    "name": "Uluru Hurricane Bomb",
+    "hitLevel": "t",
+    "startup": "i14",
+    "block": "-3",
+    "hit": "+0",
+    "counter": null,
+    "notes": "* Throw break 2\r\n* Floor Break"
+  },
+  {
+    "command": "f+3",
+    "name": "Tail Snap",
+    "hitLevel": "h",
+    "startup": "i12",
+    "block": "-9",
+    "hit": "+5c",
+    "counter": "+14",
+    "notes": "* High crush"
+  },
+  {
+    "command": "f+4",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i16~17",
+    "block": "-2 BT",
+    "hit": "-1 BT",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "f+4,3",
+    "name": null,
+    "hitLevel": "m, m",
+    "startup": "i16~17, ",
+    "block": "-13",
+    "hit": "+26a (+16)",
+    "counter": null,
+    "notes": "* Combo from 1st hit"
+  },
+  {
+    "command": "f+4,3,3",
+    "name": "Ayer's Rock 'n' Roll",
+    "hitLevel": "m, m, m",
+    "startup": "i16~17, ",
+    "block": "-16",
+    "hit": null,
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "f,F+2",
+    "name": "Sliding Hook",
+    "hitLevel": "m",
+    "startup": "i15",
+    "block": "-9",
+    "hit": null,
+    "counter": null,
+    "notes": "* Heat Engager\r\n\r\n* Balcony Break"
+  },
+  {
+    "command": "f,F+3+4",
+    "name": "Animal Missile Kick",
+    "hitLevel": null,
+    "startup": "i28~30",
+    "block": "-2",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break\r\n* Low crush"
+  },
+  {
+    "command": "f,b,db,d,df,F+1",
+    "name": "Whirling Punishment",
+    "hitLevel": "t",
+    "startup": "i10",
+    "block": "+0",
+    "hit": "-10",
+    "counter": null,
+    "notes": "* Throw break 1"
+  },
+  {
+    "command": "f,b,db,d,df,F+2",
+    "name": "Uluru Hurricane Bomb",
+    "hitLevel": "t",
+    "startup": "i11",
+    "block": "-3",
+    "hit": "+0",
+    "counter": null,
+    "notes": "* Throw break 2\r\n* Floor Break"
+  },
+  {
+    "command": "f,f,F+3",
+    "name": "Baiame's Spear",
+    "hitLevel": "m",
+    "startup": "i23~24",
+    "block": "+6",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break\r\n* Low crush"
+  },
+  {
+    "command": "f,n,d,df",
+    "name": null,
+    "hitLevel": null,
+    "startup": null,
+    "block": null,
+    "hit": null,
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "f,n,d,df+1",
+    "name": "Animal Uppercut",
+    "hitLevel": "m",
+    "startup": "i21~24",
+    "block": "-16",
+    "hit": null,
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "hFC.1",
+    "name": "Crouch Jab",
+    "hitLevel": "sl",
+    "startup": "i10",
+    "block": "-5",
+    "hit": "+6",
+    "counter": null,
+    "notes": "* Transition to standing r24 cs1~25 with f at frame 25\r\n* +6c on crouching hit\r\n* High crush 1~34"
+  },
+  {
+    "command": "hFC.1+2",
+    "name": "Kangaroo Attack",
+    "hitLevel": "m",
+    "startup": "i20~24",
+    "block": "+7 ROC",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break\r\n* Cancel ROC transition with B, +3 on block instead"
+  },
+  {
+    "command": "hFC.2",
+    "name": "Crouch Straight",
+    "hitLevel": "sl",
+    "startup": "i11",
+    "block": "-4",
+    "hit": "+7",
+    "counter": null,
+    "notes": "* +7c on crouching hit\r\n* High crush 1~34"
+  },
+  {
+    "command": "hFC.3",
+    "name": "Tail Brush",
+    "hitLevel": "l",
+    "startup": "i21~22",
+    "block": "-14",
+    "hit": "+6",
+    "counter": "+13 AST",
+    "notes": null
+  },
+  {
+    "command": "hFC.4",
+    "name": null,
+    "hitLevel": "l",
+    "startup": "i14",
+    "block": "-15",
+    "hit": "-4",
+    "counter": null,
+    "notes": "* High crush"
+  },
+  {
+    "command": "u+1+2",
+    "name": "Capital Punishment",
+    "hitLevel": "m",
+    "startup": "i35~36",
+    "block": "+2c",
+    "hit": null,
+    "counter": null,
+    "notes": "* Low crush"
+  },
+  {
+    "command": "u+3+4",
+    "name": "Spinning Tail Whip",
+    "hitLevel": "m,m",
+    "startup": "i28~29",
+    "block": "+0",
+    "hit": null,
+    "counter": null,
+    "notes": "* Low crush"
+  },
+  {
+    "command": "ub+3",
+    "name": "Reverse Bicycle Kick",
+    "hitLevel": "m",
+    "startup": "i16",
+    "block": "-4 BT",
+    "hit": "+8 BT",
+    "counter": "+13 BT",
+    "notes": null
+  },
+  {
+    "command": "ub+4",
+    "name": "Rolling Toe Drop",
+    "hitLevel": "m",
+    "startup": "i37~38",
+    "block": "-5",
+    "hit": null,
+    "counter": null,
+    "notes": "* Floor Break\r\n* Low crush"
+  },
+  {
+    "command": "uf+1",
+    "name": null,
+    "hitLevel": "h",
+    "startup": "i17",
+    "block": "-7",
+    "hit": "+4",
+    "counter": "+6",
+    "notes": "* Homing"
+  },
+  {
+    "command": "uf+1+2",
+    "name": "Naughty Tacker",
+    "hitLevel": "t",
+    "startup": "i12",
+    "block": "-3",
+    "hit": "+0d",
+    "counter": null,
+    "notes": "* Throw break 1+2"
+  },
+  {
+    "command": "uf+1,2",
+    "name": "Zip 'n' Upper",
+    "hitLevel": "h, m",
+    "startup": "i17, ",
+    "block": "-13",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Tornado\r\n* Balcony Break"
+  },
+  {
+    "command": "uf+1,3",
+    "name": "Zip 'n' Tail",
+    "hitLevel": "h, m",
+    "startup": "i17, ",
+    "block": "-8",
+    "hit": "+9 ROC",
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Cancel ROC transition with B, +5 on hit instead"
+  },
+  {
+    "command": "uf+2",
+    "name": "Whac-A-Mole",
+    "hitLevel": "m",
+    "startup": "i21~22",
+    "block": "+5",
+    "hit": "+7c",
+    "counter": null,
+    "notes": "* Low crush"
+  },
+  {
+    "command": "uf+3",
+    "name": "Helicopter Kick",
+    "hitLevel": "m,h",
+    "startup": "i24~25",
+    "block": "-9",
+    "hit": null,
+    "counter": null,
+    "notes": "* Homing\r\n* Combo from 1st hit\r\n* Jail from 1st block\r\n* Balcony Break\r\n* Low crush"
+  },
+  {
+    "command": "uf+3+4",
+    "name": "Kangaroo Stomp",
+    "hitLevel": "m",
+    "startup": "i30~32",
+    "block": "-4c",
+    "hit": "+6c",
+    "counter": "+10d",
+    "notes": "* Low crush"
+  },
+  {
+    "command": "uf+4",
+    "name": "Rising Roo Kick",
+    "hitLevel": "m",
+    "startup": "i15~16",
+    "block": "-13",
+    "hit": null,
+    "counter": null,
+    "notes": "* Low crush"
+  },
+  {
+    "command": "uf,n,3",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i31~43",
+    "block": "-19",
+    "hit": null,
+    "counter": null,
+    "notes": "* Balcony Break\r\n* Low crush"
+  },
+  {
+    "command": "uf,n,4",
+    "name": "Delayed Rising Roo Kick",
+    "hitLevel": "m",
+    "startup": "i23~37",
+    "block": "-13",
+    "hit": null,
+    "counter": null,
+    "notes": "* Low crush"
+  },
+  {
+    "command": "ws1",
+    "name": "Liftoff Knuckle",
+    "hitLevel": "m",
+    "startup": "i15~16",
+    "block": "-16",
+    "hit": null,
+    "counter": null,
+    "notes": "* Tornado"
+  },
+  {
+    "command": "ws2",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i14",
+    "block": "-7",
+    "hit": "+6",
+    "counter": null,
+    "notes": null
+  },
+  {
+    "command": "ws2,1",
+    "name": "Boomerang Bash",
+    "hitLevel": "m, h",
+    "startup": "i14, ",
+    "block": "-7",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st hit\r\n* Balcony Break"
+  },
+  {
+    "command": "ws2,2",
+    "name": "Boomerang Punch",
+    "hitLevel": "m, m",
+    "startup": "i14, ",
+    "block": "-12c",
+    "hit": "+6c",
+    "counter": null,
+    "notes": "* Combo from 1st hit"
+  },
+  {
+    "command": "ws3",
+    "name": null,
+    "hitLevel": "m",
+    "startup": "i15",
+    "block": "-17",
+    "hit": "-7",
+    "counter": "-5",
+    "notes": null
+  },
+  {
+    "command": "ws3,3",
+    "name": "Spring Stomp Kick",
+    "hitLevel": "m, h",
+    "startup": "i15, ",
+    "block": "-3",
+    "hit": "+3",
+    "counter": null,
+    "notes": "* Combo from 1st hit"
+  },
+  {
+    "command": "ws3,3*",
+    "name": "Charge Stomp Kick",
+    "hitLevel": "m, m",
+    "startup": "i15, ",
+    "block": "+7c",
+    "hit": null,
+    "counter": null,
+    "notes": "* Combo from 1st CH\r\n* Floor Break"
+  },
+  {
+    "command": "ws4",
+    "name": "Toe Smash",
+    "hitLevel": "m",
+    "startup": "i11~12",
+    "block": "-6",
+    "hit": "+5",
+    "counter": null,
+    "notes": null
+  }
+]

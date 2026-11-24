@@ -1,0 +1,21 @@
+import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import { registerHooks } from "node:module";
+import { fileURLToPath } from "node:url";
+registerHooks({resolve(specifier,context,next){if(context.parentURL&&specifier.startsWith(".")&&!/\.[jt]s$/u.test(specifier)&&existsSync(fileURLToPath(new URL(`${specifier}.ts`,context.parentURL))))return next(`${specifier}.ts`,context);return next(specifier,context);}});
+const {ROGER_MOVES,ROGER_CLIP_COMMANDS,ROGER_THROWS,ROGER_TOOLS,ROGER_COMBOS,ROGER_DRILLS,rogerMove}=await import("../app/roger/roger-data.ts");
+const {getMatchupPunishment}=await import("../app/tekken/punishment-data.ts");
+assert.equal(ROGER_MOVES.length,132);
+assert.equal(new Set(ROGER_MOVES.map(m=>m.command)).size,ROGER_MOVES.length);
+for(const command of ROGER_CLIP_COMMANDS)assert.ok(rogerMove(command),`Teaching command missing from source snapshot: ${command}`);
+for(const entry of ROGER_THROWS){const row=rogerMove(entry.move);assert.ok(row.notes?.includes(entry.break==="Unbreakable"?"Unbreakable":"Throw break "+entry.break),`Throw break differs from snapshot: ${entry.move}`);}
+const mirror=getMatchupPunishment("roger","Roger Jr. (mirror)");
+for(const tier of [...mirror.ladder,...mirror.crouchLadder])assert.ok(Number(rogerMove(tier.move).startup?.match(/i(\d+)/u)?.[1])<=Number(tier.frames.slice(1)),`${tier.move} cannot fit ${tier.frames}`);
+assert.ok(!mirror.ladder.some(t=>t.move==="df+2"),"CH-only launch must not replace the normal-hit hopkick punish");
+assert.equal(mirror.crouchLadder.find(t=>t.frames==="i15")?.move,"ws1");
+assert.ok(ROGER_TOOLS.find(t=>t.move==="df+2")?.use.includes("COUNTER HIT"));
+for(const [command,punish] of [["uf+4","2,1"],["db+4","uf+4"],["db+3","ws1"],["df+1,2","2,1"]])assert.equal(mirror.opponentPunishes.find(x=>x.move===command)?.punish,punish,`Wrong stance/timing after ${command}`);
+assert.ok(ROGER_COMBOS.every(c=>c.source==="https://wavu.wiki/t/Roger_Jr._combos"));
+assert.ok(ROGER_COMBOS.filter(c=>c.kind==="Wall").every(c=>c.starter.includes("regular-carry")||c.starter.includes("Same regular-carry")));
+assert.equal(ROGER_DRILLS.length,10);
+console.log(`Roger source checks passed: ${ROGER_MOVES.length} records, ${ROGER_CLIP_COMMANDS.length} teaching moves, ${ROGER_COMBOS.length} source-listed routes, throw breaks and punishment timing.`);

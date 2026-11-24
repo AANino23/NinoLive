@@ -2,6 +2,11 @@ import Link from "next/link";
 
 const sections = [
   {
+    title: "Roger Jr.",
+    href: "/roger",
+    description: "Learn Roger Jr. with a complete study guide: pokes, Rocket and Astronauts stance choices, Heat, throws, punishment, combos and every matchup.",
+  },
+  {
     title: "Steve",
     href: "/steve",
     description:

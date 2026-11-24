@@ -17,6 +17,7 @@ export const GUIDE_FIGHTERS: Record<GuideCharacterId, string> = {
   alisa: "Alisa", bryan: "Bryan", dragunov: "Dragunov", fahkumram: "Fahkumram",
   feng: "Feng", kazuya: "Kazuya", lars: "Lars", law: "Law", ling: "Xiaoyu",
   steve: "Steve", victor: "Victor",
+  roger: "Roger Jr.",
 };
 
 export function getMatchupNames(guide: GuideCharacterId): string[] {

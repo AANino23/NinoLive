@@ -12,7 +12,8 @@ export type GuideCharacterId =
   | "law"
   | "victor"
   | "lars"
-  | "bryan";
+  | "bryan"
+  | "roger";
 
 export type PunishTier = {
   frames: string;
@@ -45,6 +46,20 @@ export type CharacterPunishProfile = {
 };
 
 export const CHARACTER_PROFILES: Record<GuideCharacterId, CharacterPunishProfile> = {
+  roger: {
+    displayName: "Roger Jr.",
+    whiffPunish: "uf+4 / f,F+2",
+    ladder: [
+      { frames: "i10", move: "2,1", note: "Natural hit string into Rocket Stance at +9; hold B to cancel the stance for +6. Also your default at -11 to -13." },
+      { frames: "i14", move: "b+2,4", note: "Natural mid-mid Heat engager. Confirm range; f+2 at i13 is a wall-splat alternative, not a universal upgrade to 2,1." },
+      { frames: "i15", move: "uf+4", launch: true, note: "Normal-hit hopkick launcher. Do not substitute df+2: its launch requires counter hit." },
+    ],
+    crouchLadder: [
+      { frames: "i11", move: "ws4", note: "Fast mid from crouch. Roger has no listed i12/i13 while-standing upgrade." },
+      { frames: "i14", move: "ws2,1", note: "Natural mid-high string; can wall splat." },
+      { frames: "i15", move: "ws1", launch: true, note: "Tornado launcher from crouch. Uses Tornado immediately; choose a post-Tornado route." },
+    ],
+  },
   steve: {
     displayName: "Steve",
     whiffPunish: "u+2 / qcf+1",

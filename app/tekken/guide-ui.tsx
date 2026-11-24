@@ -75,6 +75,9 @@ const directionLabels: Record<string, string> = {
 };
 
 const stanceLabels = new Set([
+  "AST",
+  "BOB",
+  "ROC",
   "ALB",
   "AOP",
   "BAO",

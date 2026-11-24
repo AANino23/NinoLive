@@ -71,6 +71,7 @@ globalThis.fetch = ((input: Parameters<typeof upstreamFetch>[0], init?: RequestI
 // Imported after the hooks above are installed, which is why these are dynamic.
 const { GUIDE_OKIZEME_SLUGS, getMoveClipSearch, getOkizemeDatabaseUrl, getOpponentSlug, isSingleCommand } =
   await import("../app/tekken/opponent-clips.ts");
+const { ROGER_CLIP_COMMANDS } = await import("../app/roger/roger-data.ts");
 const { getMatchupNames } = await import("../app/tekken/matchup-roster.ts");
 const { getOpponentProfile } = await import("../app/tekken/opponent-profiles.ts");
 const { getMatchupPunishment } = await import("../app/tekken/punishment-data.ts");
@@ -148,7 +149,9 @@ for (const [guideId, characterSlug] of Object.entries(GUIDE_OKIZEME_SLUGS) as Ar
     );
   }
 
-  if (collectGuideClips(guideFile, source, characterSlug) === 0) {
+  const guideClips = guideId === "roger" ? ROGER_CLIP_COMMANDS.length : collectGuideClips(guideFile, source, characterSlug);
+  if (guideId === "roger") for (const command of ROGER_CLIP_COMMANDS) addReference(characterSlug, command, "app/roger/roger-data.ts teaching commands");
+  if (guideClips === 0) {
     setupErrors.push(`${guideFile} declared no clips — has the guide's clip shape changed?`);
   }
 

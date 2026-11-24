@@ -61,6 +61,7 @@ export const GUIDE_OKIZEME_SLUGS: Record<GuideCharacterId, string> = {
   victor: "victor",
   lars: "lars",
   bryan: "bryan",
+  roger: "roger-jr",
 };
 
 /** Matchup lists label the player's own character "X (mirror)". */
