@@ -1,5 +1,6 @@
 "use client";
 
+import { getMatchupNames, getMatchupDataName, getAdditionalMatchupBriefing } from "../tekken/matchup-roster";
 import { useMemo, useState } from "react";
 import { GuideClipSection } from "../tekken/guide-clip-layout";
 import { MatchupPunishmentSection } from "../tekken/matchup-punishment";
@@ -423,48 +424,7 @@ const secrets: Secret[] = [
   },
 ];
 
-const matchupNames = [
-  "Alisa",
-  "Anna",
-  "Armor King",
-  "Asuka",
-  "Azucena",
-  "Bryan",
-  "Claudio",
-  "Clive",
-  "Devil Jin",
-  "Dragunov",
-  "Eddy",
-  "Fahkumram",
-  "Feng",
-  "Heihachi",
-  "Hwoarang",
-  "Jack-8",
-  "Jin",
-  "Jun",
-  "Kazuya (mirror)",
-  "King",
-  "Kuma / Panda",
-  "Kunimitsu",
-  "Lars",
-  "Law",
-  "Lee",
-  "Leo",
-  "Leroy",
-  "Lidia",
-  "Lili",
-  "Miary Zo",
-  "Nina",
-  "Paul",
-  "Raven",
-  "Reina",
-  "Shaheen",
-  "Steve",
-  "Victor",
-  "Xiaoyu",
-  "Yoshimitsu",
-  "Zafina",
-] as const;
+const matchupNames = getMatchupNames("kazuya");
 
 const matchupOverrides: Partial<
   Record<(typeof matchupNames)[number], Partial<Matchup>>
@@ -840,6 +800,8 @@ const defaultMatchups: Record<(typeof matchupNames)[number], Matchup> =
 
 const matchups: Matchup[] = matchupNames.map((name) => ({
   ...defaultMatchups[name],
+  ...(getAdditionalMatchupBriefing(name) ?? {}),
+  ...(matchupOverrides[getMatchupDataName(name)] ?? {}),
   ...(matchupOverrides[name] ?? {}),
   name,
 }));

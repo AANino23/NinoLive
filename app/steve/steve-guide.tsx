@@ -1,5 +1,7 @@
 "use client";
 
+import { getMatchupNames, getMatchupDataName, getAdditionalMatchupBriefing } from "../tekken/matchup-roster";
+import { getOpponentProfile } from "../tekken/opponent-profiles";
 import { useMemo, useState } from "react";
 import { GuideClipSection } from "../tekken/guide-clip-layout";
 import {
@@ -553,7 +555,7 @@ const secretHabits: { title: string; copy: string }[] = [
   },
 ];
 
-const matchups: Matchup[] = [
+const authoredMatchups: Matchup[] = [
   {
     name: "Alisa",
     archetype: "Aerial mobility and chainsaw pressure",
@@ -1515,6 +1517,14 @@ const matchups: Matchup[] = [
     ],
   },
 ];
+
+const matchups: Matchup[] = getMatchupNames("steve").map((name) => {
+  const authored = authoredMatchups.find(entry => entry.name === name || entry.name === getMatchupDataName(name));
+  if (authored) return { ...authored, name };
+  const briefing = getAdditionalMatchupBriefing(name);
+  if (!briefing) throw new Error(`Missing Steve matchup briefing: ${name}`);
+  return { ...briefing, name, archetype: getOpponentProfile(name)?.archetype ?? "", overview: briefing.briefing, verdict: "Recognise the commitment, then take your reliable punish." };
+});
 
 function getOkizemeUrl(search: string) {
   return `https://okizeme.gg/database/steve?search=${encodeURIComponent(search)}`;

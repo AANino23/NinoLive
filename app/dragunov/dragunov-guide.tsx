@@ -1,5 +1,6 @@
 "use client";
 
+import { getMatchupNames, getMatchupDataName, getAdditionalMatchupBriefing } from "../tekken/matchup-roster";
 import { useMemo, useState } from "react";
 import { DragunovCombos } from "./dragunov-combos";
 import { DragunovStudy } from "./dragunov-study";
@@ -428,48 +429,7 @@ const secrets: Secret[] = [
   },
 ];
 
-const matchupNames = [
-  "Alisa",
-  "Anna",
-  "Armor King",
-  "Asuka",
-  "Azucena",
-  "Bryan",
-  "Claudio",
-  "Clive",
-  "Devil Jin",
-  "Dragunov (mirror)",
-  "Eddy",
-  "Fahkumram",
-  "Feng",
-  "Heihachi",
-  "Hwoarang",
-  "Jack-8",
-  "Jin",
-  "Jun",
-  "Kazuya",
-  "King",
-  "Kuma / Panda",
-  "Kunimitsu",
-  "Lars",
-  "Law",
-  "Lee",
-  "Leo",
-  "Leroy",
-  "Lidia",
-  "Lili",
-  "Miary Zo",
-  "Nina",
-  "Paul",
-  "Raven",
-  "Reina",
-  "Shaheen",
-  "Steve",
-  "Victor",
-  "Xiaoyu",
-  "Yoshimitsu",
-  "Zafina",
-] as const;
+const matchupNames = getMatchupNames("dragunov");
 
 const matchupOverrides: Partial<
   Record<(typeof matchupNames)[number], Partial<Matchup>>
@@ -885,6 +845,8 @@ const defaultMatchups: Record<(typeof matchupNames)[number], Matchup> =
 
 const matchups: Matchup[] = matchupNames.map((name) => ({
   ...defaultMatchups[name],
+  ...(getAdditionalMatchupBriefing(name) ?? {}),
+  ...(matchupOverrides[getMatchupDataName(name)] ?? {}),
   ...(matchupOverrides[name] ?? {}),
   name,
 }));

@@ -17,6 +17,9 @@ function normalizeCommand(value: string) {
     .toLowerCase()
     .replace(/^\([^)]*\)\s*/u, "")
     .replace(/^cd\./u, "f,n,d,")
+    // okizeme now stores quarter-circle commands as their explicit directions.
+    .replace(/^qcf/u, "d,df,f")
+    .replace(/^qcb/u, "d,db,b")
     .replace(/\s+/gu, "")
     .replace(/\*+$/u, "");
 }
@@ -129,18 +132,18 @@ export async function fetchOkizemePresignedUrl(
   character: string,
   move: string,
 ): Promise<string | null> {
-  const encodedMove = encodeURIComponent(move);
-  const response = await fetch(
-    `https://okizeme.gg/api/${character}/${encodedMove}`,
-    { cache: "no-store" },
-  );
-
-  if (!response.ok) {
-    return null;
+  // Some renamed movelist entries still store the same clip under qcf/qcb.
+  const storageKeys = new Set([move, move.replace(/^d,df,f(?=[+:])/u, "qcf").replace(/^d,db,b(?=[+:])/u, "qcb")]);
+  for (const key of storageKeys) {
+    const response = await fetch(
+      `https://okizeme.gg/api/${character}/${encodeURIComponent(key)}`,
+      { cache: "no-store" },
+    );
+    if (!response.ok) continue;
+    const data = (await response.json()) as OkizemeClipResponse;
+    if (data.presignedUrl) return data.presignedUrl;
   }
-
-  const data = (await response.json()) as OkizemeClipResponse;
-  return data.presignedUrl ?? null;
+  return null;
 }
 
 export function getOkizemeDatabaseUrl(character: string, search: string) {

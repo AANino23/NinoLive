@@ -71,6 +71,7 @@ globalThis.fetch = ((input: Parameters<typeof upstreamFetch>[0], init?: RequestI
 // Imported after the hooks above are installed, which is why these are dynamic.
 const { GUIDE_OKIZEME_SLUGS, getMoveClipSearch, getOkizemeDatabaseUrl, getOpponentSlug, isSingleCommand } =
   await import("../app/tekken/opponent-clips.ts");
+const { getMatchupNames } = await import("../app/tekken/matchup-roster.ts");
 const { getOpponentProfile } = await import("../app/tekken/opponent-profiles.ts");
 const { getMatchupPunishment } = await import("../app/tekken/punishment-data.ts");
 const { fetchOkizemePresignedUrl, looseCommand, resolveOkizemeCandidates } = await import(
@@ -125,28 +126,6 @@ function collectGuideClips(guideFile: string, source: string, characterSlug: str
   return found;
 }
 
-/**
- * Five guides build their matchup list from a `matchupNames` array; Steve still spells
- * every matchup out longhand. Both shapes have to be read to cover all six.
- */
-function collectMatchupNames(source: string): string[] {
-  const nameList = source.match(/const matchupNames = \[([^\]]*)\]/u);
-
-  if (nameList) {
-    return [...nameList[1].matchAll(/"((?:[^"\\]|\\.)*)"/gu)].map((match) => match[1]);
-  }
-
-  const literalList = source.match(/const matchups: Matchup\[\] = \[([\s\S]*?)\n\];/u);
-
-  if (literalList) {
-    return [...literalList[1].matchAll(/^ {4}name: "((?:[^"\\]|\\.)*)",$/gmu)].map(
-      (match) => match[1],
-    );
-  }
-
-  return [];
-}
-
 const setupErrors: string[] = [];
 
 for (const [guideId, characterSlug] of Object.entries(GUIDE_OKIZEME_SLUGS) as Array<
@@ -173,7 +152,7 @@ for (const [guideId, characterSlug] of Object.entries(GUIDE_OKIZEME_SLUGS) as Ar
     setupErrors.push(`${guideFile} declared no clips — has the guide's clip shape changed?`);
   }
 
-  const matchupNames = collectMatchupNames(source);
+  const matchupNames = getMatchupNames(guideId);
 
   if (matchupNames.length === 0) {
     setupErrors.push(`${guideFile} declared no matchups — has the matchup shape changed?`);
@@ -281,6 +260,8 @@ type Finding = ClipReference & {
  * 2026-09-05; delete an entry once okizeme films the clip and the audit says so.
  */
 const KNOWN_MISSING_CLIPS = new Set([
+  // 2026-11-24: WR.4, wr4, wr+4 and f,f,f+4 storage keys return no video.
+  "armor-king::wr4",
   "clive::uf+2",
   "dragunov::PGR.2",
   "dragunov::PGR.3",

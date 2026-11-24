@@ -1,3 +1,5 @@
+import { getMatchupDataName } from "./matchup-roster";
+
 export type OpponentThreat = {
   label: string;
   search: string;
@@ -15,6 +17,28 @@ export type OpponentProfile = {
 };
 
 export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
+  Bob: {
+    slug: "bob",
+    archetype: "Fast strings and crouch-dash approaches",
+    gamePlan: "Bob uses quick strings and crouch-dash movement to reach his mid/low mixup. His size does not make him slow. Stay composed, distinguish safe mids from commitments, and punish the blocked low from crouch.",
+    watchFor: ["Crouch-dash low f,n,d,DF+4: -28 on block.", "df+1,2 is a mid-mid elbow string ending at -10.", "df+2 (-8) and uf+4 (-4) are safe; do not force a block punish."],
+    threats: [
+      { label: "Crouch-dash low", search: "f,n,d,DF+4", note: "Low with stagger recovery. Block, then use a fitting crouching punish in range." },
+      { label: "Escalope Elbow", search: "df+1,2", note: "Mid-mid string; wait for the end before the i10 punish." },
+      { label: "Liaison Spike", search: "db+3", note: "Low poke at -12 on block; answer with a suitable while-standing punish." },
+    ],
+  },
+  "Roger Jr.": {
+    slug: "roger-jr",
+    archetype: "Kick pressure and wrestling throws",
+    gamePlan: "Roger Jr. blends dynamic kicks with pro-wrestling throws. Recognise which kick ended the sequence, then use the appropriate standing or crouching punish instead of guessing a turn.",
+    watchFor: ["uf+4 and the completed 3,4 string are -13 on block.", "db+4 is a high-crushing mid (-19); db+3 is a low (-27).", "b+1+2 is +1 on block and df+2 is safe at -7."],
+    threats: [
+      { label: "Rising Roo Kick", search: "uf+4", note: "Low-crushing mid. Block standing, then take a fitting i13 punish." },
+      { label: "Animal Sobat Combo", search: "3,4", note: "Two mids, -13 after the completed string." },
+      { label: "Animal Headbutt", search: "b+1+2", note: "Mid that leaves Roger at +1 on block. Do not treat it as your punish window." },
+    ],
+  },
   "Alisa": {
     slug: "alisa",
     archetype: "Aerial mobility and chainsaw pressure",
@@ -926,5 +950,9 @@ export const OPPONENT_PROFILES: Record<string, OpponentProfile> = {
 };
 
 export function getOpponentProfile(name: string): OpponentProfile | null {
-  return OPPONENT_PROFILES[name] ?? OPPONENT_PROFILES[name.replace(/\s*\(mirror\)$/u, "").trim()] ?? null;
+  const profile = OPPONENT_PROFILES[name] ?? OPPONENT_PROFILES[getMatchupDataName(name)] ?? null;
+  if (profile && (name === "Kuma" || name === "Panda")) {
+    return { ...profile, slug: name.toLowerCase(), gamePlan: `${profile.gamePlan} These are shared bear fundamentals; verify character-specific Heat tools separately.` };
+  }
+  return profile;
 }

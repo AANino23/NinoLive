@@ -1,4 +1,5 @@
 import { EXTRA_OPPONENT_PUNISHES } from "./opponent-punishes-extended";
+import { getMatchupDataName } from "./matchup-roster";
 
 export type GuideCharacterId =
   | "steve"
@@ -635,6 +636,20 @@ const MIRROR_ALIASES: Record<string, string> = {
 
 export const OPPONENT_PUNISHABLE_MOVES: Record<string, OpponentPunishableMove[]> = {
   ...OPPONENT_MOVES,
+  // okizeme.gg/api/bob and /roger-jr, checked 2026-11-24.
+  Bob: [
+    { move: "f,n,d,DF+4", minus: 28, crouching: true, note: "Stagger low. Block low, then punish from crouch; check range." },
+    { move: "db+3", minus: 12, crouching: true, note: "Liaison Spike low. Use a fitting while-standing punish." },
+    { move: "db+4", minus: 12, crouching: true, note: "High-crushing low. Punish from crouch." },
+    { move: "df+1,2", minus: 10, note: "Mid-mid elbow string. Block both hits before your i10 punish." },
+  ],
+  "Roger Jr.": [
+    { move: "db+3", minus: 27, crouching: true, note: "Blocked low. Use a crouching launch punish in range." },
+    { move: "db+4", minus: 19, note: "High-crushing mid, not a low. Punish standing after blocking it." },
+    { move: "uf+4", minus: 13, note: "Rising Roo Kick. Take your i13 standing punish." },
+    { move: "3,4", minus: 13, note: "Animal Sobat Combo. Block the second mid before punishing." },
+    { move: "df+1,2", minus: 10, note: "Lovely Slap Combo. Completed mid-mid string is i10 punishable." },
+  ],
   ...Object.fromEntries(
     Object.entries(MIRROR_ALIASES).map(([alias, base]) => [alias, OPPONENT_MOVES[base]]),
   ),
@@ -662,7 +677,7 @@ export type MatchupPunishmentData = {
 };
 
 function mergeOpponentPunishes(opponentName: string): OpponentPunishableMove[] {
-  const baseName = opponentName.replace(/\s*\(mirror\)$/u, "").trim();
+  const baseName = getMatchupDataName(opponentName);
   const base = OPPONENT_PUNISHABLE_MOVES[opponentName] ?? OPPONENT_PUNISHABLE_MOVES[baseName] ?? GENERIC_FALLBACK;
   const extra = EXTRA_OPPONENT_PUNISHES[baseName] ?? [];
   const seen = new Set<string>();
